@@ -1,0 +1,553 @@
+/* ==========================================================================
+   TestimonialsSection.css
+   Tokens
+   ========================================================================== */
+.testi-section {
+  --ts-bg: #141416;
+  --ts-bg-glow: radial-gradient(
+    circle at 82% 0%,
+    rgba(229, 171, 76, 0.07),
+    transparent 40%
+  );
+  --ts-gold: #e5ab4c;
+  --ts-white: #f6f6f4;
+  --ts-muted: #b9b9b7;
+  --ts-card-bg: #f6f5f2;
+  --ts-card-text: #2a2a28;
+  --ts-card-muted: #7b7873;
+
+  position: relative;
+  width: 100%;
+  background: var(--ts-bg-glow), var(--ts-bg);
+  padding: 4rem 0 4.5rem;
+  overflow: hidden;
+}
+
+.testi-container {
+  position: relative;
+  z-index: 1;
+}
+
+/* ==========================================================================
+   Eyebrow + heading
+   ========================================================================== */
+.testi-eyebrow {
+  color: var(--ts-gold);
+  font-weight: 700;
+  font-size: 0.78rem;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  margin-bottom: 0.6rem;
+}
+
+.testi-heading {
+  color: var(--ts-white);
+  font-weight: 800;
+  font-size: clamp(1.5rem, 1.6vw + 1rem, 2.1rem);
+  letter-spacing: -0.005em;
+  text-transform: uppercase;
+  margin: 0 0 2.5rem;
+}
+
+/* ==========================================================================
+   Video testimonials block
+   ========================================================================== */
+.testi-video-block {
+  margin-bottom: 3.25rem;
+}
+
+.testi-video-eyebrow {
+  color: var(--ts-gold);
+  font-weight: 700;
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-bottom: 0.45rem;
+  opacity: 0.9;
+}
+
+.testi-video-heading {
+  color: var(--ts-white);
+  font-weight: 800;
+  font-size: clamp(1.15rem, 1vw + 0.9rem, 1.5rem);
+  letter-spacing: -0.005em;
+  text-transform: uppercase;
+  margin: 0 0 1.5rem;
+}
+
+/* Horizontal, scroll-snapping rail so it stays elegant at any count */
+.testi-video-scroll {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(240px, 1fr);
+  gap: 1.25rem;
+  overflow-x: auto;
+  padding: 0.35rem 0.35rem 1.1rem;
+  scroll-snap-type: x proximity;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(229, 171, 76, 0.45) transparent;
+}
+
+.testi-video-scroll::-webkit-scrollbar {
+  height: 6px;
+}
+
+.testi-video-scroll::-webkit-scrollbar-thumb {
+  background: rgba(229, 171, 76, 0.4);
+  border-radius: 999px;
+}
+
+.testi-video-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.testi-video-card {
+  scroll-snap-align: start;
+  position: relative;
+  display: block;
+  width: 100%;
+  border: none;
+  padding: 0;
+  background: transparent;
+  border-radius: 16px;
+  cursor: pointer;
+  text-align: left;
+  will-change: transform;
+}
+
+.testi-video-card:focus-visible {
+  outline: 2px solid var(--ts-gold);
+  outline-offset: 4px;
+}
+
+.testi-video-thumb {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 9 / 12;
+  border-radius: 16px;
+  overflow: hidden;
+  background: #1c1c1e center / cover no-repeat;
+  background-image:
+    radial-gradient(circle at 30% 20%, rgba(229, 171, 76, 0.18), transparent 55%),
+    linear-gradient(155deg, #232325 0%, #17171a 100%);
+  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(229, 171, 76, 0.18);
+}
+
+.testi-video-scrim {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.82) 0%,
+    rgba(0, 0, 0, 0.25) 42%,
+    rgba(0, 0, 0, 0.05) 65%,
+    rgba(0, 0, 0, 0.35) 100%
+  );
+  transition: background 0.25s ease;
+}
+
+.testi-video-card:hover .testi-video-scrim {
+  background: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.88) 0%,
+    rgba(0, 0, 0, 0.3) 42%,
+    rgba(0, 0, 0, 0.05) 65%,
+    rgba(0, 0, 0, 0.4) 100%
+  );
+}
+
+.testi-video-duration {
+  position: absolute;
+  top: 0.85rem;
+  right: 0.85rem;
+  z-index: 2;
+  background: rgba(20, 20, 22, 0.65);
+  backdrop-filter: blur(6px);
+  color: var(--ts-white);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  padding: 0.2rem 0.55rem;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.testi-video-play-btn {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 2;
+  transform: translate(-50%, -50%);
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(229, 171, 76, 0.92);
+  color: #1c1c1e;
+  box-shadow: 0 0 0 0 rgba(229, 171, 76, 0.45);
+  transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+}
+
+.testi-video-card:hover .testi-video-play-btn {
+  transform: translate(-50%, -50%) scale(1.08);
+  background: var(--ts-gold);
+  box-shadow: 0 0 0 10px rgba(229, 171, 76, 0.14);
+}
+
+.testi-play-icon {
+  width: 22px;
+  height: 22px;
+  margin-left: 3px;
+}
+
+.testi-video-meta {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 2;
+  padding: 1rem 1.1rem 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+}
+
+.testi-video-name {
+  color: var(--ts-white);
+  font-weight: 700;
+  font-size: 0.92rem;
+}
+
+.testi-video-role {
+  color: rgba(246, 246, 244, 0.72);
+  font-size: 0.78rem;
+}
+
+/* ==========================================================================
+   Video lightbox
+   ========================================================================== */
+.testi-lightbox-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  background: rgba(10, 10, 11, 0.86);
+  backdrop-filter: blur(10px);
+}
+
+.testi-lightbox-frame {
+  position: relative;
+  width: 100%;
+  max-width: 720px;
+  background: #17171a;
+  border: 1px solid rgba(229, 171, 76, 0.25);
+  border-radius: 18px;
+  padding: 1rem;
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.55);
+}
+
+.testi-lightbox-video-wrap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border-radius: 12px;
+  overflow: hidden;
+  background: #000;
+}
+
+.testi-lightbox-video {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: contain;
+  background: #000;
+}
+
+.testi-lightbox-meta {
+  display: flex;
+  align-items: baseline;
+  gap: 0.6rem;
+  padding: 0.9rem 0.35rem 0.2rem;
+}
+
+.testi-lightbox-name {
+  color: var(--ts-white);
+  font-weight: 700;
+  font-size: 0.95rem;
+}
+
+.testi-lightbox-role {
+  color: var(--ts-muted);
+  font-size: 0.82rem;
+}
+
+.testi-lightbox-close {
+  position: absolute;
+  top: -14px;
+  right: -14px;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1px solid rgba(229, 171, 76, 0.35);
+  background: #1c1c1e;
+  color: var(--ts-gold);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.testi-lightbox-close:hover {
+  background: var(--ts-gold);
+  color: #1c1c1e;
+  transform: rotate(90deg);
+}
+
+.testi-close-icon {
+  width: 16px;
+  height: 16px;
+}
+
+/* ==========================================================================
+   Cards
+   ========================================================================== */
+.testi-row {
+  margin-bottom: 2.75rem;
+}
+
+.testi-card {
+  position: relative;
+  height: 100%;
+  background: var(--ts-card-bg);
+  border-radius: 14px;
+  padding: 1.75rem 1.6rem 1.5rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.28);
+  box-sizing: border-box;
+  will-change: transform;
+}
+
+.testi-quote-icon {
+  position: absolute;
+  top: 1.4rem;
+  right: 1.5rem;
+  width: 30px;
+  height: 22px;
+  color: var(--ts-gold);
+  opacity: 0.9;
+}
+
+.testi-avatar-wrap {
+  margin-bottom: 1.1rem;
+}
+
+.testi-avatar {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--ts-gold);
+  display: block;
+}
+
+.testi-avatar-fallback {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #2a2a28;
+  color: var(--ts-gold);
+  font-weight: 700;
+  font-size: 0.9rem;
+  letter-spacing: 0.02em;
+}
+
+.testi-quote {
+  color: var(--ts-card-text);
+  font-size: 0.95rem;
+  line-height: 1.55;
+  margin: 0 0 1.4rem;
+  min-height: 4.6em;
+}
+
+.testi-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  padding-top: 0.85rem;
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.testi-name {
+  color: var(--ts-card-text);
+  font-weight: 700;
+  font-size: 0.9rem;
+}
+
+.testi-role {
+  color: var(--ts-card-muted);
+  font-size: 0.8rem;
+}
+
+/* ==========================================================================
+   CTA
+   ========================================================================== */
+.testi-cta-wrap {
+  display: flex;
+  justify-content: center;
+}
+
+.testi-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  background: transparent;
+  border: 1.5px solid var(--ts-gold);
+  color: var(--ts-gold);
+  border-radius: 6px;
+  padding: 0.9rem 2rem;
+  font-weight: 800;
+  font-size: 0.88rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.testi-cta-arrow {
+  width: 18px;
+  height: 18px;
+}
+
+/* ==========================================================================
+   Responsiveness
+   ========================================================================== */
+
+@media (min-width: 1400px) {
+  .testi-section {
+    padding: 4.5rem 0 5rem;
+  }
+
+  .testi-video-scroll {
+    grid-auto-columns: minmax(260px, 1fr);
+  }
+}
+
+/* Tablet */
+@media (max-width: 991.98px) {
+  .testi-section {
+    padding: 3.25rem 0 3.5rem;
+  }
+
+  .testi-heading {
+    margin-bottom: 2rem;
+  }
+
+  .testi-quote {
+    min-height: 0;
+  }
+
+  .testi-video-scroll {
+    grid-auto-columns: minmax(220px, 1fr);
+  }
+
+  .testi-video-thumb {
+    aspect-ratio: 9 / 11;
+  }
+}
+
+/* Mobile */
+@media (max-width: 767.98px) {
+  .testi-section {
+    padding: 2.75rem 0 3rem;
+  }
+
+  .testi-heading {
+    font-size: 1.35rem;
+    margin-bottom: 1.75rem;
+  }
+
+  .testi-card {
+    padding: 1.5rem 1.35rem 1.35rem;
+  }
+
+  .testi-cta {
+    width: 100%;
+    justify-content: center;
+    padding: 0.85rem 1.25rem;
+    font-size: 0.8rem;
+    text-align: center;
+  }
+
+  .testi-video-block {
+    margin-bottom: 2.5rem;
+  }
+
+  .testi-video-heading {
+    margin-bottom: 1.1rem;
+  }
+
+  .testi-video-scroll {
+    grid-auto-columns: minmax(72%, 1fr);
+    gap: 0.9rem;
+    padding-bottom: 0.9rem;
+  }
+
+  .testi-video-thumb {
+    aspect-ratio: 9 / 13;
+  }
+
+  .testi-lightbox-frame {
+    padding: 0.7rem;
+    border-radius: 14px;
+  }
+
+  .testi-lightbox-close {
+    top: -12px;
+    right: 0;
+  }
+}
+
+@media (max-width: 420px) {
+  .testi-eyebrow {
+    font-size: 0.68rem;
+  }
+
+  .testi-heading {
+    font-size: 1.2rem;
+  }
+
+  .testi-quote {
+    font-size: 0.88rem;
+  }
+
+  .testi-cta {
+    flex-wrap: wrap;
+    row-gap: 0.3rem;
+  }
+
+  .testi-video-scroll {
+    grid-auto-columns: minmax(80%, 1fr);
+  }
+
+  .testi-video-play-btn {
+    width: 50px;
+    height: 50px;
+  }
+}
+
+/* Respect reduced-motion: the Framer Motion variants already keep
+   distances small, but disable hover-lift transforms too */
+@media (prefers-reduced-motion: reduce) {
+  .testi-card,
+  .testi-video-card,
+  .testi-video-play-btn,
+  .testi-lightbox-close {
+    transition: none !important;
+  }
+}

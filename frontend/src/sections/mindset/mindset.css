@@ -1,0 +1,552 @@
+/* =========================================================
+   MINDSET SECTION
+   ========================================================= */
+
+.mindset-section {
+  --ms-bg: #17191c;
+  --ms-gold: #e5ab4c;
+  --ms-gold-soft: rgba(229, 171, 76, 0.18);
+  --ms-white: #f5f5f3;
+  --ms-muted: #bdbdbb;
+  --ms-line: rgba(229, 171, 76, 0.45);
+
+  width: 100%;
+  background: var(--ms-bg);
+
+  /* Gold divider */
+  border-top: 1px solid var(--ms-gold);
+
+  padding: 6rem 0;
+}
+
+
+/* =========================================================
+   CONTAINER
+   ========================================================= */
+
+.mindset-container {
+  width: 100%;
+}
+
+
+/* =========================================================
+   HEADER
+   ========================================================= */
+
+.mindset-header {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+
+  margin-bottom: 4.5rem;
+}
+
+.mindset-eyebrow {
+  flex: 0 0 auto;
+
+  color: var(--ms-gold);
+
+  font-size: 0.75rem;
+  font-weight: 700;
+
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+
+  margin: 0;
+}
+
+.mindset-header-line {
+  height: 1px;
+  flex: 1;
+
+  background: linear-gradient(
+    90deg,
+    rgba(229, 171, 76, 0.4),
+    rgba(229, 171, 76, 0)
+  );
+}
+
+
+/* =========================================================
+   HORIZONTAL TIMELINE
+   ========================================================= */
+
+.mindset-timeline {
+  display: grid;
+
+  grid-template-columns: repeat(4, minmax(180px, 1fr));
+
+  width: 100%;
+  max-width: 1050px;
+
+  margin: 0 auto;
+
+  justify-items: center;
+}
+
+
+/* =========================================================
+   STEP
+   ========================================================= */
+
+.mindset-step {
+  position: relative;
+
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  text-align: center;
+
+  min-width: 0;
+}
+
+
+/* =========================================================
+   STEP NUMBER
+   ========================================================= */
+
+.mindset-number {
+  color: rgba(229, 171, 76, 0.65);
+
+  font-size: 0.7rem;
+  font-weight: 700;
+
+  letter-spacing: 0.12em;
+
+  margin: 0 0 1rem;
+}
+
+
+/* =========================================================
+   ICON WRAPPER
+   ========================================================= */
+
+.mindset-icon-wrapper {
+  position: relative;
+
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  margin-bottom: 1.5rem;
+}
+
+
+/* =========================================================
+   PREMIUM ICON
+   ========================================================= */
+
+.mindset-icon {
+  position: relative;
+  z-index: 2;
+
+  width: 76px;
+  height: 76px;
+
+  flex: 0 0 76px;
+
+  border-radius: 50%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: var(--ms-gold);
+
+  background:
+    radial-gradient(
+      circle at center,
+      rgba(229, 171, 76, 0.16),
+      rgba(229, 171, 76, 0.04) 55%,
+      transparent 56%
+    );
+
+  border: 1px solid rgba(229, 171, 76, 0.65);
+
+  box-shadow:
+    0 0 0 7px rgba(229, 171, 76, 0.035),
+    0 0 25px rgba(229, 171, 76, 0.06);
+
+  transition:
+    transform 0.35s ease,
+    box-shadow 0.35s ease,
+    background 0.35s ease;
+}
+
+
+.mindset-icon svg {
+  width: 46px;
+  height: 46px;
+}
+
+
+/* =========================================================
+   HORIZONTAL CONNECTOR
+   ========================================================= */
+
+.mindset-connector {
+  position: absolute;
+
+  z-index: 1;
+
+  left: calc(50% + 38px);
+  top: 50%;
+
+  width: calc(100% - 76px);
+
+  height: 1px;
+
+  background: linear-gradient(
+    90deg,
+    rgba(229, 171, 76, 0.45),
+    rgba(229, 171, 76, 0.15)
+  );
+}
+
+
+/* =========================================================
+   CONTENT
+   ========================================================= */
+
+.mindset-copy {
+  padding: 0;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  text-align: center;
+}
+
+
+.mindset-title {
+  color: var(--ms-white);
+
+  font-size: 1.1rem;
+  font-weight: 800;
+
+  letter-spacing: 0.08em;
+
+  text-transform: uppercase;
+
+  margin: 0 0 0.55rem;
+}
+
+
+.mindset-description {
+  color: var(--ms-muted);
+
+  font-size: 0.9rem;
+
+  line-height: 1.65;
+
+  margin: 0;
+
+  max-width: 220px;
+
+  text-align: center;
+}
+
+
+/* =========================================================
+   HOVER EFFECT
+   ========================================================= */
+
+.mindset-step:hover .mindset-icon {
+  transform: translateY(-4px);
+
+  background:
+    radial-gradient(
+      circle at center,
+      rgba(229, 171, 76, 0.24),
+      rgba(229, 171, 76, 0.07) 55%,
+      transparent 56%
+    );
+
+  box-shadow:
+    0 0 0 8px rgba(229, 171, 76, 0.05),
+    0 0 35px rgba(229, 171, 76, 0.13);
+}
+
+
+/* =========================================================
+   LARGE TABLET
+   ========================================================= */
+
+@media (max-width: 1100px) {
+
+  .mindset-section {
+    padding: 5rem 0;
+  }
+
+  .mindset-timeline {
+    grid-template-columns: repeat(2, minmax(200px, 1fr));
+
+    max-width: 750px;
+
+    row-gap: 4rem;
+  }
+
+  .mindset-connector {
+    display: none;
+  }
+}
+
+
+/* =========================================================
+   TABLET / MOBILE
+   ========================================================= */
+
+@media (max-width: 767.98px) {
+
+  .mindset-section {
+    padding: 4rem 0;
+  }
+
+
+  /* Header */
+
+  .mindset-header {
+    gap: 1rem;
+
+    margin-bottom: 3rem;
+  }
+
+
+  .mindset-eyebrow {
+    font-size: 0.7rem;
+  }
+
+
+  /* Vertical timeline */
+
+  .mindset-timeline {
+    display: flex;
+    flex-direction: column;
+
+    width: 100%;
+    max-width: 600px;
+
+    margin: 0 auto;
+
+    gap: 2.5rem;
+  }
+
+
+  .mindset-step {
+    display: grid;
+
+    grid-template-columns: 60px 1fr;
+
+    column-gap: 1.25rem;
+
+    width: 100%;
+
+    text-align: left;
+
+    align-items: start;
+  }
+
+
+  /* Number */
+
+  .mindset-number {
+    grid-column: 1;
+    grid-row: 1;
+
+    margin: 0;
+
+    padding-top: 0.4rem;
+
+    text-align: center;
+  }
+
+
+  /* Icon */
+
+  .mindset-icon-wrapper {
+    grid-column: 1;
+    grid-row: 2;
+
+    width: 60px;
+
+    margin: 0;
+
+    display: flex;
+
+    align-items: flex-start;
+    justify-content: center;
+  }
+
+
+  .mindset-icon {
+    width: 58px;
+    height: 58px;
+
+    flex: 0 0 58px;
+  }
+
+
+  .mindset-icon svg {
+    width: 36px;
+    height: 36px;
+  }
+
+
+  /* Vertical connector */
+
+  .mindset-connector {
+    display: block;
+
+    left: 50%;
+    top: 58px;
+
+    width: 1px;
+
+    height: calc(100% + 2.5rem);
+
+    background: linear-gradient(
+      180deg,
+      rgba(229, 171, 76, 0.45),
+      rgba(229, 171, 76, 0)
+    );
+  }
+
+
+  /* Text */
+
+  .mindset-copy {
+    grid-column: 2;
+    grid-row: 2;
+
+    display: block;
+
+    padding: 0;
+
+    text-align: left;
+  }
+
+
+  .mindset-title {
+    font-size: 1rem;
+
+    text-align: left;
+
+    margin-bottom: 0.4rem;
+  }
+
+
+  .mindset-description {
+    max-width: 100%;
+
+    font-size: 0.88rem;
+
+    line-height: 1.55;
+
+    text-align: left;
+  }
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+   ========================================================= */
+
+@media (max-width: 420px) {
+
+  .mindset-section {
+    padding: 3rem 0;
+  }
+
+
+  .mindset-header {
+    margin-bottom: 2.5rem;
+  }
+
+
+  .mindset-eyebrow {
+    font-size: 0.66rem;
+
+    letter-spacing: 0.1em;
+  }
+
+
+  .mindset-timeline {
+    gap: 2rem;
+  }
+
+
+  .mindset-step {
+    grid-template-columns: 50px 1fr;
+
+    column-gap: 1rem;
+  }
+
+
+  .mindset-number {
+    font-size: 0.6rem;
+
+    padding-top: 0.3rem;
+  }
+
+
+  .mindset-icon-wrapper {
+    width: 50px;
+  }
+
+
+  .mindset-icon {
+    width: 50px;
+    height: 50px;
+
+    flex: 0 0 50px;
+  }
+
+
+  .mindset-icon svg {
+    width: 31px;
+    height: 31px;
+  }
+
+
+  .mindset-connector {
+    top: 50px;
+
+    height: calc(100% + 2rem);
+  }
+
+
+  .mindset-title {
+    font-size: 0.92rem;
+
+    letter-spacing: 0.06em;
+  }
+
+
+  .mindset-description {
+    font-size: 0.82rem;
+
+    line-height: 1.55;
+  }
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .mindset-section *,
+  .mindset-section *::before,
+  .mindset-section *::after {
+    scroll-behavior: auto !important;
+
+    transition: none !important;
+  }
+}

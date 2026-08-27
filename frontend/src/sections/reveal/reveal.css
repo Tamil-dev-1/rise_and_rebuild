@@ -1,0 +1,622 @@
+/* =========================================================
+   SEASON 2 REVEAL
+   ========================================================= */
+
+.season-reveal-section {
+  --sr-bg: #17191c;
+  --sr-bg-light: #1c1e21;
+
+  --sr-gold: #e5ab4c;
+  --sr-gold-dark: #b9852f;
+
+  --sr-white: #f5f5f3;
+  --sr-muted: #c5c5c3;
+
+  position: relative;
+
+  width: 100%;
+
+  background:
+    radial-gradient(
+      circle at 50% 0%,
+      rgba(229, 171, 76, 0.07),
+      transparent 35%
+    ),
+    radial-gradient(
+      circle at 10% 100%,
+      rgba(229, 171, 76, 0.035),
+      transparent 30%
+    ),
+    var(--sr-bg);
+
+  overflow: hidden;
+
+  padding-bottom: 5.5rem;
+}
+
+
+/* =========================================================
+   TOP GOLD DIVIDER
+   ========================================================= */
+
+.season-reveal-divider {
+  width: 100%;
+
+  height: 2px;
+
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(229, 171, 76, 0.65) 20%,
+    var(--sr-gold) 50%,
+    rgba(229, 171, 76, 0.65) 80%,
+    transparent 100%
+  );
+}
+
+
+/* =========================================================
+   BACKGROUND DECORATION
+   ========================================================= */
+
+.season-reveal-section::before {
+  content: "";
+
+  position: absolute;
+
+  width: 520px;
+  height: 520px;
+
+  left: 50%;
+  top: 50%;
+
+  transform: translate(-50%, -50%);
+
+  border-radius: 50%;
+
+  border: 1px solid rgba(229, 171, 76, 0.035);
+
+  box-shadow:
+    0 0 0 60px rgba(229, 171, 76, 0.012),
+    0 0 0 120px rgba(229, 171, 76, 0.008);
+
+  pointer-events: none;
+}
+
+
+/* =========================================================
+   CONTAINER
+   ========================================================= */
+
+.season-reveal-container {
+  position: relative;
+
+  z-index: 2;
+
+  width: 100%;
+
+  padding-top: 4rem;
+}
+
+
+/* =========================================================
+   CONTENT
+   ========================================================= */
+
+.season-reveal-content {
+  width: 100%;
+
+  max-width: 720px;
+
+  margin: 0 auto;
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  text-align: center;
+}
+
+
+/* =========================================================
+   EYEBROW
+   ========================================================= */
+
+.season-reveal-eyebrow {
+  align-self: flex-start;
+
+  color: var(--sr-gold);
+
+  font-size: 0.72rem;
+
+  font-weight: 800;
+
+  letter-spacing: 0.13em;
+
+  text-transform: uppercase;
+
+  margin: 0 0 1.1rem;
+}
+
+
+/* =========================================================
+   LOCK
+   ========================================================= */
+
+.season-reveal-lock {
+  width: 48px;
+  height: 48px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  color: var(--sr-gold);
+
+  margin-bottom: 1rem;
+
+  filter:
+    drop-shadow(
+      0 6px 14px
+      rgba(229, 171, 76, 0.15)
+    );
+}
+
+
+.season-reveal-lock svg {
+  width: 100%;
+  height: 100%;
+}
+
+
+/* =========================================================
+   HEADING
+   ========================================================= */
+
+.season-reveal-heading {
+  color: var(--sr-white);
+
+  font-size: clamp(
+    1.5rem,
+    3.5vw,
+    2.3rem
+  );
+
+  font-weight: 900;
+
+  line-height: 1.08;
+
+  letter-spacing: -0.025em;
+
+  text-transform: uppercase;
+
+  margin: 0;
+}
+
+
+/* =========================================================
+   HEADING GOLD LINE
+   ========================================================= */
+
+.season-reveal-heading-line {
+  width: 100%;
+
+  max-width: 430px;
+
+  height: 2px;
+
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--sr-gold),
+    transparent
+  );
+
+  margin: 0.85rem auto 1.2rem;
+
+  transform-origin: center;
+}
+
+
+/* =========================================================
+   DESCRIPTION
+   ========================================================= */
+
+.season-reveal-description {
+  color: var(--sr-muted);
+
+  width: 100%;
+
+  max-width: 650px;
+
+  font-size: 0.98rem;
+
+  line-height: 1.65;
+
+  margin: 0 auto;
+
+  text-align: center;
+}
+
+
+/* =========================================================
+   REGISTER BUTTON
+   ========================================================= */
+
+.season-reveal-button {
+  width: auto;
+
+  min-width: 240px;
+
+  max-width: 300px;
+
+  margin: 1.8rem auto 0;
+
+  padding: 0.75rem 1.4rem;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 2.5rem;
+
+  border: 1px solid
+    rgba(229, 171, 76, 0.9);
+
+  border-radius: 5px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #f0b84e,
+      #e5ab4c
+    );
+
+  color: #18150e;
+
+  font-size: 0.88rem;
+
+  font-weight: 900;
+
+  letter-spacing: 0.035em;
+
+  text-transform: uppercase;
+
+  cursor: pointer;
+
+  box-shadow:
+    0 8px 24px
+    rgba(0, 0, 0, 0.25),
+
+    inset 0 1px 0
+    rgba(255, 255, 255, 0.35);
+
+  transition:
+    box-shadow 0.3s ease,
+    filter 0.3s ease;
+}
+
+
+.season-reveal-button:hover {
+  filter: brightness(1.05);
+
+  box-shadow:
+    0 12px 30px
+    rgba(0, 0, 0, 0.3),
+
+    0 0 20px
+    rgba(229, 171, 76, 0.1),
+
+    inset 0 1px 0
+    rgba(255, 255, 255, 0.4);
+}
+
+
+/* =========================================================
+   ARROW
+   ========================================================= */
+
+.season-reveal-arrow {
+  font-size: 1.25rem;
+
+  font-weight: 700;
+
+  line-height: 1;
+
+  transition:
+    transform 0.3s ease;
+}
+
+
+.season-reveal-button:hover
+.season-reveal-arrow {
+  transform: translateX(4px);
+}
+
+
+/* =========================================================
+   BOTTOM TEXT
+   ========================================================= */
+
+.season-reveal-bottom-text {
+  color: var(--sr-muted);
+
+  font-size: 0.82rem;
+
+  line-height: 1.5;
+
+  letter-spacing: 0.01em;
+
+  margin: 1.35rem 0 0;
+
+  text-align: center;
+}
+
+
+/* =========================================================
+   LARGE DESKTOP
+   ========================================================= */
+
+@media (min-width: 1400px) {
+
+  .season-reveal-container {
+    padding-top: 4.8rem;
+  }
+
+  .season-reveal-content {
+    max-width: 780px;
+  }
+
+  .season-reveal-heading {
+    font-size: 3rem;
+  }
+
+  .season-reveal-description {
+    font-size: 1rem;
+
+    max-width: 680px;
+  }
+}
+
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (max-width: 991.98px) {
+
+  .season-reveal-section {
+    padding-bottom: 4.8rem;
+  }
+
+  .season-reveal-container {
+    padding-top: 3.5rem;
+  }
+
+  .season-reveal-content {
+    max-width: 680px;
+  }
+
+  .season-reveal-heading {
+    font-size: 2.35rem;
+  }
+
+  .season-reveal-description {
+    font-size: 0.94rem;
+  }
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 767.98px) {
+
+  .season-reveal-section {
+    padding-bottom: 4rem;
+  }
+
+  .season-reveal-container {
+    padding-top: 3rem;
+  }
+
+  .season-reveal-content {
+    max-width: 100%;
+  }
+
+
+  /* Eyebrow */
+
+  .season-reveal-eyebrow {
+    font-size: 0.64rem;
+
+    letter-spacing: 0.1em;
+
+    margin-bottom: 0.9rem;
+  }
+
+
+  /* Lock */
+
+  .season-reveal-lock {
+    width: 42px;
+    height: 42px;
+
+    margin-bottom: 0.8rem;
+  }
+
+
+  /* Heading */
+
+  .season-reveal-heading {
+    font-size: 1.9rem;
+
+    line-height: 1.08;
+  }
+
+
+  .season-reveal-heading-line {
+    max-width: 300px;
+
+    margin-top: 0.75rem;
+  }
+
+
+  /* Description */
+
+  .season-reveal-description {
+    font-size: 0.86rem;
+
+    line-height: 1.6;
+
+    max-width: 560px;
+  }
+
+
+  /* Button */
+
+  .season-reveal-button {
+    min-width: 210px;
+
+    padding: 0.7rem 1.2rem;
+
+    font-size: 0.8rem;
+
+    gap: 2rem;
+
+    margin-top: 1.5rem;
+  }
+
+
+  /* Bottom text */
+
+  .season-reveal-bottom-text {
+    font-size: 0.76rem;
+
+    margin-top: 1.15rem;
+  }
+
+
+  /* Background */
+
+  .season-reveal-section::before {
+    width: 380px;
+    height: 380px;
+  }
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+   ========================================================= */
+
+@media (max-width: 480px) {
+
+  .season-reveal-container {
+    padding-top: 2.5rem;
+  }
+
+  .season-reveal-section {
+    padding-bottom: 3.5rem;
+  }
+
+
+  .season-reveal-lock {
+    width: 38px;
+    height: 38px;
+  }
+
+
+  .season-reveal-heading {
+    font-size: 1.65rem;
+
+    letter-spacing: -0.015em;
+  }
+
+
+  .season-reveal-heading-line {
+    max-width: 230px;
+
+    margin-bottom: 1rem;
+  }
+
+
+  .season-reveal-description {
+    font-size: 0.82rem;
+
+    line-height: 1.55;
+  }
+
+
+  .season-reveal-button {
+    min-width: 195px;
+
+    padding: 0.68rem 1rem;
+
+    font-size: 0.76rem;
+
+    gap: 1.5rem;
+  }
+
+
+  .season-reveal-bottom-text {
+    font-size: 0.72rem;
+
+    padding: 0 1rem;
+  }
+
+
+  .season-reveal-section::before {
+    width: 300px;
+    height: 300px;
+  }
+}
+
+
+/* =========================================================
+   EXTRA SMALL
+   ========================================================= */
+
+@media (max-width: 360px) {
+
+  .season-reveal-heading {
+    font-size: 1.45rem;
+  }
+
+  .season-reveal-description {
+    font-size: 0.78rem;
+  }
+
+  .season-reveal-button {
+    min-width: 180px;
+
+    font-size: 0.72rem;
+
+    gap: 1.2rem;
+  }
+
+  .season-reveal-bottom-text {
+    font-size: 0.68rem;
+  }
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .season-reveal-section *,
+  .season-reveal-section *::before,
+  .season-reveal-section *::after {
+    animation: none !important;
+
+    transition: none !important;
+  }
+}

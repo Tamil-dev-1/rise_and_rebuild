@@ -1,0 +1,262 @@
+/* =========================================================
+   SEASON TEASER SECTION
+   ========================================================= */
+
+.season-teaser-section {
+  --st-bg: #0a0705;
+  --st-gold: #e5ab4c;
+  --st-white: #f5f5f3;
+  --st-muted: #d7d7d5;
+
+  width: 100%;
+  background: var(--st-bg);
+  border-top: 1px solid #e5ab4c;
+  padding: 6rem 0;
+}
+
+/* Main full-width content area */
+.season-teaser-container {
+  width: 100%;
+}
+
+/* No card / no border */
+.season-teaser-content {
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+
+/* =========================================================
+   EYEBROW
+   ========================================================= */
+
+.season-teaser-eyebrow {
+  color: var(--st-gold);
+  font-weight: 700;
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin: 0 0 1rem;
+}
+
+
+/* =========================================================
+   HEADING
+   ========================================================= */
+
+.season-teaser-heading {
+  color: var(--st-white);
+  font-weight: 800;
+  font-size: clamp(2rem, 2.3vw, 2rem);
+  line-height: 1.1;
+  text-transform: uppercase;
+  margin: 0 0 3.5rem;
+  max-width: 750px;
+}
+
+
+/* =========================================================
+   QUESTIONS - 2 x 2 GRID
+   ========================================================= */
+
+.season-teaser-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  column-gap: 5rem;
+  row-gap: 2.5rem;
+
+  width: 100%;
+  margin-bottom: 3.5rem;
+}
+
+
+/* Individual question */
+
+.season-teaser-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+
+/* SVG check icon */
+
+.season-teaser-check {
+  flex: 0 0 auto;
+  width: 24px;
+  height: 24px;
+  margin-top: 0.15rem;
+  color: var(--st-gold);
+}
+
+
+/* Question text */
+
+.season-teaser-item span {
+  color: var(--st-muted);
+  font-size: 1rem;
+  line-height: 1.65;
+  max-width: 450px;
+}
+
+
+/* =========================================================
+   CTA
+   ========================================================= */
+
+/* =========================================================
+   CTA
+   ========================================================= */
+
+.season-teaser-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+
+  width: fit-content;
+  max-width: 100%;
+
+  background: var(--st-gold);
+  color: #16140d;
+
+  border: none;
+  border-radius: 5px;
+
+  padding: 0.75rem 1.25rem;
+
+  font-weight: 800;
+  font-size: 0.78rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+
+  /* Important for React Router Link */
+  text-decoration: none;
+
+  cursor: pointer;
+
+  transition:
+    filter 0.2s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.season-teaser-cta:hover {
+  filter: brightness(1.08);
+  color: #16140d;
+  text-decoration: none;
+
+  transform: translateY(-1px);
+
+  box-shadow:
+    0 6px 18px rgba(229, 171, 76, 0.25);
+}
+
+.season-teaser-cta:active {
+  transform: translateY(1px);
+}
+
+.season-teaser-cta:focus {
+  outline: none;
+  color: #16140d;
+  text-decoration: none;
+}
+
+.season-teaser-arrow {
+  font-size: 1.1rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (max-width: 991.98px) {
+  .season-teaser-section {
+    padding: 5rem 0;
+  }
+
+  .season-teaser-content {
+    max-width: 850px;
+  }
+
+  .season-teaser-grid {
+    column-gap: 3rem;
+    row-gap: 2rem;
+  }
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 767.98px) {
+  .season-teaser-section {
+    padding: 4rem 0;
+  }
+
+  .season-teaser-heading {
+    font-size: 2rem;
+    margin-bottom: 2.5rem;
+  }
+
+  /*
+    On mobile:
+    2 columns → 1 column
+  */
+
+  .season-teaser-grid {
+    grid-template-columns: 1fr;
+    gap: 1.75rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .season-teaser-item {
+    gap: 0.8rem;
+  }
+
+  .season-teaser-item span {
+    font-size: 0.92rem;
+    line-height: 1.55;
+  }
+
+  .season-teaser-check {
+    width: 21px;
+    height: 21px;
+  }
+
+  .season-teaser-cta {
+    max-width: 100%;
+  }
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+   ========================================================= */
+
+@media (max-width: 420px) {
+  .season-teaser-section {
+    padding: 3rem 0;
+  }
+
+  .season-teaser-heading {
+    font-size: 1.65rem;
+  }
+
+  .season-teaser-eyebrow {
+    font-size: 0.68rem;
+  }
+
+  .season-teaser-item span {
+    font-size: 0.87rem;
+  }
+
+  .season-teaser-cta {
+    font-size: 0.8rem;
+    padding: 0.85rem 1rem;
+  }
+}

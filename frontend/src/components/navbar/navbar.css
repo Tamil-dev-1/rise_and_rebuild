@@ -1,0 +1,653 @@
+/* =====================================================
+   RISE & REBUILD
+   PREMIUM NAVBAR
+   ===================================================== */
+
+
+/* =====================================================
+   ROOT VARIABLES
+   ===================================================== */
+
+:root {
+  --rr-bg-dark: #15100c;
+  --rr-bg-darker: #0d0a08;
+
+  --rr-gold: #d9a94f;
+  --rr-gold-light: #f0d9a3;
+
+  --rr-gold-gradient: linear-gradient(
+    135deg,
+    #f3d99a 0%,
+    #d9a94f 50%,
+    #b8863a 100%
+  );
+
+  --rr-text: #f5f1e8;
+  --rr-text-muted: rgba(245, 241, 232, 0.75);
+
+  --rr-border: rgba(217, 169, 79, 0.25);
+
+  --rr-font-display:
+    "Playfair Display",
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  --rr-font-body:
+    "Poppins",
+    "Segoe UI",
+    Arial,
+    sans-serif;
+}
+
+
+/* =====================================================
+   NAVBAR
+   ===================================================== */
+
+.rr-navbar {
+  width: 100%;
+  min-height: 68px;
+
+  padding: 0.75rem 0;
+
+  background:
+    linear-gradient(
+      180deg,
+      var(--rr-bg-dark) 0%,
+      var(--rr-bg-darker) 100%
+    );
+
+  border-bottom: 1px solid var(--rr-border);
+
+  font-family: var(--rr-font-body);
+
+  box-shadow:
+    0 2px 18px rgba(0, 0, 0, 0.45);
+
+  z-index: 1000;
+}
+
+
+/* =====================================================
+   CONTAINER
+   ===================================================== */
+
+.rr-container {
+  width: 100%;
+  max-width: 1600px;
+
+  margin: 0 auto;
+
+  padding-left:
+    clamp(1.5rem, 4vw, 4.5rem);
+
+  padding-right:
+    clamp(1.5rem, 4vw, 4.5rem);
+}
+
+
+/* =====================================================
+   LOGO
+   ===================================================== */
+
+.rr-brand {
+  display: flex;
+  align-items: center;
+
+  flex-shrink: 0;
+
+  gap: 0.3rem;
+
+  padding: 0 !important;
+  margin: 0;
+
+  font-family: var(--rr-font-display);
+
+  font-size: 1.4rem;
+  font-weight: 700;
+
+  line-height: 1;
+
+  letter-spacing: 0.5px;
+
+  text-transform: uppercase;
+
+  text-decoration: none !important;
+}
+
+
+/* Remove Bootstrap / browser underline */
+
+.rr-brand:hover,
+.rr-brand:focus {
+  text-decoration: none !important;
+}
+
+
+/* RISE */
+
+.rr-brand-primary {
+  color: var(--rr-gold-light);
+}
+
+
+/* & */
+
+.rr-brand-amp {
+  color: var(--rr-gold);
+
+  font-style: italic;
+  font-weight: 500;
+
+  font-size: 1.25rem;
+}
+
+
+/* REBUILD */
+
+.rr-brand-secondary {
+  color: var(--rr-text);
+}
+
+
+/* Logo hover */
+
+.rr-brand:hover .rr-brand-primary,
+.rr-brand:hover .rr-brand-secondary {
+  color: var(--rr-gold-light);
+}
+
+
+/* =====================================================
+   NAVIGATION AREA
+   ===================================================== */
+
+.rr-navbar .navbar-collapse {
+  flex: 1;
+
+  display: flex;
+
+  justify-content: center;
+  align-items: center;
+}
+
+
+/* =====================================================
+   NAVIGATION LINKS
+   ===================================================== */
+
+.rr-nav-links {
+  width: 100%;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  gap:
+    clamp(0.8rem, 1.8vw, 2rem);
+
+  margin: 0;
+}
+
+
+/* Individual link */
+
+.rr-nav-link {
+  position: relative;
+
+  padding:
+    0.5rem 0.15rem !important;
+
+  color: var(--rr-text) !important;
+
+  font-family: var(--rr-font-body);
+
+  font-size: 0.78rem;
+
+  font-weight: 500;
+
+  line-height: 1;
+
+  letter-spacing: 0.7px;
+
+  text-transform: uppercase;
+
+  white-space: nowrap;
+
+  text-decoration: none !important;
+
+  transition:
+    color 0.25s ease,
+    opacity 0.25s ease;
+}
+
+
+/* Remove default underline */
+
+.rr-nav-link:hover,
+.rr-nav-link:focus {
+  text-decoration: none !important;
+}
+
+
+/* =====================================================
+   ACTIVE / HOVER GOLD LINE
+   ===================================================== */
+
+.rr-nav-link::after {
+  content: "";
+
+  position: absolute;
+
+  left: 0;
+
+  bottom: -7px;
+
+  width: 0;
+
+  height: 2px;
+
+  background:
+    var(--rr-gold-gradient);
+
+  transition:
+    width 0.3s ease;
+}
+
+
+/* Hover */
+
+.rr-nav-link:hover {
+  color: var(--rr-gold-light) !important;
+}
+
+
+/* Active */
+
+.rr-nav-link.active {
+  color: var(--rr-gold-light) !important;
+}
+
+
+/* Underline */
+
+.rr-nav-link:hover::after,
+.rr-nav-link.active::after {
+  width: 100%;
+}
+
+
+/* =====================================================
+   REGISTER BUTTON
+   ===================================================== */
+
+.rr-cta-btn {
+  flex-shrink: 0;
+
+  padding:
+    0.68rem 1.55rem;
+
+  border: none !important;
+
+  border-radius: 5px;
+
+  background:
+    var(--rr-gold-gradient) !important;
+
+  color: #241a0c !important;
+
+  font-family: var(--rr-font-body);
+
+  font-size: 0.76rem;
+
+  font-weight: 600;
+
+  line-height: 1;
+
+  letter-spacing: 0.8px;
+
+  text-transform: uppercase;
+
+  white-space: nowrap;
+
+  text-decoration: none !important;
+
+  box-shadow:
+    0 4px 14px rgba(217, 169, 79, 0.25);
+
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    filter 0.25s ease;
+}
+
+
+/* Button hover */
+
+.rr-cta-btn:hover,
+.rr-cta-btn:focus {
+  color: #241a0c !important;
+
+  text-decoration: none !important;
+
+  filter: brightness(1.08);
+
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 6px 20px rgba(217, 169, 79, 0.4);
+}
+
+
+/* Button click */
+
+.rr-cta-btn:active {
+  transform: translateY(0);
+}
+
+
+/* =====================================================
+   MOBILE TOGGLE
+   ===================================================== */
+
+.rr-toggler {
+  flex-shrink: 0;
+
+  margin-left: 1rem;
+
+  padding:
+    0.4rem 0.55rem !important;
+
+  border:
+    1px solid var(--rr-border) !important;
+
+  border-radius: 5px;
+
+  background: transparent !important;
+}
+
+
+/* Toggle focus */
+
+.rr-toggler:focus {
+  box-shadow:
+    0 0 0 3px
+    rgba(217, 169, 79, 0.25) !important;
+}
+
+
+/* =====================================================
+   HAMBURGER ICON
+   ===================================================== */
+
+.rr-toggler .navbar-toggler-icon {
+  width: 1.4em;
+  height: 1.4em;
+
+  background-image:
+    url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(240,217,163,0.95)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e") !important;
+}
+
+
+/* =====================================================
+   DESKTOP
+   ===================================================== */
+
+@media (min-width: 992px) {
+
+  .rr-container {
+    display: flex;
+    align-items: center;
+  }
+
+
+  /* Logo */
+
+  .rr-brand {
+    flex-shrink: 0;
+  }
+
+
+  /* Navigation */
+
+  .rr-navbar .navbar-collapse {
+    flex: 1;
+
+    display: flex !important;
+
+    justify-content: center;
+    align-items: center;
+  }
+
+
+  .rr-nav-links {
+    justify-content: center;
+    align-items: center;
+  }
+
+
+  /* CTA */
+
+  .rr-cta-btn {
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+
+/* =====================================================
+   TABLET + MOBILE
+   ===================================================== */
+
+@media (max-width: 991.98px) {
+
+  /* Navbar */
+
+  .rr-navbar {
+    min-height: 64px;
+
+    padding:
+      0.7rem 0;
+  }
+
+
+  /* Container */
+
+  .rr-container {
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+  }
+
+
+  /* Logo */
+
+  .rr-brand {
+    font-size: 1.25rem;
+  }
+
+
+  .rr-brand-amp {
+    font-size: 1.1rem;
+  }
+
+
+  /* Navigation dropdown */
+
+  .rr-navbar .navbar-collapse {
+    width: 100%;
+
+    flex-basis: 100%;
+
+    margin-top: 0.85rem;
+
+    padding:
+      1.25rem 1rem 1.5rem;
+
+    background:
+      var(--rr-bg-darker);
+
+    border-top:
+      1px solid var(--rr-border);
+
+    border-radius:
+      0 0 10px 10px;
+
+    animation:
+      rr-fade-slide 0.28s ease;
+  }
+
+
+  /* Navigation */
+
+  .rr-nav-links {
+    width: 100%;
+
+    flex-direction: column;
+
+    align-items: flex-start;
+
+    justify-content: flex-start;
+
+    gap: 0;
+  }
+
+
+  /* Links */
+
+  .rr-nav-link {
+    width: 100%;
+
+    padding:
+      0.8rem 0.25rem !important;
+
+    border-bottom:
+      1px solid
+      rgba(217, 169, 79, 0.12);
+
+    font-size: 0.8rem;
+  }
+
+
+  /* Remove desktop underline */
+
+  .rr-nav-link::after {
+    display: none;
+  }
+
+
+  /* Register button */
+
+  .rr-cta-btn {
+    display: block;
+
+    width: 100%;
+
+    margin-top: 1rem;
+
+    margin-left: 0 !important;
+
+    padding:
+      0.75rem 1.5rem;
+
+    border: none !important;
+
+    border-radius: 5px;
+
+    background:
+      var(--rr-gold-gradient) !important;
+
+    color: #241a0c !important;
+
+    font-family: var(--rr-font-body);
+
+    font-size: 0.78rem;
+
+    font-weight: 600;
+
+    letter-spacing: 0.8px;
+
+    text-transform: uppercase;
+
+    text-decoration: none !important;
+
+    text-align: center;
+  }
+
+
+  .rr-cta-btn:hover {
+    filter: brightness(1.08);
+
+    color: #241a0c !important;
+  }
+}
+
+
+/* =====================================================
+   MOBILE MENU ANIMATION
+   ===================================================== */
+
+@keyframes rr-fade-slide {
+
+  from {
+    opacity: 0;
+
+    transform:
+      translateY(-8px);
+  }
+
+  to {
+    opacity: 1;
+
+    transform:
+      translateY(0);
+  }
+}
+
+
+/* =====================================================
+   SMALL PHONES
+   ===================================================== */
+
+@media (max-width: 420px) {
+
+  .rr-container {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+
+  .rr-brand {
+    font-size: 1.1rem;
+  }
+
+
+  .rr-brand-amp {
+    font-size: 1rem;
+  }
+
+
+  .rr-toggler {
+    margin-left: 0.75rem;
+  }
+}
+
+
+/* =====================================================
+   EXTRA SAFETY
+   Prevent navbar from opening automatically
+   ===================================================== */
+
+@media (max-width: 991.98px) {
+
+  .rr-navbar .navbar-collapse:not(.show) {
+    display: none;
+  }
+
+  .rr-navbar .navbar-collapse.show {
+    display: block;
+  }
+}

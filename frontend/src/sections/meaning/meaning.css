@@ -1,0 +1,100 @@
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #0b0b0b;
+}
+
+.rr-full-width-section {
+  width: 100%;
+  background-color: #0b0b0b;
+  box-sizing: border-box;
+}
+
+.rr-card-wrapper {
+  background-color: #ededed;
+  border-radius: 0;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+  width: 100%;
+}
+
+.rr-top-header {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.rr-number {
+  color: #b08a4b;
+}
+
+.rr-title-gold {
+  color: #b08a4b;
+}
+
+.rr-title-black {
+  color: #111111;
+}
+
+.card-icon {
+  width: 72px;
+  height: 72px;
+}
+
+.rr-card-title {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: #111111;
+  letter-spacing: 1.2px;
+}
+
+.rr-card-desc {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-size: 0.95rem;
+  color: #333333;
+  line-height: 1.35;
+  max-width: 220px;
+  font-weight: 500;
+}
+
+.rr-col-divider {
+  position: relative;
+}
+
+@media (min-width: 768px) {
+  .rr-col-divider:not(:last-child)::after {
+    content: "";
+    position: absolute;
+    top: 10%;
+    right: 0;
+    height: 80%;
+    width: 1px;
+    background-color: #d1d1d1;
+  }
+}
+
+@media (max-width: 767.98px) {
+  .rr-col-divider:not(:last-child) {
+    border-bottom: 1px solid #d1d1d1;
+  }
+}
+
+.rr-footer-text {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  color: #2b2b2b;
+  font-size: 0.95rem;
+  font-weight: 500;
+  line-height: 1.45;
+}
+
+@media (max-width: 576px) {
+  .rr-card-wrapper {
+    padding: 1.5rem !important;
+  }
+  
+  .rr-footer-text {
+    font-size: 0.85rem;
+  }
+}

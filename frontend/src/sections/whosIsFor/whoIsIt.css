@@ -1,0 +1,296 @@
+/* =========================================================
+   AUDIENCE FIT SECTION
+   ========================================================= */
+
+.audience-fit-section {
+  --af-bg: #17191c;
+  --af-gold: #e5ab4c;
+  --af-white: #f5f5f3;
+  --af-muted: #d7d7d5;
+
+  width: 100%;
+  background: var(--af-bg);
+
+  /* Gold divider */
+  border-top: 1px solid #e5ab4c;
+
+  padding: 6rem 0;
+}
+
+
+/* =========================================================
+   CONTAINER
+   ========================================================= */
+
+.audience-fit-container {
+  width: 100%;
+}
+
+
+/* =========================================================
+   MAIN CONTENT
+   ========================================================= */
+
+.audience-fit-content {
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+
+/* =========================================================
+   EYEBROW
+   ========================================================= */
+
+.audience-fit-eyebrow {
+  color: var(--af-gold);
+
+  font-weight: 700;
+  font-size: 0.75rem;
+
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+
+  margin: 0 0 1rem;
+}
+
+
+/* =========================================================
+   HEADING
+   ========================================================= */
+
+.audience-fit-heading {
+  color: var(--af-white);
+
+  font-weight: 800;
+  font-size: clamp(2rem, 2vw, 2.1rem);
+
+  line-height: 1.1;
+  text-transform: uppercase;
+
+  margin: 0 0 4rem;
+
+  max-width: 800px;
+}
+
+
+/* =========================================================
+   POINTS GRID
+   4 COLUMNS × 2 ROWS
+   ========================================================= */
+
+.audience-fit-grid {
+  display: grid;
+
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+
+  column-gap: 3rem;
+  row-gap: 2.5rem;
+
+  width: 100%;
+
+  margin-bottom: 4rem;
+}
+
+
+/* =========================================================
+   INDIVIDUAL POINT
+   ========================================================= */
+
+.audience-fit-item {
+  display: flex;
+  align-items: flex-start;
+
+  gap: 0.8rem;
+}
+
+
+/* =========================================================
+   CHECK ICON
+   ========================================================= */
+
+.audience-fit-check {
+  flex: 0 0 auto;
+
+  width: 21px;
+  height: 21px;
+
+  margin-top: 0.15rem;
+
+  color: var(--af-gold);
+}
+
+
+/* =========================================================
+   POINT TEXT
+   ========================================================= */
+
+.audience-fit-item span {
+  color: var(--af-muted);
+
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+
+/* =========================================================
+   CLOSING STATEMENT
+   ========================================================= */
+
+.audience-fit-closing {
+  width: 100%;
+
+  text-align: center;
+
+  padding-top: 1rem;
+}
+
+
+.audience-fit-closing p {
+  color: var(--af-white);
+
+  font-size: 1.05rem;
+  line-height: 1.7;
+
+  margin: 0;
+}
+
+
+.audience-fit-closing p + p {
+  margin-top: 0.25rem;
+}
+
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (max-width: 991.98px) {
+
+  .audience-fit-section {
+    padding: 5rem 0;
+  }
+
+  .audience-fit-content {
+    max-width: 850px;
+  }
+
+  .audience-fit-heading {
+    margin-bottom: 3rem;
+  }
+
+  /*
+     4 columns → 2 columns
+     2 rows → 4 rows
+  */
+
+  .audience-fit-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+
+    column-gap: 3rem;
+    row-gap: 2rem;
+
+    margin-bottom: 3rem;
+  }
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 767.98px) {
+
+  .audience-fit-section {
+    padding: 4rem 0;
+  }
+
+  .audience-fit-heading {
+    font-size: 2rem;
+
+    margin-bottom: 2.5rem;
+  }
+
+
+  /*
+     2 columns → 1 column
+  */
+
+  .audience-fit-grid {
+    grid-template-columns: 1fr;
+
+    gap: 1.5rem;
+
+    margin-bottom: 2.5rem;
+  }
+
+
+  .audience-fit-item {
+    gap: 0.75rem;
+  }
+
+
+  .audience-fit-check {
+    width: 20px;
+    height: 20px;
+  }
+
+
+  .audience-fit-item span {
+    font-size: 0.92rem;
+    line-height: 1.55;
+  }
+
+
+  .audience-fit-closing {
+    padding-top: 0.5rem;
+  }
+
+
+  .audience-fit-closing p {
+    font-size: 0.95rem;
+    line-height: 1.6;
+  }
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+   ========================================================= */
+
+@media (max-width: 420px) {
+
+  .audience-fit-section {
+    padding: 3rem 0;
+  }
+
+  .audience-fit-eyebrow {
+    font-size: 0.68rem;
+  }
+
+  .audience-fit-heading {
+    font-size: 1.65rem;
+  }
+
+  .audience-fit-item span {
+    font-size: 0.87rem;
+  }
+
+  .audience-fit-closing p {
+    font-size: 0.88rem;
+  }
+}
+
+
+/* =========================================================
+   REDUCED MOTION ACCESSIBILITY
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .audience-fit-section * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

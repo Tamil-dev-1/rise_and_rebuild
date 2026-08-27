@@ -1,0 +1,636 @@
+/* =========================================================
+   BIG QUESTION SECTION
+   ========================================================= */
+
+.big-question-section {
+  --bq-bg: #f3f1ec;
+  --bq-dark: #17191c;
+  --bq-text: #242527;
+  --bq-muted: #555657;
+
+  --bq-gold: #a87928;
+  --bq-gold-light: #e5ab4c;
+
+  position: relative;
+
+  width: 100%;
+
+  background:
+    radial-gradient(
+      circle at 15% 20%,
+      rgba(229, 171, 76, 0.07),
+      transparent 32%
+    ),
+    radial-gradient(
+      circle at 90% 80%,
+      rgba(229, 171, 76, 0.05),
+      transparent 30%
+    ),
+    #f3f1ec;
+
+  overflow: hidden;
+
+  padding-bottom: 6rem;
+}
+
+
+/* =========================================================
+   TOP GOLD DIVIDER
+   ========================================================= */
+
+.big-question-divider {
+  width: 100%;
+  height: 2px;
+
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(229, 171, 76, 0.8) 20%,
+    #e5ab4c 50%,
+    rgba(229, 171, 76, 0.8) 80%,
+    transparent 100%
+  );
+}
+
+
+/* =========================================================
+   DECORATIVE BACKGROUND
+   ========================================================= */
+
+.big-question-section::before {
+  content: "";
+
+  position: absolute;
+
+  width: 500px;
+  height: 500px;
+
+  right: -240px;
+  top: -220px;
+
+  border-radius: 50%;
+
+  border: 1px solid rgba(168, 121, 40, 0.07);
+
+  box-shadow:
+    0 0 0 40px rgba(168, 121, 40, 0.018),
+    0 0 0 80px rgba(168, 121, 40, 0.012);
+
+  pointer-events: none;
+}
+
+
+/* =========================================================
+   LARGE BACKGROUND QUESTION MARK
+   ========================================================= */
+
+.big-question-section::after {
+  content: "?";
+
+  position: absolute;
+
+  right: 4%;
+  bottom: -6rem;
+
+  font-family: Georgia, "Times New Roman", serif;
+
+  font-size: 17rem;
+
+  font-weight: 700;
+
+  line-height: 1;
+
+  color: rgba(168, 121, 40, 0.04);
+
+  pointer-events: none;
+
+  user-select: none;
+}
+
+
+/* =========================================================
+   CONTAINER
+   ========================================================= */
+
+.big-question-container {
+  position: relative;
+
+  z-index: 2;
+
+  width: 100%;
+
+  max-width: 1200px;
+
+  margin: 0 auto;
+
+  padding-top: 4.5rem;
+}
+
+
+/* =========================================================
+   CONTENT
+   ========================================================= */
+
+.big-question-content {
+  width: 100%;
+
+  max-width: 1000px;
+
+  margin: 0 auto;
+}
+
+
+/* =========================================================
+   EYEBROW
+   ========================================================= */
+
+.big-question-eyebrow {
+  color: var(--bq-gold);
+
+  font-size: 0.72rem;
+
+  font-weight: 800;
+
+  letter-spacing: 0.14em;
+
+  text-transform: uppercase;
+
+  margin: 0 0 1rem;
+}
+
+
+/* =========================================================
+   MAIN HEADING
+   ========================================================= */
+
+.big-question-heading {
+  color: var(--bq-dark);
+
+  /*
+     Reduced from the previous large heading.
+  */
+
+  font-size: clamp(
+    1.7rem,
+    2.8vw,
+    2.65rem
+  );
+
+  font-weight: 900;
+
+  line-height: 1.08;
+
+  letter-spacing: -0.025em;
+
+  text-transform: uppercase;
+
+  margin: 0 0 3.2rem;
+}
+
+
+/* =========================================================
+   POINTS GRID
+   3 COLUMNS
+   ========================================================= */
+
+.big-question-list {
+  list-style: none;
+
+  padding: 0;
+  margin: 0 auto;
+
+  width: 100%;
+
+  max-width: 900px;
+
+  display: grid;
+
+  grid-template-columns:
+    repeat(3, minmax(0, 1fr));
+
+  column-gap: 3rem;
+
+  row-gap: 1.25rem;
+
+  align-items: center;
+}
+
+
+/* =========================================================
+   POINT ITEM
+   ========================================================= */
+
+.big-question-item {
+  display: flex;
+
+  align-items: center;
+
+  justify-content: flex-start;
+
+  gap: 0.75rem;
+
+  min-width: 0;
+
+  color: var(--bq-text);
+
+  padding: 0.55rem 0;
+
+  transition:
+    transform 0.3s ease;
+}
+
+
+/* =========================================================
+   CENTER 7TH ITEM
+   ========================================================= */
+
+/*
+   The seventh item occupies the middle column
+   of the third row.
+*/
+
+.big-question-item:nth-child(7) {
+  grid-column: 2;
+
+  justify-content: center;
+
+  text-align: center;
+}
+
+
+/* =========================================================
+   ICON
+   ========================================================= */
+
+.big-question-icon {
+  width: 23px;
+  height: 23px;
+
+  min-width: 23px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  color: var(--bq-gold);
+
+  transition:
+    transform 0.35s ease,
+    color 0.35s ease;
+}
+
+
+.big-question-icon svg {
+  width: 100%;
+  height: 100%;
+}
+
+
+/* =========================================================
+   POINT TEXT
+   ========================================================= */
+
+.big-question-text {
+  color: var(--bq-muted);
+
+  font-size: 0.94rem;
+
+  font-weight: 500;
+
+  line-height: 1.45;
+
+  letter-spacing: 0.005em;
+}
+
+
+/* =========================================================
+   HOVER
+   ========================================================= */
+
+.big-question-item:hover {
+  transform: translateY(-2px);
+}
+
+.big-question-item:hover .big-question-icon {
+  transform: scale(1.12);
+
+  color: var(--bq-gold-light);
+}
+
+
+/* =========================================================
+   CLOSING STATEMENT
+   ========================================================= */
+
+.big-question-closing {
+  color: var(--bq-gold);
+
+  font-size: clamp(
+    1.35rem,
+    2vw,
+    1.9rem
+  );
+
+  font-weight: 900;
+
+  letter-spacing: 0.06em;
+
+  line-height: 1.2;
+
+  text-align: center;
+
+  text-transform: uppercase;
+
+  margin: 4rem auto 0;
+
+  width: 100%;
+}
+
+
+/* =========================================================
+   DECORATIVE LINE ABOVE CLOSING TEXT
+   ========================================================= */
+
+.big-question-closing::before {
+  content: "";
+
+  display: block;
+
+  width: 45px;
+
+  height: 1px;
+
+  background: var(--bq-gold);
+
+  margin: 0 auto 1.2rem;
+
+  opacity: 0.8;
+}
+
+
+/* =========================================================
+   LARGE DESKTOP
+   ========================================================= */
+
+@media (min-width: 1400px) {
+
+  .big-question-container {
+    padding-top: 5rem;
+  }
+
+  .big-question-content {
+    max-width: 1050px;
+  }
+
+  .big-question-list {
+    max-width: 950px;
+
+    column-gap: 4rem;
+  }
+
+  .big-question-heading {
+    font-size: 2.75rem;
+  }
+}
+
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (max-width: 991.98px) {
+
+  .big-question-section {
+    padding-bottom: 5rem;
+  }
+
+  .big-question-container {
+    padding-top: 3.8rem;
+  }
+
+  .big-question-heading {
+    font-size: 2rem;
+
+    margin-bottom: 2.7rem;
+  }
+
+  .big-question-list {
+    max-width: 760px;
+
+    column-gap: 2rem;
+
+    row-gap: 1rem;
+  }
+
+  .big-question-text {
+    font-size: 0.88rem;
+  }
+
+  .big-question-item {
+    gap: 0.6rem;
+  }
+
+  .big-question-icon {
+    width: 21px;
+    height: 21px;
+
+    min-width: 21px;
+  }
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 767.98px) {
+
+  .big-question-section {
+    padding-bottom: 4rem;
+  }
+
+  .big-question-container {
+    padding-top: 3rem;
+  }
+
+  .big-question-content {
+    max-width: 100%;
+  }
+
+
+  /* Eyebrow */
+
+  .big-question-eyebrow {
+    font-size: 0.65rem;
+
+    letter-spacing: 0.11em;
+
+    margin-bottom: 0.9rem;
+  }
+
+
+  /* Heading */
+
+  .big-question-heading {
+    font-size: 1.75rem;
+
+    line-height: 1.1;
+
+    margin-bottom: 2.3rem;
+  }
+
+
+  /*
+     Keep 3 columns on normal mobile
+     only when there is enough width.
+  */
+
+  .big-question-list {
+    grid-template-columns:
+      repeat(3, minmax(0, 1fr));
+
+    column-gap: 0.8rem;
+
+    row-gap: 0.8rem;
+
+    max-width: 100%;
+  }
+
+
+  .big-question-item {
+    gap: 0.4rem;
+
+    padding: 0.4rem 0;
+  }
+
+
+  .big-question-item:nth-child(7) {
+    grid-column: 2;
+  }
+
+
+  .big-question-icon {
+    width: 18px;
+    height: 18px;
+
+    min-width: 18px;
+  }
+
+
+  .big-question-text {
+    font-size: 0.76rem;
+
+    line-height: 1.35;
+  }
+
+
+  /* Closing */
+
+  .big-question-closing {
+    font-size: 1.25rem;
+
+    letter-spacing: 0.045em;
+
+    margin-top: 3rem;
+  }
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+   ========================================================= */
+
+@media (max-width: 480px) {
+
+  .big-question-container {
+    padding-top: 2.5rem;
+  }
+
+
+  .big-question-heading {
+    font-size: 1.55rem;
+
+    margin-bottom: 2rem;
+  }
+
+
+  /*
+     Two columns for small phones.
+     This prevents the text from becoming
+     too narrow.
+  */
+
+  .big-question-list {
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+
+    column-gap: 1.1rem;
+
+    row-gap: 0.8rem;
+  }
+
+
+  .big-question-item:nth-child(7) {
+    grid-column: 1 / -1;
+
+    justify-content: center;
+
+    text-align: center;
+  }
+
+
+  .big-question-text {
+    font-size: 0.82rem;
+  }
+
+
+  .big-question-closing {
+    font-size: 1.15rem;
+
+    margin-top: 2.7rem;
+  }
+
+
+  .big-question-section::after {
+    display: none;
+  }
+}
+
+
+/* =========================================================
+   EXTRA SMALL
+   ========================================================= */
+
+@media (max-width: 360px) {
+
+  .big-question-heading {
+    font-size: 1.4rem;
+  }
+
+  .big-question-list {
+    column-gap: 0.8rem;
+  }
+
+  .big-question-text {
+    font-size: 0.77rem;
+  }
+
+  .big-question-closing {
+    font-size: 1.05rem;
+  }
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .big-question-section *,
+  .big-question-section *::before,
+  .big-question-section *::after {
+    transition: none !important;
+  }
+}

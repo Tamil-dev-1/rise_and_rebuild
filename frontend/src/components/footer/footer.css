@@ -1,0 +1,88 @@
+.custom-footer {
+  background-color: #0a0705;
+  color: #ffffff;
+  padding: 40px 0;
+  font-family: 'Inter', sans-serif;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* Brand styling */
+.brand-title {
+  font-size: 1.5rem;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  line-height: 1.1;
+  color: #ffffff;
+}
+
+.brand-title .ampersand {
+  color: #e5a855; /* Gold accent color */
+}
+
+.brand-tagline {
+  font-size: 0.85rem;
+  font-style: italic;
+  color: #b0aeb0;
+  margin-top: 6px;
+  margin-bottom: 0;
+  line-height: 1.3;
+}
+
+/* Headings */
+.footer-heading {
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 1.2px;
+  color: #ffffff;
+  text-transform: uppercase;
+}
+
+/* Navigation Links */
+.quick-links a {
+  display: block;
+  color: #c4c2c4;
+  text-decoration: none;
+  font-size: 0.85rem;
+  margin-bottom: 8px;
+  transition: color 0.3s ease;
+}
+
+.quick-links a:hover {
+  color: #e5a855;
+}
+
+/* Circular Social Icons */
+.social-circle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: #ffffff;
+  font-size: 0.95rem;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.social-circle:hover {
+  background-color: #ffffff;
+  color: #0a0705;
+  border-color: #ffffff;
+}
+
+/* Copyright text */
+.copyright-text {
+  font-size: 0.8rem;
+  color: #908e90;
+  line-height: 1.4;
+}
+
+/* Vertical Dividers for Desktop Layouts */
+@media (min-width: 992px) {
+  .section-divider {
+    border-left: 1px solid rgba(255, 255, 255, 0.15);
+    padding-left: 2rem;
+  }
+}

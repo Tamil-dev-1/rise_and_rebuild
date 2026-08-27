@@ -1,0 +1,602 @@
+/* =========================================================
+   FINAL CTA SECTION
+   ========================================================= */
+
+.final-cta-section {
+  --fc-bg: #17191c;
+  --fc-gold: #e5ab4c;
+  --fc-white: #f5f5f3;
+  --fc-muted: #c9c9c7;
+
+  position: relative;
+
+  width: 100%;
+
+  background:
+    radial-gradient(
+      circle at 50% 0%,
+      rgba(229, 171, 76, 0.065),
+      transparent 38%
+    ),
+    radial-gradient(
+      circle at 50% 100%,
+      rgba(229, 171, 76, 0.02),
+      transparent 35%
+    ),
+    var(--fc-bg);
+
+  overflow: hidden;
+
+  padding-bottom: 3rem;
+}
+
+
+/* =========================================================
+   TOP GOLD DIVIDER
+   ========================================================= */
+
+.final-cta-divider {
+  width: 100%;
+
+  height: 2px;
+
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(229, 171, 76, 0.45) 15%,
+    var(--fc-gold) 50%,
+    rgba(229, 171, 76, 0.45) 85%,
+    transparent 100%
+  );
+}
+
+
+/* =========================================================
+   PREMIUM BACKGROUND CIRCLE
+   ========================================================= */
+
+.final-cta-section::before {
+  content: "";
+
+  position: absolute;
+
+  width: 520px;
+  height: 520px;
+
+  left: 50%;
+  top: 50%;
+
+  transform: translate(-50%, -50%);
+
+  border-radius: 50%;
+
+  border: 1px solid
+    rgba(229, 171, 76, 0.025);
+
+  box-shadow:
+    0 0 0 60px
+      rgba(229, 171, 76, 0.006),
+    0 0 0 120px
+      rgba(229, 171, 76, 0.004);
+
+  pointer-events: none;
+}
+
+
+/* =========================================================
+   CONTAINER
+   ========================================================= */
+
+.final-cta-container {
+  position: relative;
+
+  z-index: 2;
+
+  width: 100%;
+
+  padding-top: 2.5rem;
+}
+
+
+/* =========================================================
+   CONTENT
+   ========================================================= */
+
+.final-cta-content {
+  width: 100%;
+
+  margin: 0 auto;
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+
+  text-align: center;
+}
+
+
+/* =========================================================
+   EYEBROW
+   ========================================================= */
+
+.final-cta-eyebrow {
+  align-self: flex-start;
+
+  color: var(--fc-gold);
+
+  font-size: 0.68rem;
+
+  font-weight: 800;
+
+  letter-spacing: 0.12em;
+
+  text-transform: uppercase;
+
+  margin: 0 0 1rem;
+}
+
+
+/* =========================================================
+   HEADING
+   ========================================================= */
+
+.final-cta-heading {
+  color: var(--fc-white);
+
+  font-size: clamp(
+    1.65rem,
+    2.6vw,
+    2.3rem
+  );
+
+  font-weight: 900;
+
+  line-height: 1.08;
+
+  letter-spacing: -0.02em;
+
+  text-transform: uppercase;
+
+  margin: 0;
+}
+
+
+/* =========================================================
+   GOLD HEADING LINE
+   ========================================================= */
+
+.final-cta-heading-line {
+  display: block;
+
+  width: 100%;
+
+  max-width: 280px;
+
+  height: 2px;
+
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--fc-gold),
+    transparent
+  );
+
+  margin: 0.7rem auto 1rem;
+
+  transform-origin: center;
+}
+
+
+/* =========================================================
+   MAIN DESCRIPTION
+   DESKTOP = 60% WIDTH
+   ========================================================= */
+
+.final-cta-description {
+  width: 60%;
+
+  max-width: none;
+
+  margin: 0 auto;
+
+  color: var(--fc-muted);
+
+  font-size: 0.9rem;
+
+  font-weight: 400;
+
+  line-height: 1.5;
+
+  text-align: center;
+
+  white-space: nowrap;
+}
+
+
+/* =========================================================
+   REGISTER BUTTON
+   ========================================================= */
+
+.final-cta-button {
+  min-width: 220px;
+
+  width: auto;
+
+  margin: 1.25rem auto 0;
+
+  padding: 0.65rem 1.25rem;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 1.8rem;
+
+  border: 1px solid
+    rgba(229, 171, 76, 0.9);
+
+  border-radius: 5px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #f1ba50,
+      #e5ab4c
+    );
+
+  color: #17140d;
+
+  font-size: 0.8rem;
+
+  font-weight: 900;
+
+  letter-spacing: 0.04em;
+
+  text-transform: uppercase;
+
+  cursor: pointer;
+
+  box-shadow:
+    0 7px 20px
+      rgba(0, 0, 0, 0.22),
+    inset 0 1px 0
+      rgba(255, 255, 255, 0.35);
+
+  transition:
+    filter 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+
+/* =========================================================
+   BUTTON HOVER
+   ========================================================= */
+
+.final-cta-button:hover {
+  filter: brightness(1.06);
+
+  box-shadow:
+    0 10px 25px
+      rgba(0, 0, 0, 0.28),
+    0 0 18px
+      rgba(229, 171, 76, 0.08),
+    inset 0 1px 0
+      rgba(255, 255, 255, 0.4);
+}
+
+
+/* =========================================================
+   ARROW
+   ========================================================= */
+
+.final-cta-arrow {
+  font-size: 1.1rem;
+
+  font-weight: 700;
+
+  line-height: 1;
+
+  transition:
+    transform 0.3s ease;
+}
+
+
+.final-cta-button:hover
+.final-cta-arrow {
+  transform: translateX(4px);
+}
+
+
+/* =========================================================
+   REGISTRATION TEXT
+   DESKTOP = SINGLE LINE
+   ========================================================= */
+
+.final-cta-registration {
+  width: 60%;
+
+  max-width: none;
+
+  margin: 0.9rem auto 0;
+
+  color: var(--fc-muted);
+
+  font-size: 0.78rem;
+
+  font-weight: 400;
+
+  line-height: 1.5;
+
+  text-align: center;
+
+  white-space: nowrap;
+}
+
+
+/* =========================================================
+   LARGE DESKTOP
+   ========================================================= */
+
+@media (min-width: 1400px) {
+
+  .final-cta-container {
+    padding-top: 2.8rem;
+  }
+
+  .final-cta-description {
+    font-size: 0.94rem;
+  }
+
+  .final-cta-registration {
+    font-size: 0.8rem;
+  }
+}
+
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (max-width: 991.98px) {
+
+  .final-cta-section {
+    padding-bottom: 2.75rem;
+  }
+
+  .final-cta-container {
+    padding-top: 2.3rem;
+  }
+
+  .final-cta-heading {
+    font-size: 2rem;
+  }
+
+  .final-cta-description {
+    width: 75%;
+
+    font-size: 0.87rem;
+  }
+
+  .final-cta-registration {
+    width: 75%;
+
+    font-size: 0.75rem;
+  }
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 767.98px) {
+
+  .final-cta-section {
+    padding-bottom: 2.5rem;
+  }
+
+  .final-cta-container {
+    padding-top: 2rem;
+  }
+
+
+  /* Eyebrow */
+
+  .final-cta-eyebrow {
+    font-size: 0.62rem;
+
+    letter-spacing: 0.1em;
+
+    margin-bottom: 0.85rem;
+  }
+
+
+  /* Heading */
+
+  .final-cta-heading {
+    font-size: 1.65rem;
+
+    line-height: 1.1;
+  }
+
+
+  /* Heading line */
+
+  .final-cta-heading-line {
+    max-width: 220px;
+
+    margin-top: 0.6rem;
+
+    margin-bottom: 0.9rem;
+  }
+
+
+  /* Main paragraph */
+
+  .final-cta-description {
+    width: 90%;
+
+    max-width: 560px;
+
+    font-size: 0.82rem;
+
+    line-height: 1.55;
+
+    white-space: normal;
+  }
+
+
+  /* Button */
+
+  .final-cta-button {
+    min-width: 200px;
+
+    padding: 0.65rem 1rem;
+
+    margin-top: 1.15rem;
+
+    font-size: 0.75rem;
+
+    gap: 1.4rem;
+  }
+
+
+  /* Registration text */
+
+  .final-cta-registration {
+    width: 90%;
+
+    font-size: 0.72rem;
+
+    line-height: 1.5;
+
+    margin-top: 0.85rem;
+
+    white-space: normal;
+  }
+
+
+  /* Background decoration */
+
+  .final-cta-section::before {
+    width: 360px;
+
+    height: 360px;
+  }
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+   ========================================================= */
+
+@media (max-width: 480px) {
+
+  .final-cta-section {
+    padding-bottom: 2.25rem;
+  }
+
+  .final-cta-container {
+    padding-top: 1.8rem;
+  }
+
+
+  .final-cta-heading {
+    font-size: 1.45rem;
+  }
+
+
+  .final-cta-description {
+    width: 92%;
+
+    font-size: 0.78rem;
+
+    line-height: 1.5;
+  }
+
+
+  .final-cta-button {
+    min-width: 185px;
+
+    padding: 0.62rem 0.9rem;
+
+    margin-top: 1rem;
+
+    font-size: 0.7rem;
+
+    gap: 1.2rem;
+  }
+
+
+  .final-cta-arrow {
+    font-size: 1rem;
+  }
+
+
+  .final-cta-registration {
+    width: 92%;
+
+    font-size: 0.69rem;
+
+    line-height: 1.5;
+  }
+
+
+  .final-cta-section::before {
+    width: 290px;
+
+    height: 290px;
+  }
+}
+
+
+/* =========================================================
+   EXTRA SMALL DEVICES
+   ========================================================= */
+
+@media (max-width: 360px) {
+
+  .final-cta-heading {
+    font-size: 1.3rem;
+  }
+
+  .final-cta-description {
+    width: 94%;
+
+    font-size: 0.74rem;
+  }
+
+  .final-cta-registration {
+    width: 94%;
+
+    font-size: 0.66rem;
+  }
+
+  .final-cta-button {
+    min-width: 175px;
+
+    font-size: 0.67rem;
+
+    gap: 1rem;
+  }
+}
+
+
+/* =========================================================
+   ACCESSIBILITY
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .final-cta-section *,
+  .final-cta-section *::before,
+  .final-cta-section *::after {
+    animation: none !important;
+
+    transition: none !important;
+  }
+}

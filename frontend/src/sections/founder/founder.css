@@ -1,0 +1,540 @@
+/* =========================================================
+   ABOUT HOST SECTION
+   ========================================================= */
+
+.about-host-section {
+  --ah-bg: #141416;
+  --ah-bg-soft: #18191c;
+
+  --ah-gold: #e5ab4c;
+  --ah-gold-soft: rgba(229, 171, 76, 0.18);
+
+  --ah-white: #f6f6f4;
+  --ah-muted: #b9b9b7;
+  --ah-bio: #cfcfce;
+
+  width: 100%;
+
+  position: relative;
+
+  background:
+    radial-gradient(
+      circle at 15% 35%,
+      rgba(229, 171, 76, 0.055),
+      transparent 32%
+    ),
+    radial-gradient(
+      circle at 90% 80%,
+      rgba(255, 255, 255, 0.025),
+      transparent 30%
+    ),
+    var(--ah-bg);
+
+  overflow: hidden;
+
+  padding-bottom: 6rem;
+}
+
+
+/* =========================================================
+   TOP GOLD DIVIDER
+   ========================================================= */
+
+.about-host-divider {
+  width: 100%;
+  height: 1px;
+
+  background: linear-gradient(
+    90deg,
+    rgba(229, 171, 76, 0),
+    #e5ab4c 25%,
+    #e5ab4c 75%,
+    rgba(229, 171, 76, 0)
+  );
+}
+
+
+/* =========================================================
+   CONTAINER
+   ========================================================= */
+
+.about-host-container {
+  position: relative;
+  z-index: 2;
+
+  width: 100%;
+
+  max-width: 1200px;
+
+  margin: 0 auto;
+
+  padding-top: 4.5rem;
+}
+
+
+/* =========================================================
+   EYEBROW
+   ========================================================= */
+
+.about-host-eyebrow {
+  color: var(--ah-gold);
+
+  font-size: 0.75rem;
+  font-weight: 700;
+
+  letter-spacing: 0.12em;
+
+  text-transform: uppercase;
+
+  margin: 0 0 3.5rem;
+}
+
+
+/* =========================================================
+   MAIN ROW
+   ========================================================= */
+
+.about-host-row {
+  width: 100%;
+
+  margin: 0;
+
+  justify-content: center;
+}
+
+
+/* =========================================================
+   PHOTO COLUMN
+   ========================================================= */
+
+.about-host-photo-col {
+  display: flex;
+
+  justify-content: center;
+  align-items: center;
+
+  padding: 0;
+}
+
+
+/* =========================================================
+   PHOTO WRAPPER
+   ========================================================= */
+
+.about-host-photo-wrap {
+  width: 100%;
+
+  max-width: 400px;
+
+  position: relative;
+}
+
+
+/* =========================================================
+   PHOTO FRAME
+   ========================================================= */
+
+.about-host-photo-frame {
+  position: relative;
+
+  width: 100%;
+
+  aspect-ratio: 4 / 5;
+
+  padding: 8px;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(229, 171, 76, 0.75),
+      rgba(229, 171, 76, 0.12) 45%,
+      rgba(229, 171, 76, 0.5)
+    );
+
+  border-radius: 10px;
+
+  box-shadow:
+    0 25px 70px rgba(0, 0, 0, 0.45),
+    0 0 45px rgba(229, 171, 76, 0.06);
+}
+
+
+/* =========================================================
+   PHOTO
+   ========================================================= */
+
+.about-host-photo {
+  width: 100%;
+  height: 100%;
+
+  background-size: cover;
+
+  /*
+    Keep the face/subject clearly visible.
+  */
+
+  background-position: center top;
+
+  background-repeat: no-repeat;
+
+  border-radius: 5px;
+
+  background-color: #222;
+
+  transition:
+    transform 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+    filter 0.6s ease;
+}
+
+
+/* =========================================================
+   IMAGE HOVER
+   ========================================================= */
+
+.about-host-photo-wrap:hover .about-host-photo {
+  transform: scale(1.025);
+
+  filter: brightness(1.04);
+}
+
+
+/* =========================================================
+   IMAGE DECORATIVE CORNER
+   ========================================================= */
+
+.about-host-photo-wrap::before {
+  content: "";
+
+  position: absolute;
+
+  left: -14px;
+  bottom: -14px;
+
+  width: 70px;
+  height: 70px;
+
+  border-left: 1px solid var(--ah-gold);
+  border-bottom: 1px solid var(--ah-gold);
+
+  opacity: 0.7;
+
+  pointer-events: none;
+
+  z-index: 3;
+}
+
+
+.about-host-photo-wrap::after {
+  content: "";
+
+  position: absolute;
+
+  right: -14px;
+  top: -14px;
+
+  width: 70px;
+  height: 70px;
+
+  border-right: 1px solid var(--ah-gold);
+  border-top: 1px solid var(--ah-gold);
+
+  opacity: 0.7;
+
+  pointer-events: none;
+
+  z-index: 3;
+}
+
+
+/* =========================================================
+   COPY COLUMN
+   ========================================================= */
+
+.about-host-copy-col {
+  display: flex;
+
+  align-items: center;
+
+  padding-left: clamp(3rem, 6vw, 7rem);
+}
+
+
+/* =========================================================
+   COPY
+   ========================================================= */
+
+.about-host-copy {
+  max-width: 600px;
+}
+
+
+/* =========================================================
+   SMALL LABEL
+   ========================================================= */
+
+.about-host-label {
+  display: inline-block;
+
+  color: var(--ah-gold);
+
+  font-size: 0.68rem;
+
+  font-weight: 700;
+
+  letter-spacing: 0.16em;
+
+  text-transform: uppercase;
+
+  margin-bottom: 1rem;
+}
+
+
+/* =========================================================
+   NAME
+   ========================================================= */
+
+.about-host-name {
+  color: var(--ah-white);
+
+  font-size: clamp(
+    2rem,
+    3.2vw,
+    3.4rem
+  );
+
+  font-weight: 800;
+
+  line-height: 1.05;
+
+  letter-spacing: -0.035em;
+
+  margin: 0 0 0.8rem;
+}
+
+
+/* =========================================================
+   ROLE
+   ========================================================= */
+
+.about-host-role {
+  color: var(--ah-muted);
+
+  font-size: 1rem;
+
+  line-height: 1.6;
+
+  margin: 0 0 1.7rem;
+}
+
+
+/* =========================================================
+   GOLD RULE
+   ========================================================= */
+
+.about-host-rule {
+  display: block;
+
+  width: 55px;
+  height: 2px;
+
+  background: var(--ah-gold);
+
+  margin-bottom: 1.7rem;
+
+  box-shadow:
+    0 0 12px rgba(229, 171, 76, 0.2);
+}
+
+
+/* =========================================================
+   BIO
+   ========================================================= */
+
+.about-host-bio {
+  color: var(--ah-bio);
+
+  font-size: 1rem;
+
+  line-height: 1.85;
+
+  max-width: 52ch;
+
+  margin: 0;
+}
+
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (max-width: 991.98px) {
+
+  .about-host-section {
+    padding-bottom: 5rem;
+  }
+
+  .about-host-container {
+    padding-top: 3.5rem;
+  }
+
+  .about-host-eyebrow {
+    margin-bottom: 2.8rem;
+  }
+
+  .about-host-photo-wrap {
+    max-width: 330px;
+  }
+
+  .about-host-copy-col {
+    padding-left: 3rem;
+  }
+
+  .about-host-name {
+    font-size: 2.4rem;
+  }
+
+  .about-host-bio {
+    font-size: 0.94rem;
+  }
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 767.98px) {
+
+  .about-host-section {
+    padding-bottom: 4rem;
+  }
+
+  .about-host-container {
+    padding-top: 3rem;
+  }
+
+  .about-host-eyebrow {
+    margin-bottom: 2.5rem;
+
+    font-size: 0.68rem;
+  }
+
+
+  /* Image */
+
+  .about-host-photo-col {
+    margin-bottom: 3rem;
+
+    justify-content: center;
+  }
+
+  .about-host-photo-wrap {
+    max-width: 300px;
+  }
+
+
+  /* Content */
+
+  .about-host-copy-col {
+    padding-left: 0;
+
+    justify-content: center;
+
+    text-align: center;
+  }
+
+  .about-host-copy {
+    max-width: 600px;
+
+    margin: 0 auto;
+  }
+
+  .about-host-label {
+    font-size: 0.62rem;
+  }
+
+  .about-host-name {
+    font-size: 2rem;
+  }
+
+  .about-host-role {
+    font-size: 0.9rem;
+  }
+
+  .about-host-rule {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .about-host-bio {
+    max-width: 55ch;
+
+    margin-left: auto;
+    margin-right: auto;
+
+    font-size: 0.9rem;
+
+    line-height: 1.7;
+  }
+
+
+  /* Decorative corners */
+
+  .about-host-photo-wrap::before {
+    left: -8px;
+    bottom: -8px;
+  }
+
+  .about-host-photo-wrap::after {
+    right: -8px;
+    top: -8px;
+  }
+}
+
+
+/* =========================================================
+   SMALL MOBILE
+   ========================================================= */
+
+@media (max-width: 420px) {
+
+  .about-host-section {
+    padding-bottom: 3.5rem;
+  }
+
+  .about-host-container {
+    padding-top: 2.5rem;
+  }
+
+  .about-host-photo-wrap {
+    max-width: 260px;
+  }
+
+  .about-host-name {
+    font-size: 1.75rem;
+  }
+
+  .about-host-role {
+    font-size: 0.85rem;
+  }
+
+  .about-host-bio {
+    font-size: 0.84rem;
+
+    line-height: 1.65;
+  }
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .about-host-section *,
+  .about-host-section *::before,
+  .about-host-section *::after {
+    transition: none !important;
+  }
+}
