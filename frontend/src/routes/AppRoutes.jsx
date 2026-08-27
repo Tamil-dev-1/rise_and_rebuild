@@ -4,6 +4,8 @@ import RegistrationForm from '../pages/register/RegistrationForm'
 import { Routes, Route } from 'react-router-dom'
 import Membership from '../pages/membership/Membership'
 import ProtectRoute from '../components/protectRoutes/ProtectRoute'
+import CreateAccount from '../pages/createAccount/CreateAccount'
+import Login from '../pages/login/Login'
 
 const AppRoutes = () => {
   return (
@@ -17,6 +19,9 @@ const AppRoutes = () => {
           <Membership />
           </ProtectRoute>} 
           />
+
+          <Route path='/createAccount' element={<CreateAccount />} />
+          <Route path='/login' element={< Login/>} />
       </Routes>
     </div>
   )
