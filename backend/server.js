@@ -3,13 +3,19 @@ import cors from "cors";
 import dotenv from "dotenv";
 
 import connectDB from "./config/db.js";
+
 import leadRoutes from "./routes/leadRoutes.js";
+import authRoutes from "./routes/authRoutes.js"
+
 
 dotenv.config();
 
 const app = express();
 
+//Connect MongoDB
 connectDB();
+
+// Middleware
 
 app.use(
   cors({
@@ -23,7 +29,13 @@ app.get("/", (req, res) => {
   res.send("Rise & Rebuild API is running");
 });
 
+// LEAD ROUTES
 app.use("/api/leads", leadRoutes);
+
+//CREATE ACCOUNT -- AUTH ROUTES
+
+app.use("/api/auth", authRoutes);
+
 
 const PORT = process.env.PORT || 5000;
 

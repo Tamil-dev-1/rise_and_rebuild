@@ -20,7 +20,7 @@ const AppRoutes = () => {
           </ProtectRoute>} 
           />
 
-          <Route path='/createAccount' element={<CreateAccount />} />
+          <Route path='/create-account' element={<CreateAccount />} />
           <Route path='/login' element={< Login/>} />
       </Routes>
     </div>

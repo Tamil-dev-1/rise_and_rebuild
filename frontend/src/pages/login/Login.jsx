@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link, useNavigate } from 'react-router-dom'
 
 import "./Login.css";
 
@@ -37,11 +38,15 @@ const RiseMark = () => (
 );
 
 export default function LoginForm() {
+
+    const navigate = useNavigate();
+
   const [form, setForm] = useState({ email: "", password: "" });
   const [showPassword, setShowPassword] = useState(false);
   const [errors, setErrors] = useState({});
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [serverError, setServerError] = useState("");
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -62,20 +67,85 @@ export default function LoginForm() {
     return next;
   };
 
-  const handleSubmit = (e) => {
+ const handleSubmit = async (e) => {
     e.preventDefault();
+
+    // Clear previous server error
+    setServerError("");
+
+    // Frontend validation
     const next = validate();
+
     setErrors(next);
-    if (Object.keys(next).length === 0) {
-      setSubmitting(true);
-      // Simulate an auth call — swap for real login logic
-      setTimeout(() => {
-        setSubmitting(false);
-        setSubmitted(true);
-        console.log("Login payload:", form);
-      }, 700);
+
+    // Stop if validation has errors
+    if (Object.keys(next).length !== 0) {
+        return;
     }
-  };
+
+    setSubmitting(true);
+
+    try {
+        const response = await fetch(
+            "http://localhost:5000/api/auth/login",
+            {
+                method: "POST",
+
+                headers: {
+                    "Content-Type": "application/json",
+                },
+
+                body: JSON.stringify({
+                    email: form.email,
+                    password: form.password,
+                }),
+            }
+        );
+
+        const data = await response.json();
+
+        console.log("Login API response:", data);
+
+        // Backend returned an error
+        if (!response.ok) {
+            setServerError(
+                data.message || "Login failed."
+            );
+
+            return;
+        }
+
+        // Login successful
+        sessionStorage.setItem(
+            "authToken",
+            data.token
+        );
+
+        // Store user information
+        sessionStorage.setItem(
+            "user",
+            JSON.stringify(data.user)
+        );
+
+        // Show success
+        setSubmitted(true);
+
+        // Go to dashboard
+        navigate("/dashboard");
+
+    } catch (error) {
+
+        console.error("Login Error:", error);
+
+        setServerError(
+            "Unable to connect to the server."
+        );
+
+    } finally {
+
+        setSubmitting(false);
+    }
+};
 
   return (
     <div className="rr-page">
@@ -131,7 +201,9 @@ export default function LoginForm() {
                   <EyeIcon off={showPassword} />
                 </button>
               </div>
-              {errors.password && <span className="rr-error">{errors.password}</span>}
+              {serverError && (
+                 <div className="rr-error">{serverError}
+                 </div>)}
             </div>
 
             <div className="rr-forgot-row">
@@ -146,9 +218,11 @@ export default function LoginForm() {
               )}
             </button>
 
-            <p className="rr-footer">
-              Don&apos;t have an account? <a href="#register">Register</a>
+        <Link to="/create-account" className="text-decoration-none">
+                    <p className="rr-footer">
+              Don&apos;t have an account? <a href="">Create account</a>
             </p>
+           </Link>
           </form>
         )}
       </div>

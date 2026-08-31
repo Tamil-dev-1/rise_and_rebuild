@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "bootstrap/dist/css/bootstrap.min.css";
+import { Link, useNavigate  } from 'react-router-dom';
 import "./CreateAccount.css";
 
 // Simple inline eye / eye-off icons so the component has zero icon-library dependency
@@ -37,6 +37,10 @@ const RiseMark = () => (
 );
 
 export default function CreateAccount() {
+
+  const navigate = useNavigate();
+
+
   const [form, setForm] = useState({
     fullName: "",
     email: "",
@@ -48,6 +52,8 @@ export default function CreateAccount() {
   const [showConfirm, setShowConfirm] = useState(false);
   const [errors, setErrors] = useState({});
   const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [serverError, setServerError] = useState("");
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -77,16 +83,82 @@ export default function CreateAccount() {
     return next;
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const next = validate();
-    setErrors(next);
-    if (Object.keys(next).length === 0) {
-      setSubmitted(true);
-      // Hook up real account-creation logic here
-      console.log("Account payload:", form);
+  const handleSubmit = async (e) => {
+  e.preventDefault();
+
+  const next = validate();
+  setErrors(next);
+
+  // Stop if frontend validation fails
+  if (Object.keys(next).length !== 0) {
+    return;
+  }
+
+  setLoading(true);
+  setServerError("");
+
+  try {
+    // Get the JWT token from registration
+    const token = sessionStorage.getItem("authToken");
+
+    // Token not found
+    if (!token) {
+      setServerError(
+        "Registration session expired. Please register again."
+      );
+      return;
     }
-  };
+
+    // Send request to backend
+    const response = await fetch(
+      "http://localhost:5000/api/auth/register",
+      {
+        method: "POST",
+
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+
+        body: JSON.stringify({
+          fullName: form.fullName,
+          email: form.email,
+          password: form.password,
+        }),
+      }
+    );
+
+    const data = await response.json();
+
+    // Backend returned an error
+    if (!response.ok) {
+      setServerError(
+        data.message || "Unable to create account."
+      );
+      return;
+    }
+
+    // Account successfully created
+    setSubmitted(true);
+
+    console.log("Account created:", data);
+
+    // Go to login page
+    setTimeout(() => {
+      navigate("/login");
+    }, 1500);
+
+  } catch (error) {
+    console.error("Create Account Error:", error);
+
+    setServerError(
+      "Unable to connect to the server. Please try again."
+    );
+
+  } finally {
+    setLoading(false);
+  }
+};
 
   return (
     <div className="rr-page">
@@ -195,15 +267,18 @@ export default function CreateAccount() {
                 I agree to the <a href="#terms">Terms &amp; Conditions</a>
               </label>
             </div>
-            {errors.agree && <span className="rr-error rr-error-checkbox">{errors.agree}</span>}
+            {serverError && (
+              <div className="rr-error rr-error-checkbox">{serverError}</div>)}
 
-            <button type="submit" className="rr-submit">
-              Create Account
+            <button type="submit" className="rr-submit" disabled={loading}>
+              {loading ? "Creating Account...":"Create Account"}
             </button>
 
-            <p className="rr-footer">
-              Already have an account? <a href="#login">Login</a>
+           
+                       <p className="rr-footer">
+              Already have an account? <Link to="/login" className="text-decoration-none">Login</Link>
             </p>
+          
           </form>
         )}
       </div>
