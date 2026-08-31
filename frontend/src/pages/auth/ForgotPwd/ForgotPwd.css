@@ -1,0 +1,262 @@
+/* ForgotPassword.css
+   Dark, warm-gold theme to match the "Season 2 · Rise & Rebuild" login page. */
+
+:root {
+  --fp-bg: #170f0a;
+  --fp-card-bg: #241a12;
+  --fp-card-border: #3a2c1d;
+  --fp-input-bg: #1c130c;
+  --fp-input-border: #4a3928;
+  --fp-input-border-focus: #d99a44;
+  --fp-gold-1: #f0c274;
+  --fp-gold-2: #c4802f;
+  --fp-text-primary: #f5ece0;
+  --fp-text-secondary: #b8a693;
+  --fp-text-muted: #8a7862;
+  --fp-error: #e3684f;
+}
+
+.fp-page {
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(
+      circle at 50% 0%,
+      rgba(196, 128, 47, 0.08),
+      transparent 55%
+    ),
+    var(--fp-bg);
+  padding: 32px 16px;
+  font-family: "Inter", "Segoe UI", system-ui, -apple-system, sans-serif;
+}
+
+.fp-card {
+  width: 100%;
+  max-width: 440px;
+  background: var(--fp-card-bg);
+  border: 1px solid var(--fp-card-border);
+  border-radius: 18px;
+  padding: 40px 36px 32px;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.45);
+  text-align: center;
+}
+
+.fp-brandmark {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 6px;
+}
+
+.fp-brandmark-svg {
+  width: 92px;
+  height: 46px;
+  fill: none;
+  stroke: var(--fp-gold-2);
+  stroke-width: 2.5;
+  stroke-linecap: round;
+}
+
+.fp-brandmark-svg circle {
+  fill: var(--fp-gold-1);
+  stroke: none;
+}
+
+.fp-eyebrow {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--fp-gold-1);
+  margin: 0 0 14px;
+}
+
+.fp-title {
+  font-family: "Georgia", "Playfair Display", serif;
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--fp-text-primary);
+  margin: 0 0 12px;
+  line-height: 1.25;
+}
+
+.fp-title-sm {
+  font-size: 26px;
+}
+
+.fp-subtitle {
+  font-size: 14.5px;
+  line-height: 1.55;
+  color: var(--fp-text-secondary);
+  margin: 0 0 28px;
+}
+
+.fp-subtitle strong {
+  color: var(--fp-text-primary);
+  font-weight: 600;
+}
+
+.fp-subtitle-muted {
+  margin-top: -18px;
+  color: var(--fp-text-muted);
+  font-size: 13.5px;
+}
+
+.fp-field {
+  text-align: left;
+}
+
+.fp-label {
+  display: block;
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--fp-text-primary);
+  margin-bottom: 8px;
+}
+
+.fp-input.form-control {
+  background-color: var(--fp-input-bg);
+  border: 1px solid var(--fp-input-border);
+  border-radius: 10px;
+  color: var(--fp-text-primary);
+  padding: 12px 14px;
+  font-size: 14.5px;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.fp-input.form-control::placeholder {
+  color: var(--fp-text-muted);
+}
+
+.fp-input.form-control:focus {
+  background-color: var(--fp-input-bg);
+  border-color: var(--fp-input-border-focus);
+  color: var(--fp-text-primary);
+  box-shadow: 0 0 0 3px rgba(217, 154, 68, 0.18);
+}
+
+.fp-input-error {
+  border-color: var(--fp-error) !important;
+}
+
+.fp-error {
+  margin-top: 8px;
+  font-size: 12.5px;
+  color: var(--fp-error);
+}
+
+.fp-submit-btn {
+  margin-top: 6px;
+  padding: 13px 16px;
+  border: none;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #241505;
+  background: linear-gradient(135deg, var(--fp-gold-1), var(--fp-gold-2));
+  box-shadow: 0 10px 24px rgba(196, 128, 47, 0.28);
+  transition: transform 0.12s ease, box-shadow 0.12s ease, filter 0.12s ease;
+}
+
+.fp-submit-btn:hover:not(:disabled) {
+  filter: brightness(1.06);
+  box-shadow: 0 12px 28px rgba(196, 128, 47, 0.36);
+}
+
+.fp-submit-btn:active:not(:disabled) {
+  transform: translateY(1px);
+}
+
+.fp-submit-btn:disabled {
+  opacity: 0.75;
+  cursor: not-allowed;
+}
+
+.fp-btn-loading {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.fp-back-wrap {
+  margin-top: 20px;
+}
+
+.fp-back-link {
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--fp-gold-1);
+  text-decoration: none;
+}
+
+.fp-back-link:hover {
+  color: var(--fp-gold-2);
+  text-decoration: underline;
+}
+
+.fp-footer-note {
+  margin: 28px 0 0;
+  font-size: 13.5px;
+  color: var(--fp-text-secondary);
+}
+
+.fp-footer-note a {
+  color: var(--fp-gold-1);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.fp-footer-note a:hover {
+  color: var(--fp-gold-2);
+  text-decoration: underline;
+}
+
+/* --- Sent / confirmation state --- */
+
+.fp-sent-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 60px;
+  height: 60px;
+  margin: 4px auto 18px;
+  border-radius: 50%;
+  background: rgba(196, 128, 47, 0.12);
+  border: 1px solid rgba(196, 128, 47, 0.3);
+  color: var(--fp-gold-1);
+}
+
+/* --- Responsiveness --- */
+
+@media (max-width: 480px) {
+  .fp-card {
+    padding: 32px 22px 26px;
+    border-radius: 14px;
+  }
+
+  .fp-title {
+    font-size: 23px;
+  }
+
+  .fp-title-sm {
+    font-size: 22px;
+  }
+
+  .fp-subtitle {
+    font-size: 13.5px;
+  }
+
+  .fp-brandmark-svg {
+    width: 78px;
+    height: 40px;
+  }
+}
+
+@media (min-width: 992px) {
+  .fp-card {
+    padding: 48px 44px 36px;
+  }
+}

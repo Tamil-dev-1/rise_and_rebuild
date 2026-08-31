@@ -1,6 +1,6 @@
 import express from "express";
 import cors from "cors";
-import dotenv from "dotenv";
+import  "dotenv/config";
 
 import connectDB from "./config/db.js";
 
@@ -8,7 +8,7 @@ import leadRoutes from "./routes/leadRoutes.js";
 import authRoutes from "./routes/authRoutes.js"
 
 
-dotenv.config();
+// dotenv.config();
 
 const app = express();
 

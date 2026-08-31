@@ -6,6 +6,8 @@ import Membership from '../pages/membership/Membership'
 import ProtectRoute from '../components/protectRoutes/ProtectRoute'
 import CreateAccount from '../pages/createAccount/CreateAccount'
 import Login from '../pages/login/Login'
+import ForgotPassword from '../pages/auth/ForgotPwd/ForgotPassword'
+import ResetPassword from '../pages/auth/ResetPwd/ResetPassword'
 
 const AppRoutes = () => {
   return (
@@ -22,6 +24,8 @@ const AppRoutes = () => {
 
           <Route path='/create-account' element={<CreateAccount />} />
           <Route path='/login' element={< Login/>} />
+          <Route path='/forgot-password' element={<ForgotPassword />} />
+          <Route path='/reset-password/:token' element={< ResetPassword/>} />
       </Routes>
     </div>
   )

@@ -207,7 +207,7 @@ export default function LoginForm() {
             </div>
 
             <div className="rr-forgot-row">
-              <a href="#forgot-password">Forgot Password?</a>
+              <Link to="/forgot-password" >Forgot Password?</Link>
             </div>
 
             <button type="submit" className="rr-submit" disabled={submitting}>
@@ -218,11 +218,13 @@ export default function LoginForm() {
               )}
             </button>
 
-        <Link to="/create-account" className="text-decoration-none">
+        
                     <p className="rr-footer">
-              Don&apos;t have an account? <a href="">Create account</a>
+              Don&apos;t have an account?
+                <Link to="/create-account" className="text-decoration-none gap-2">Create account
+                 </Link>
             </p>
-           </Link>
+          
           </form>
         )}
       </div>

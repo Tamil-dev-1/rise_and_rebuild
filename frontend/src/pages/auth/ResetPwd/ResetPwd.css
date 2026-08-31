@@ -1,0 +1,250 @@
+/* ResetPassword.css
+   Dark, warm-gold theme to match the "Season 2 · Rise & Rebuild" login page. */
+
+:root {
+  --rp-bg: #170f0a;
+  --rp-card-bg: #241a12;
+  --rp-card-border: #3a2c1d;
+  --rp-input-bg: #1c130c;
+  --rp-input-border: #4a3928;
+  --rp-input-border-focus: #d99a44;
+  --rp-gold-1: #f0c274;
+  --rp-gold-2: #c4802f;
+  --rp-text-primary: #f5ece0;
+  --rp-text-secondary: #b8a693;
+  --rp-text-muted: #8a7862;
+  --rp-error: #e3684f;
+}
+
+.rp-page {
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(
+      circle at 50% 0%,
+      rgba(196, 128, 47, 0.08),
+      transparent 55%
+    ),
+    var(--rp-bg);
+  padding: 32px 16px;
+  font-family: "Inter", "Segoe UI", system-ui, -apple-system, sans-serif;
+}
+
+.rp-card {
+  width: 100%;
+  max-width: 440px;
+  background: var(--rp-card-bg);
+  border: 1px solid var(--rp-card-border);
+  border-radius: 18px;
+  padding: 40px 36px 32px;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.45);
+  text-align: center;
+}
+
+.rp-brandmark {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 6px;
+}
+
+.rp-brandmark-svg {
+  width: 92px;
+  height: 46px;
+  fill: none;
+  stroke: var(--rp-gold-2);
+  stroke-width: 2.5;
+  stroke-linecap: round;
+}
+
+.rp-brandmark-svg circle {
+  fill: var(--rp-gold-1);
+  stroke: none;
+}
+
+.rp-eyebrow {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--rp-gold-1);
+  margin: 0 0 14px;
+}
+
+.rp-title {
+  font-family: Georgia, "Playfair Display", serif;
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--rp-text-primary);
+  margin: 0 0 12px;
+  line-height: 1.25;
+}
+
+.rp-subtitle {
+  font-size: 14.5px;
+  line-height: 1.55;
+  color: var(--rp-text-secondary);
+  margin: 0 0 28px;
+}
+
+.rp-field {
+  text-align: left;
+}
+
+.rp-label {
+  display: block;
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--rp-text-primary);
+  margin-bottom: 8px;
+}
+
+.rp-input-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.rp-input.form-control {
+  background-color: var(--rp-input-bg);
+  border: 1px solid var(--rp-input-border);
+  border-radius: 10px;
+  color: var(--rp-text-primary);
+  padding: 12px 44px 12px 14px;
+  font-size: 14.5px;
+  width: 100%;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.rp-input.form-control::placeholder {
+  color: var(--rp-text-muted);
+}
+
+.rp-input.form-control:focus {
+  background-color: var(--rp-input-bg);
+  border-color: var(--rp-input-border-focus);
+  color: var(--rp-text-primary);
+  box-shadow: 0 0 0 3px rgba(217, 154, 68, 0.18);
+}
+
+.rp-input-error {
+  border-color: var(--rp-error) !important;
+}
+
+.rp-eye-btn {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--rp-text-muted);
+  cursor: pointer;
+  transition: color 0.15s ease;
+}
+
+.rp-eye-btn:hover {
+  color: var(--rp-gold-1);
+}
+
+.rp-eye-btn:focus-visible {
+  outline: 2px solid var(--rp-gold-1);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+.rp-error {
+  margin: 4px 0 18px;
+  font-size: 12.5px;
+  color: var(--rp-error);
+  text-align: left;
+}
+
+.rp-submit-btn {
+  margin-top: 6px;
+  padding: 13px 16px;
+  border: none;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #241505;
+  background: linear-gradient(135deg, var(--rp-gold-1), var(--rp-gold-2));
+  box-shadow: 0 10px 24px rgba(196, 128, 47, 0.28);
+  transition: transform 0.12s ease, box-shadow 0.12s ease, filter 0.12s ease;
+}
+
+.rp-submit-btn:hover:not(:disabled) {
+  filter: brightness(1.06);
+  box-shadow: 0 12px 28px rgba(196, 128, 47, 0.36);
+}
+
+.rp-submit-btn:active:not(:disabled) {
+  transform: translateY(1px);
+}
+
+.rp-submit-btn:disabled {
+  opacity: 0.75;
+  cursor: not-allowed;
+}
+
+.rp-btn-loading {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.rp-back-wrap {
+  margin-top: 20px;
+}
+
+.rp-back-link {
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--rp-gold-1);
+  text-decoration: none;
+}
+
+.rp-back-link:hover {
+  color: var(--rp-gold-2);
+  text-decoration: underline;
+}
+
+/* --- Responsiveness --- */
+
+@media (max-width: 480px) {
+  .rp-card {
+    padding: 32px 22px 26px;
+    border-radius: 14px;
+  }
+
+  .rp-title {
+    font-size: 23px;
+  }
+
+  .rp-subtitle {
+    font-size: 13.5px;
+  }
+
+  .rp-brandmark-svg {
+    width: 78px;
+    height: 40px;
+  }
+
+  .rp-input.form-control {
+    padding: 11px 40px 11px 12px;
+    font-size: 14px;
+  }
+}
+
+@media (min-width: 992px) {
+  .rp-card {
+    padding: 48px 44px 36px;
+  }
+}
