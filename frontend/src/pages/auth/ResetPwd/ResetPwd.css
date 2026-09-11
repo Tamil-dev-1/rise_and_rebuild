@@ -1,250 +1,1071 @@
-/* ResetPassword.css
-   Dark, warm-gold theme to match the "Season 2 · Rise & Rebuild" login page. */
+/* ==========================================================================
+   Rise & Rebuild — Reset Password
+   Premium Black / Ivory / Champagne Gold Theme
+========================================================================== */
+
+
+/* ==========================================================================
+   DESIGN TOKENS
+========================================================================== */
 
 :root {
-  --rp-bg: #170f0a;
-  --rp-card-bg: #241a12;
-  --rp-card-border: #3a2c1d;
-  --rp-input-bg: #1c130c;
-  --rp-input-border: #4a3928;
-  --rp-input-border-focus: #d99a44;
-  --rp-gold-1: #f0c274;
-  --rp-gold-2: #c4802f;
-  --rp-text-primary: #f5ece0;
-  --rp-text-secondary: #b8a693;
-  --rp-text-muted: #8a7862;
-  --rp-error: #e3684f;
+
+  /* Background */
+  --rp-bg: #090807;
+  --rp-bg-soft: #0d0c0b;
+
+  /* Card */
+  --rp-card-bg: #11100e;
+  --rp-card-top: #151310;
+
+  /* Inputs */
+  --rp-input-bg: #141311;
+  --rp-input-hover: #181613;
+  --rp-input-focus: #1b1814;
+
+  /* Borders */
+  --rp-card-border: rgba(224, 184, 108, 0.14);
+  --rp-border-soft: rgba(255, 255, 255, 0.09);
+  --rp-border-medium: rgba(224, 184, 108, 0.24);
+  --rp-border-strong: rgba(224, 184, 108, 0.38);
+
+  /* Text */
+  --rp-text-primary: #f5efe6;
+  --rp-text-secondary: #ded3c5;
+  --rp-text-muted: #9e9285;
+  --rp-text-faint: #70675e;
+  --rp-text-dark: #17120b;
+
+  /* Champagne Gold */
+  --rp-gold-1: #f1ca76;
+  --rp-gold-2: #dca84b;
+  --rp-gold-3: #bb812d;
+
+  --rp-gold-soft: rgba(220, 168, 75, 0.12);
+  --rp-gold-glow: rgba(220, 168, 75, 0.20);
+
+  /* States */
+  --rp-error: #df7065;
+  --rp-success: #7fba8b;
+
+  /* Typography */
+  --rp-font-display: 'Fraunces', 'Georgia', serif;
+  --rp-font-body: 'Manrope', 'Segoe UI', system-ui, -apple-system, sans-serif;
 }
+
+
+/* ==========================================================================
+   PAGE
+========================================================================== */
 
 .rp-page {
+
   min-height: 100vh;
+
   width: 100%;
+
   display: flex;
+
   align-items: center;
+
   justify-content: center;
-  background: radial-gradient(
-      circle at 50% 0%,
-      rgba(196, 128, 47, 0.08),
-      transparent 55%
+
+  padding: 48px 20px;
+
+  background:
+
+    radial-gradient(
+      circle at 50% -10%,
+      rgba(220, 168, 75, 0.09),
+      transparent 43%
     ),
+
+    radial-gradient(
+      circle at 100% 100%,
+      rgba(255, 255, 255, 0.018),
+      transparent 35%
+    ),
+
     var(--rp-bg);
-  padding: 32px 16px;
-  font-family: "Inter", "Segoe UI", system-ui, -apple-system, sans-serif;
+
+  font-family: var(--rp-font-body);
+
+  box-sizing: border-box;
+
+  position: relative;
+
+  overflow: hidden;
 }
+
+
+/* ==========================================================================
+   BACKGROUND GLOW
+========================================================================== */
+
+.rp-page::before {
+
+  content: "";
+
+  position: absolute;
+
+  width: 430px;
+
+  height: 430px;
+
+  left: -250px;
+
+  bottom: -230px;
+
+  border-radius: 50%;
+
+  background: rgba(220, 168, 75, 0.035);
+
+  filter: blur(90px);
+
+  pointer-events: none;
+}
+
+
+.rp-page::after {
+
+  content: "";
+
+  position: absolute;
+
+  width: 300px;
+
+  height: 300px;
+
+  right: -190px;
+
+  top: -150px;
+
+  border-radius: 50%;
+
+  background: rgba(255, 255, 255, 0.018);
+
+  filter: blur(80px);
+
+  pointer-events: none;
+}
+
+
+/* ==========================================================================
+   CARD
+========================================================================== */
 
 .rp-card {
+
+  position: relative;
+
   width: 100%;
+
   max-width: 440px;
-  background: var(--rp-card-bg);
+
+  background:
+
+    linear-gradient(
+      145deg,
+      rgba(255, 255, 255, 0.035),
+      rgba(255, 255, 255, 0.012)
+    ),
+
+    var(--rp-card-bg);
+
   border: 1px solid var(--rp-card-border);
-  border-radius: 18px;
-  padding: 40px 36px 32px;
-  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.45);
+
+  border-radius: 20px;
+
+  padding: 42px 36px 34px;
+
+  box-shadow:
+
+    0 30px 80px rgba(0, 0, 0, 0.55),
+
+    0 10px 30px rgba(0, 0, 0, 0.25),
+
+    0 0 45px rgba(220, 168, 75, 0.025),
+
+    inset 0 1px 0 rgba(255, 255, 255, 0.025);
+
   text-align: center;
+
+  backdrop-filter: blur(18px);
+
+  -webkit-backdrop-filter: blur(18px);
+
+  overflow: hidden;
+
+  animation: rp-card-in 0.5s ease both;
 }
+
+
+/* ==========================================================================
+   GOLD TOP LINE
+========================================================================== */
+
+.rp-card::before {
+
+  content: "";
+
+  position: absolute;
+
+  top: 0;
+
+  left: 12%;
+
+  right: 12%;
+
+  height: 1px;
+
+  background:
+
+    linear-gradient(
+      90deg,
+      transparent,
+      rgba(241, 202, 118, 0.65),
+      transparent
+    );
+
+  opacity: 0.8;
+}
+
+
+/* ==========================================================================
+   CARD HIGHLIGHT
+========================================================================== */
+
+.rp-card::after {
+
+  content: "";
+
+  position: absolute;
+
+  top: 0;
+
+  left: 0;
+
+  right: 0;
+
+  height: 120px;
+
+  background:
+
+    linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.018),
+      transparent
+    );
+
+  pointer-events: none;
+}
+
+
+/* ==========================================================================
+   CARD ANIMATION
+========================================================================== */
+
+@keyframes rp-card-in {
+
+  from {
+
+    opacity: 0;
+
+    transform: translateY(10px);
+  }
+
+  to {
+
+    opacity: 1;
+
+    transform: translateY(0);
+  }
+}
+
+
+/* ==========================================================================
+   BRAND MARK
+========================================================================== */
 
 .rp-brandmark {
+
   display: flex;
+
   justify-content: center;
-  margin-bottom: 6px;
+
+  margin-bottom: 8px;
+
+  position: relative;
+
+  z-index: 2;
 }
+
 
 .rp-brandmark-svg {
+
   width: 92px;
+
   height: 46px;
+
   fill: none;
+
   stroke: var(--rp-gold-2);
+
   stroke-width: 2.5;
+
   stroke-linecap: round;
+
+  filter: drop-shadow(
+    0 4px 12px rgba(220, 168, 75, 0.10)
+  );
 }
 
+
 .rp-brandmark-svg circle {
+
   fill: var(--rp-gold-1);
+
   stroke: none;
 }
 
+
+/* ==========================================================================
+   EYEBROW
+========================================================================== */
+
 .rp-eyebrow {
-  font-size: 12px;
-  font-weight: 600;
-  letter-spacing: 0.14em;
+
+  font-family: var(--rp-font-body);
+
+  font-size: 10px;
+
+  font-weight: 800;
+
+  letter-spacing: 0.19em;
+
   text-transform: uppercase;
-  color: var(--rp-gold-1);
-  margin: 0 0 14px;
+
+  background:
+
+    linear-gradient(
+      90deg,
+      var(--rp-gold-1),
+      var(--rp-gold-2),
+      var(--rp-gold-3)
+    );
+
+  -webkit-background-clip: text;
+
+  background-clip: text;
+
+  color: transparent;
+
+  margin: 0 0 11px;
+
+  position: relative;
+
+  z-index: 2;
 }
+
+
+/* ==========================================================================
+   TITLE
+========================================================================== */
 
 .rp-title {
-  font-family: Georgia, "Playfair Display", serif;
-  font-size: 28px;
-  font-weight: 700;
+
+  font-family: var(--rp-font-display);
+
+  font-size: 30px;
+
+  font-weight: 600;
+
   color: var(--rp-text-primary);
+
   margin: 0 0 12px;
-  line-height: 1.25;
+
+  line-height: 1.15;
+
+  letter-spacing: -0.4px;
+
+  position: relative;
+
+  z-index: 2;
 }
+
+
+/* ==========================================================================
+   TITLE GOLD DETAIL
+========================================================================== */
+
+.rp-title::after {
+
+  content: "";
+
+  display: block;
+
+  width: 34px;
+
+  height: 2px;
+
+  margin: 15px auto 0;
+
+  border-radius: 2px;
+
+  background:
+
+    linear-gradient(
+      90deg,
+      var(--rp-gold-3),
+      var(--rp-gold-1)
+    );
+
+  opacity: 0.75;
+}
+
+
+/* ==========================================================================
+   SUBTITLE
+========================================================================== */
 
 .rp-subtitle {
-  font-size: 14.5px;
-  line-height: 1.55;
+
+  font-size: 13.5px;
+
+  line-height: 1.7;
+
   color: var(--rp-text-secondary);
+
   margin: 0 0 28px;
+
+  position: relative;
+
+  z-index: 2;
 }
+
+
+/* ==========================================================================
+   FORM FIELD
+========================================================================== */
 
 .rp-field {
+
   text-align: left;
+
+  position: relative;
+
+  z-index: 2;
 }
 
+
+/* ==========================================================================
+   LABEL
+========================================================================== */
+
 .rp-label {
+
   display: block;
-  font-size: 13.5px;
+
+  font-size: 12.5px;
+
   font-weight: 600;
-  color: var(--rp-text-primary);
+
+  color: var(--rp-text-secondary);
+
   margin-bottom: 8px;
 }
 
+
+/* ==========================================================================
+   INPUT WRAPPER
+========================================================================== */
+
 .rp-input-wrap {
+
   position: relative;
+
   display: flex;
+
   align-items: center;
 }
 
+
+/* ==========================================================================
+   INPUT
+========================================================================== */
+
 .rp-input.form-control {
-  background-color: var(--rp-input-bg);
-  border: 1px solid var(--rp-input-border);
-  border-radius: 10px;
-  color: var(--rp-text-primary);
-  padding: 12px 44px 12px 14px;
-  font-size: 14.5px;
+
   width: 100%;
-  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+
+  min-height: 48px;
+
+  background-color: var(--rp-input-bg);
+
+  border: 1px solid var(--rp-border-soft);
+
+  border-radius: 11px;
+
+  color: var(--rp-text-primary);
+
+  padding: 12px 44px 12px 14px;
+
+  font-family: var(--rp-font-body);
+
+  font-size: 13.5px;
+
+  outline: none;
+
+  transition:
+
+    border-color 0.25s ease,
+
+    background-color 0.25s ease,
+
+    box-shadow 0.25s ease;
 }
+
+
+/* ==========================================================================
+   INPUT HOVER
+========================================================================== */
+
+.rp-input.form-control:hover {
+
+  background-color: var(--rp-input-hover);
+
+  border-color: var(--rp-border-medium);
+}
+
+
+/* ==========================================================================
+   PLACEHOLDER
+========================================================================== */
 
 .rp-input.form-control::placeholder {
-  color: var(--rp-text-muted);
+
+  color: var(--rp-text-faint);
+
+  opacity: 1;
 }
+
+
+/* ==========================================================================
+   INPUT FOCUS
+========================================================================== */
 
 .rp-input.form-control:focus {
-  background-color: var(--rp-input-bg);
-  border-color: var(--rp-input-border-focus);
+
+  background-color: var(--rp-input-focus);
+
+  border-color: var(--rp-gold-2);
+
   color: var(--rp-text-primary);
-  box-shadow: 0 0 0 3px rgba(217, 154, 68, 0.18);
+
+  box-shadow:
+
+    0 0 0 3px var(--rp-gold-soft),
+
+    0 8px 22px rgba(0, 0, 0, 0.16);
+
+  outline: none;
 }
 
+
+/* ==========================================================================
+   ERROR INPUT
+========================================================================== */
+
 .rp-input-error {
+
   border-color: var(--rp-error) !important;
 }
 
-.rp-eye-btn {
-  position: absolute;
-  right: 12px;
-  top: 50%;
-  transform: translateY(-50%);
-  background: none;
-  border: none;
-  padding: 4px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--rp-text-muted);
-  cursor: pointer;
-  transition: color 0.15s ease;
+
+.rp-input-error:focus {
+
+  box-shadow:
+
+    0 0 0 3px rgba(223, 112, 101, 0.15) !important;
 }
+
+
+/* ==========================================================================
+   PASSWORD EYE BUTTON
+========================================================================== */
+
+.rp-eye-btn {
+
+  position: absolute;
+
+  right: 11px;
+
+  top: 50%;
+
+  transform: translateY(-50%);
+
+  background: transparent;
+
+  border: none;
+
+  padding: 6px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  color: var(--rp-text-muted);
+
+  cursor: pointer;
+
+  border-radius: 7px;
+
+  transition:
+
+    color 0.2s ease,
+
+    background-color 0.2s ease;
+}
+
 
 .rp-eye-btn:hover {
+
   color: var(--rp-gold-1);
+
+  background: rgba(220, 168, 75, 0.07);
 }
+
 
 .rp-eye-btn:focus-visible {
+
   outline: 2px solid var(--rp-gold-1);
+
   outline-offset: 2px;
-  border-radius: 4px;
 }
 
+
+/* ==========================================================================
+   ERROR
+========================================================================== */
+
 .rp-error {
-  margin: 4px 0 18px;
-  font-size: 12.5px;
+
+  margin: 6px 0 18px;
+
+  font-size: 11.5px;
+
+  line-height: 1.5;
+
   color: var(--rp-error);
+
   text-align: left;
 }
 
+
+/* ==========================================================================
+   SUBMIT BUTTON
+========================================================================== */
+
 .rp-submit-btn {
+
+  width: 100%;
+
+  min-height: 50px;
+
   margin-top: 6px;
+
   padding: 13px 16px;
+
   border: none;
-  border-radius: 10px;
-  font-size: 14px;
-  font-weight: 700;
-  letter-spacing: 0.06em;
+
+  border-radius: 11px;
+
+  font-family: var(--rp-font-body);
+
+  font-size: 12px;
+
+  font-weight: 800;
+
+  letter-spacing: 0.08em;
+
   text-transform: uppercase;
-  color: #241505;
-  background: linear-gradient(135deg, var(--rp-gold-1), var(--rp-gold-2));
-  box-shadow: 0 10px 24px rgba(196, 128, 47, 0.28);
-  transition: transform 0.12s ease, box-shadow 0.12s ease, filter 0.12s ease;
+
+  color: var(--rp-text-dark);
+
+  background:
+
+    linear-gradient(
+      135deg,
+      var(--rp-gold-1) 0%,
+      var(--rp-gold-2) 52%,
+      var(--rp-gold-3) 100%
+    );
+
+  box-shadow:
+
+    0 10px 28px rgba(190, 132, 45, 0.18);
+
+  cursor: pointer;
+
+  position: relative;
+
+  overflow: hidden;
+
+  transition:
+
+    transform 0.2s ease,
+
+    box-shadow 0.25s ease,
+
+    filter 0.25s ease;
 }
+
+
+/* ==========================================================================
+   BUTTON SHINE
+========================================================================== */
+
+.rp-submit-btn::before {
+
+  content: "";
+
+  position: absolute;
+
+  top: 0;
+
+  left: -110%;
+
+  width: 65%;
+
+  height: 100%;
+
+  background:
+
+    linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.24),
+      transparent
+    );
+
+  transform: skewX(-20deg);
+
+  transition: left 0.55s ease;
+}
+
+
+/* ==========================================================================
+   BUTTON HOVER
+========================================================================== */
 
 .rp-submit-btn:hover:not(:disabled) {
+
   filter: brightness(1.06);
-  box-shadow: 0 12px 28px rgba(196, 128, 47, 0.36);
+
+  transform: translateY(-2px);
+
+  box-shadow:
+
+    0 15px 35px rgba(201, 145, 45, 0.27);
 }
+
+
+.rp-submit-btn:hover:not(:disabled)::before {
+
+  left: 130%;
+}
+
+
+/* ==========================================================================
+   BUTTON ACTIVE
+========================================================================== */
 
 .rp-submit-btn:active:not(:disabled) {
-  transform: translateY(1px);
+
+  transform: translateY(0);
+
+  box-shadow:
+
+    0 7px 18px rgba(190, 132, 45, 0.18);
 }
+
+
+/* ==========================================================================
+   BUTTON DISABLED
+========================================================================== */
 
 .rp-submit-btn:disabled {
-  opacity: 0.75;
+
+  opacity: 0.65;
+
   cursor: not-allowed;
+
+  transform: none;
+
+  box-shadow: none;
+
+  filter: none;
 }
 
+
+/* ==========================================================================
+   BUTTON LOADING
+========================================================================== */
+
 .rp-btn-loading {
+
   display: inline-flex;
+
   align-items: center;
+
+  justify-content: center;
+
   gap: 8px;
 }
 
+
+/* ==========================================================================
+   BACK LINK
+========================================================================== */
+
 .rp-back-wrap {
+
   margin-top: 20px;
+
+  position: relative;
+
+  z-index: 2;
 }
+
 
 .rp-back-link {
-  font-size: 13.5px;
-  font-weight: 600;
+
+  font-size: 12.5px;
+
+  font-weight: 700;
+
   color: var(--rp-gold-1);
+
   text-decoration: none;
+
+  transition:
+
+    color 0.2s ease,
+
+    opacity 0.2s ease;
 }
 
+
 .rp-back-link:hover {
+
   color: var(--rp-gold-2);
+
   text-decoration: underline;
 }
 
-/* --- Responsiveness --- */
+
+.rp-back-link:focus-visible {
+
+  outline: 2px solid var(--rp-gold-1);
+
+  outline-offset: 3px;
+
+  border-radius: 3px;
+}
+
+
+/* ==========================================================================
+   ACCESSIBILITY
+========================================================================== */
+
+.rp-input.form-control:focus-visible,
+.rp-submit-btn:focus-visible {
+
+  outline: 2px solid var(--rp-gold-1);
+
+  outline-offset: 3px;
+}
+
+
+/* ==========================================================================
+   MOBILE
+========================================================================== */
 
 @media (max-width: 480px) {
+
+  .rp-page {
+
+    padding: 32px 14px;
+  }
+
+
   .rp-card {
-    padding: 32px 22px 26px;
-    border-radius: 14px;
+
+    max-width: 100%;
+
+    padding: 30px 22px 25px;
+
+    border-radius: 16px;
   }
 
-  .rp-title {
-    font-size: 23px;
-  }
-
-  .rp-subtitle {
-    font-size: 13.5px;
-  }
 
   .rp-brandmark-svg {
+
     width: 78px;
+
     height: 40px;
   }
 
+
+  .rp-eyebrow {
+
+    font-size: 9.5px;
+
+    letter-spacing: 0.17em;
+  }
+
+
+  .rp-title {
+
+    font-size: 25px;
+
+    letter-spacing: -0.3px;
+  }
+
+
+  .rp-subtitle {
+
+    font-size: 12.5px;
+
+    line-height: 1.7;
+
+    margin-bottom: 24px;
+  }
+
+
+  .rp-label {
+
+    font-size: 12px;
+  }
+
+
   .rp-input.form-control {
+
+    min-height: 47px;
+
     padding: 11px 40px 11px 12px;
-    font-size: 14px;
+
+    font-size: 13px;
+  }
+
+
+  .rp-eye-btn {
+
+    right: 9px;
+  }
+
+
+  .rp-submit-btn {
+
+    min-height: 49px;
+
+    padding: 12px 14px;
+
+    font-size: 11px;
+
+    letter-spacing: 0.07em;
+  }
+
+
+  .rp-back-wrap {
+
+    margin-top: 18px;
+  }
+
+
+  .rp-back-link {
+
+    font-size: 11.5px;
   }
 }
 
-@media (min-width: 992px) {
+
+/* ==========================================================================
+   SMALL PHONES
+========================================================================== */
+
+@media (max-width: 360px) {
+
+  .rp-page {
+
+    padding: 25px 12px;
+  }
+
+
   .rp-card {
-    padding: 48px 44px 36px;
+
+    padding: 26px 16px 20px;
+
+    border-radius: 14px;
+  }
+
+
+  .rp-title {
+
+    font-size: 23px;
+  }
+
+
+  .rp-subtitle {
+
+    font-size: 12px;
+  }
+
+
+  .rp-submit-btn {
+
+    min-height: 47px;
+
+    font-size: 10.5px;
+  }
+}
+
+
+/* ==========================================================================
+   DESKTOP
+========================================================================== */
+
+@media (min-width: 992px) {
+
+  .rp-card {
+
+    padding: 44px 40px 34px;
+  }
+}
+
+
+/* ==========================================================================
+   REDUCED MOTION
+========================================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .rp-card,
+  .rp-input,
+  .rp-submit-btn,
+  .rp-eye-btn,
+  .rp-back-link {
+
+    transition: none;
+
+    animation: none;
+  }
+
+
+  .rp-submit-btn::before {
+
+    transition: none;
   }
 }

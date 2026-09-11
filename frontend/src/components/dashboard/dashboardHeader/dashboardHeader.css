@@ -1,0 +1,383 @@
+/* ==========================================================================
+   Header — reads var(--app-*) tokens from theme.css so it automatically
+   matches whichever theme ThemeContext has set on <html data-theme="">.
+   ========================================================================== */
+
+.app-header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 16px 28px;
+  background: var(--app-surface);
+  border-bottom: 1px solid var(--app-border);
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+  transition: background-color 0.3s var(--app-ease), border-color 0.3s var(--app-ease);
+}
+
+/* ---- Left: menu + greeting ---- */
+
+.app-header-left {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  min-width: 0;
+}
+
+.app-header-menu-btn {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  flex-shrink: 0;
+  border-radius: var(--app-radius-sm);
+  border: 1px solid var(--app-border);
+  background: var(--app-surface-elevated);
+  color: var(--app-text);
+  cursor: pointer;
+  transition: background-color 0.2s var(--app-ease);
+}
+
+.app-header-menu-btn:hover {
+  background: var(--app-surface-hover);
+}
+
+.app-header-greeting {
+  min-width: 0;
+}
+
+.app-header-greeting h1 {
+  margin: 0;
+  font-family: "Sora", "Inter", sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--app-text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.app-header-wave {
+  display: inline-block;
+  transform-origin: 70% 70%;
+  animation: app-header-wave 1.6s var(--app-ease) 1;
+}
+
+.app-header-greeting p {
+  margin: 3px 0 0;
+  font-size: 13px;
+  color: var(--app-text-muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+@keyframes app-header-wave {
+  0% {
+    transform: rotate(0deg);
+  }
+  15% {
+    transform: rotate(14deg);
+  }
+  30% {
+    transform: rotate(-8deg);
+  }
+  45% {
+    transform: rotate(14deg);
+  }
+  60% {
+    transform: rotate(-4deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
+/* ---- Right: search, theme toggle, bell, profile ---- */
+
+.app-header-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+.app-header-search {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 260px;
+  padding: 9px 14px;
+  border-radius: 999px;
+  background: var(--app-surface-elevated);
+  border: 1px solid var(--app-border);
+  transition: border-color 0.2s var(--app-ease), width 0.25s var(--app-ease);
+}
+
+.app-header-search:focus-within {
+  border-color: var(--app-violet-1);
+}
+
+.app-header-search input {
+  flex: 1;
+  min-width: 0;
+  border: none;
+  outline: none;
+  background: transparent;
+  font-size: 13.5px;
+  color: var(--app-text);
+  font-family: inherit;
+}
+
+.app-header-search input::placeholder {
+  color: var(--app-text-faint);
+}
+
+.app-header-search-icon {
+  color: var(--app-text-faint);
+  flex-shrink: 0;
+}
+
+.app-header-search-toggle {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: 1px solid var(--app-border);
+  background: var(--app-surface-elevated);
+  color: var(--app-text-muted);
+  cursor: pointer;
+}
+
+.app-header-icon-btn {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  border: 1px solid var(--app-border);
+  background: var(--app-surface-elevated);
+  color: var(--app-text-muted);
+  cursor: pointer;
+  transition: background-color 0.2s var(--app-ease), color 0.2s var(--app-ease),
+    transform 0.2s var(--app-ease);
+}
+
+.app-header-icon-btn:hover {
+  background: var(--app-surface-hover);
+  color: var(--app-text);
+  transform: translateY(-1px);
+}
+
+.app-header-theme-icon {
+  display: flex;
+  transition: transform 0.35s var(--app-ease);
+}
+
+.app-header-icon-btn:hover .app-header-theme-icon {
+  transform: rotate(20deg);
+}
+
+.app-header-badge {
+  position: absolute;
+  top: -3px;
+  right: -3px;
+  min-width: 17px;
+  height: 17px;
+  padding: 0 4px;
+  border-radius: 999px;
+  background: var(--app-danger);
+  color: #fff;
+  font-size: 10px;
+  font-weight: 700;
+  line-height: 17px;
+  text-align: center;
+  border: 2px solid var(--app-surface);
+}
+
+/* ---- Profile ---- */
+
+.app-header-profile {
+  position: relative;
+}
+
+.app-header-profile-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 6px 4px 4px;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  background: transparent;
+  cursor: pointer;
+  transition: background-color 0.2s var(--app-ease), border-color 0.2s var(--app-ease);
+}
+
+.app-header-profile-btn:hover {
+  background: var(--app-surface-elevated);
+  border-color: var(--app-border);
+}
+
+.app-header-avatar {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Sora", sans-serif;
+  font-weight: 700;
+  font-size: 13px;
+  color: #fff;
+  background: linear-gradient(145deg, var(--app-violet-1), var(--app-violet-2));
+  box-shadow: 0 0 0 2px var(--app-surface), 0 0 0 3.5px var(--app-gold);
+}
+
+.app-header-chevron {
+  color: var(--app-text-muted);
+  transition: transform 0.25s var(--app-ease);
+}
+
+.app-header-chevron-open {
+  transform: rotate(180deg);
+}
+
+.app-header-profile-menu {
+  position: absolute;
+  top: calc(100% + 10px);
+  right: 0;
+  min-width: 180px;
+  padding: 8px;
+  border-radius: var(--app-radius-md);
+  background: var(--app-surface-elevated);
+  border: 1px solid var(--app-border);
+  box-shadow: 0 16px 32px -12px var(--app-shadow);
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  animation: app-header-menu-in 0.18s var(--app-ease);
+  z-index: 60;
+}
+
+@keyframes app-header-menu-in {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.app-header-profile-menu a,
+.app-header-profile-menu button {
+  display: block;
+  width: 100%;
+  text-align: left;
+  padding: 8px 10px;
+  border-radius: var(--app-radius-sm);
+  border: none;
+  background: transparent;
+  color: var(--app-text);
+  font-size: 13px;
+  font-family: inherit;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 0.15s var(--app-ease);
+}
+
+.app-header-profile-menu a:hover,
+.app-header-profile-menu button:hover {
+  background: var(--app-surface-hover);
+}
+
+.app-header-profile-menu button {
+  color: var(--app-danger);
+}
+
+/* ==========================================================================
+   Responsive
+   ========================================================================== */
+
+@media (max-width: 900px) {
+  .app-header {
+    padding: 14px 20px;
+  }
+
+  .app-header-search {
+    width: 200px;
+  }
+
+  .app-header-greeting p {
+    display: none;
+  }
+}
+
+@media (max-width: 640px) {
+  .app-header {
+    padding: 12px 16px;
+    gap: 10px;
+  }
+
+  .app-header-menu-btn {
+    display: flex;
+  }
+
+  .app-header-greeting h1 {
+    font-size: 15px;
+  }
+
+  .app-header-search {
+    position: absolute;
+    left: 16px;
+    right: 16px;
+    top: calc(100% + 8px);
+    width: auto;
+    background: var(--app-surface-elevated);
+    box-shadow: 0 16px 32px -12px var(--app-shadow);
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(-6px);
+    transition: opacity 0.2s var(--app-ease), transform 0.2s var(--app-ease);
+  }
+
+  .app-header-search-open {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
+  }
+
+  .app-header-search-toggle {
+    display: flex;
+  }
+}
+
+@media (max-width: 380px) {
+  .app-header-greeting h1 {
+    font-size: 14px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .app-header-wave {
+    animation: none;
+  }
+  .app-header-icon-btn,
+  .app-header-theme-icon,
+  .app-header-chevron,
+  .app-header-search,
+  .app-header-profile-menu {
+    transition: none;
+    animation: none;
+  }
+}

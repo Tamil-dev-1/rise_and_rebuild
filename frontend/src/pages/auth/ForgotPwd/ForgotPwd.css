@@ -1,262 +1,1161 @@
-/* ForgotPassword.css
-   Dark, warm-gold theme to match the "Season 2 · Rise & Rebuild" login page. */
+/* ==========================================================================
+   Rise & Rebuild — Forgot Password
+   Premium Black / Ivory / Champagne Gold Theme
+========================================================================== */
+
+
+/* ==========================================================================
+   DESIGN TOKENS
+========================================================================== */
 
 :root {
-  --fp-bg: #170f0a;
-  --fp-card-bg: #241a12;
-  --fp-card-border: #3a2c1d;
-  --fp-input-bg: #1c130c;
-  --fp-input-border: #4a3928;
-  --fp-input-border-focus: #d99a44;
-  --fp-gold-1: #f0c274;
-  --fp-gold-2: #c4802f;
-  --fp-text-primary: #f5ece0;
-  --fp-text-secondary: #b8a693;
-  --fp-text-muted: #8a7862;
-  --fp-error: #e3684f;
+
+  /* =========================================================
+     BACKGROUNDS
+  ========================================================= */
+
+  --fp-bg: #090807;
+  --fp-bg-soft: #0d0c0b;
+
+  --fp-card-bg: #11100e;
+  --fp-card-top: #151310;
+
+  --fp-input-bg: #141311;
+  --fp-input-hover: #181613;
+  --fp-input-focus: #1b1814;
+
+
+  /* =========================================================
+     BORDERS
+  ========================================================= */
+
+  --fp-card-border: rgba(224, 184, 108, 0.14);
+
+  --fp-border-soft: rgba(255, 255, 255, 0.09);
+
+  --fp-border-medium: rgba(224, 184, 108, 0.24);
+
+  --fp-border-strong: rgba(224, 184, 108, 0.38);
+
+
+  /* =========================================================
+     TEXT
+  ========================================================= */
+
+  --fp-text-primary: #f5efe6;
+
+  --fp-text-secondary: #ded3c5;
+
+  --fp-text-muted: #9e9285;
+
+  --fp-text-faint: #70675e;
+
+  --fp-text-dark: #17120b;
+
+
+  /* =========================================================
+     CHAMPAGNE GOLD
+  ========================================================= */
+
+  --fp-gold-1: #f1ca76;
+
+  --fp-gold-2: #dca84b;
+
+  --fp-gold-3: #bb812d;
+
+  --fp-gold-soft: rgba(220, 168, 75, 0.12);
+
+  --fp-gold-glow: rgba(220, 168, 75, 0.20);
+
+
+  /* =========================================================
+     STATES
+  ========================================================= */
+
+  --fp-error: #df7065;
+
+  --fp-success: #7fba8b;
+
+
+  /* =========================================================
+     TYPOGRAPHY
+  ========================================================= */
+
+  --fp-font-display: 'Fraunces', 'Georgia', serif;
+
+  --fp-font-body: 'Manrope', 'Segoe UI', system-ui, -apple-system, sans-serif;
 }
+
+
+/* ==========================================================================
+   PAGE
+========================================================================== */
 
 .fp-page {
+
   min-height: 100vh;
+
   width: 100%;
+
   display: flex;
+
   align-items: center;
+
   justify-content: center;
-  background: radial-gradient(
-      circle at 50% 0%,
-      rgba(196, 128, 47, 0.08),
-      transparent 55%
+
+  padding: 48px 20px;
+
+  background:
+
+    radial-gradient(
+      circle at 50% -10%,
+      rgba(220, 168, 75, 0.09),
+      transparent 43%
     ),
+
+    radial-gradient(
+      circle at 100% 100%,
+      rgba(255, 255, 255, 0.018),
+      transparent 35%
+    ),
+
     var(--fp-bg);
-  padding: 32px 16px;
-  font-family: "Inter", "Segoe UI", system-ui, -apple-system, sans-serif;
+
+  font-family: var(--fp-font-body);
+
+  box-sizing: border-box;
+
+  position: relative;
+
+  overflow: hidden;
 }
+
+
+/* ==========================================================================
+   BACKGROUND ATMOSPHERE
+========================================================================== */
+
+.fp-page::before {
+
+  content: "";
+
+  position: absolute;
+
+  width: 430px;
+
+  height: 430px;
+
+  left: -250px;
+
+  bottom: -230px;
+
+  border-radius: 50%;
+
+  background: rgba(220, 168, 75, 0.035);
+
+  filter: blur(90px);
+
+  pointer-events: none;
+}
+
+
+.fp-page::after {
+
+  content: "";
+
+  position: absolute;
+
+  width: 300px;
+
+  height: 300px;
+
+  right: -190px;
+
+  top: -150px;
+
+  border-radius: 50%;
+
+  background: rgba(255, 255, 255, 0.018);
+
+  filter: blur(80px);
+
+  pointer-events: none;
+}
+
+
+/* ==========================================================================
+   CARD
+========================================================================== */
 
 .fp-card {
+
+  position: relative;
+
   width: 100%;
+
   max-width: 440px;
-  background: var(--fp-card-bg);
+
+  background:
+
+    linear-gradient(
+      145deg,
+      rgba(255, 255, 255, 0.035),
+      rgba(255, 255, 255, 0.012)
+    ),
+
+    var(--fp-card-bg);
+
   border: 1px solid var(--fp-card-border);
-  border-radius: 18px;
-  padding: 40px 36px 32px;
-  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.45);
+
+  border-radius: 20px;
+
+  padding: 42px 36px 34px;
+
+  box-shadow:
+
+    0 30px 80px rgba(0, 0, 0, 0.55),
+
+    0 10px 30px rgba(0, 0, 0, 0.25),
+
+    0 0 45px rgba(220, 168, 75, 0.025),
+
+    inset 0 1px 0 rgba(255, 255, 255, 0.025);
+
   text-align: center;
+
+  backdrop-filter: blur(18px);
+
+  -webkit-backdrop-filter: blur(18px);
+
+  overflow: hidden;
+
+  animation: fp-card-in 0.5s ease both;
 }
+
+
+/* ==========================================================================
+   GOLD TOP LINE
+========================================================================== */
+
+.fp-card::before {
+
+  content: "";
+
+  position: absolute;
+
+  top: 0;
+
+  left: 12%;
+
+  right: 12%;
+
+  height: 1px;
+
+  background:
+
+    linear-gradient(
+      90deg,
+      transparent,
+      rgba(241, 202, 118, 0.65),
+      transparent
+    );
+
+  opacity: 0.8;
+}
+
+
+/* ==========================================================================
+   CARD INNER HIGHLIGHT
+========================================================================== */
+
+.fp-card::after {
+
+  content: "";
+
+  position: absolute;
+
+  top: 0;
+
+  left: 0;
+
+  right: 0;
+
+  height: 120px;
+
+  background:
+
+    linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.018),
+      transparent
+    );
+
+  pointer-events: none;
+}
+
+
+/* ==========================================================================
+   CARD ANIMATION
+========================================================================== */
+
+@keyframes fp-card-in {
+
+  from {
+
+    opacity: 0;
+
+    transform: translateY(10px);
+  }
+
+  to {
+
+    opacity: 1;
+
+    transform: translateY(0);
+  }
+}
+
+
+/* ==========================================================================
+   BRAND MARK
+========================================================================== */
 
 .fp-brandmark {
+
   display: flex;
+
   justify-content: center;
-  margin-bottom: 6px;
+
+  margin-bottom: 8px;
+
+  position: relative;
+
+  z-index: 2;
 }
+
 
 .fp-brandmark-svg {
+
   width: 92px;
+
   height: 46px;
+
   fill: none;
+
   stroke: var(--fp-gold-2);
+
   stroke-width: 2.5;
+
   stroke-linecap: round;
+
+  filter: drop-shadow(
+    0 4px 12px rgba(220, 168, 75, 0.10)
+  );
 }
 
+
 .fp-brandmark-svg circle {
+
   fill: var(--fp-gold-1);
+
   stroke: none;
 }
 
+
+/* ==========================================================================
+   EYEBROW
+========================================================================== */
+
 .fp-eyebrow {
-  font-size: 12px;
-  font-weight: 600;
-  letter-spacing: 0.14em;
+
+  font-family: var(--fp-font-body);
+
+  font-size: 10px;
+
+  font-weight: 800;
+
+  letter-spacing: 0.19em;
+
   text-transform: uppercase;
-  color: var(--fp-gold-1);
-  margin: 0 0 14px;
+
+  background:
+
+    linear-gradient(
+      90deg,
+      var(--fp-gold-1),
+      var(--fp-gold-2),
+      var(--fp-gold-3)
+    );
+
+  -webkit-background-clip: text;
+
+  background-clip: text;
+
+  color: transparent;
+
+  margin: 0 0 11px;
+
+  position: relative;
+
+  z-index: 2;
 }
+
+
+/* ==========================================================================
+   TITLE
+========================================================================== */
 
 .fp-title {
-  font-family: "Georgia", "Playfair Display", serif;
-  font-size: 28px;
-  font-weight: 700;
+
+  font-family: var(--fp-font-display);
+
+  font-size: 30px;
+
+  font-weight: 600;
+
   color: var(--fp-text-primary);
+
   margin: 0 0 12px;
-  line-height: 1.25;
+
+  line-height: 1.15;
+
+  letter-spacing: -0.4px;
+
+  position: relative;
+
+  z-index: 2;
 }
+
+
+/* ==========================================================================
+   TITLE GOLD DETAIL
+========================================================================== */
+
+.fp-title::after {
+
+  content: "";
+
+  display: block;
+
+  width: 34px;
+
+  height: 2px;
+
+  margin: 15px auto 0;
+
+  border-radius: 2px;
+
+  background:
+
+    linear-gradient(
+      90deg,
+      var(--fp-gold-3),
+      var(--fp-gold-1)
+    );
+
+  opacity: 0.75;
+}
+
 
 .fp-title-sm {
-  font-size: 26px;
+
+  font-size: 27px;
 }
+
+
+/* ==========================================================================
+   SUBTITLE
+========================================================================== */
 
 .fp-subtitle {
-  font-size: 14.5px;
-  line-height: 1.55;
+
+  font-size: 13.5px;
+
+  line-height: 1.7;
+
   color: var(--fp-text-secondary);
+
   margin: 0 0 28px;
+
+  position: relative;
+
+  z-index: 2;
 }
+
 
 .fp-subtitle strong {
+
   color: var(--fp-text-primary);
+
   font-weight: 600;
 }
+
 
 .fp-subtitle-muted {
+
   margin-top: -18px;
+
   color: var(--fp-text-muted);
-  font-size: 13.5px;
+
+  font-size: 13px;
 }
+
+
+/* ==========================================================================
+   FORM FIELD
+========================================================================== */
 
 .fp-field {
+
   text-align: left;
+
+  position: relative;
+
+  z-index: 2;
 }
 
+
 .fp-label {
+
   display: block;
-  font-size: 13.5px;
+
+  font-size: 12.5px;
+
   font-weight: 600;
-  color: var(--fp-text-primary);
+
+  color: var(--fp-text-secondary);
+
   margin-bottom: 8px;
 }
 
+
+/* ==========================================================================
+   INPUT
+========================================================================== */
+
 .fp-input.form-control {
+
+  width: 100%;
+
+  min-height: 48px;
+
   background-color: var(--fp-input-bg);
-  border: 1px solid var(--fp-input-border);
-  border-radius: 10px;
+
+  border: 1px solid var(--fp-border-soft);
+
+  border-radius: 11px;
+
   color: var(--fp-text-primary);
+
   padding: 12px 14px;
-  font-size: 14.5px;
-  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+
+  font-family: var(--fp-font-body);
+
+  font-size: 13.5px;
+
+  outline: none;
+
+  transition:
+
+    border-color 0.25s ease,
+
+    background-color 0.25s ease,
+
+    box-shadow 0.25s ease,
+
+    transform 0.25s ease;
 }
+
+
+/* ==========================================================================
+   INPUT HOVER
+========================================================================== */
+
+.fp-input.form-control:hover {
+
+  background-color: var(--fp-input-hover);
+
+  border-color: var(--fp-border-medium);
+}
+
+
+/* ==========================================================================
+   PLACEHOLDER
+========================================================================== */
 
 .fp-input.form-control::placeholder {
-  color: var(--fp-text-muted);
+
+  color: var(--fp-text-faint);
+
+  opacity: 1;
 }
+
+
+/* ==========================================================================
+   INPUT FOCUS
+========================================================================== */
 
 .fp-input.form-control:focus {
-  background-color: var(--fp-input-bg);
-  border-color: var(--fp-input-border-focus);
+
+  background-color: var(--fp-input-focus);
+
+  border-color: var(--fp-gold-2);
+
   color: var(--fp-text-primary);
-  box-shadow: 0 0 0 3px rgba(217, 154, 68, 0.18);
+
+  box-shadow:
+
+    0 0 0 3px var(--fp-gold-soft),
+
+    0 8px 22px rgba(0, 0, 0, 0.16);
+
+  outline: none;
 }
 
+
+/* ==========================================================================
+   ERROR INPUT
+========================================================================== */
+
 .fp-input-error {
+
   border-color: var(--fp-error) !important;
 }
 
+
+.fp-input-error:focus {
+
+  box-shadow:
+
+    0 0 0 3px rgba(223, 112, 101, 0.15) !important;
+}
+
+
+/* ==========================================================================
+   ERROR MESSAGE
+========================================================================== */
+
 .fp-error {
-  margin-top: 8px;
-  font-size: 12.5px;
+
+  margin-top: 7px;
+
+  font-size: 11.5px;
+
+  line-height: 1.5;
+
   color: var(--fp-error);
 }
 
+
+/* ==========================================================================
+   SUBMIT BUTTON
+========================================================================== */
+
 .fp-submit-btn {
+
+  width: 100%;
+
+  min-height: 50px;
+
   margin-top: 6px;
+
   padding: 13px 16px;
+
   border: none;
-  border-radius: 10px;
-  font-size: 14px;
-  font-weight: 700;
-  letter-spacing: 0.06em;
+
+  border-radius: 11px;
+
+  font-family: var(--fp-font-body);
+
+  font-size: 12px;
+
+  font-weight: 800;
+
+  letter-spacing: 0.08em;
+
   text-transform: uppercase;
-  color: #241505;
-  background: linear-gradient(135deg, var(--fp-gold-1), var(--fp-gold-2));
-  box-shadow: 0 10px 24px rgba(196, 128, 47, 0.28);
-  transition: transform 0.12s ease, box-shadow 0.12s ease, filter 0.12s ease;
+
+  color: var(--fp-text-dark);
+
+  background:
+
+    linear-gradient(
+      135deg,
+      var(--fp-gold-1) 0%,
+      var(--fp-gold-2) 52%,
+      var(--fp-gold-3) 100%
+    );
+
+  box-shadow:
+
+    0 10px 28px rgba(190, 132, 45, 0.18);
+
+  cursor: pointer;
+
+  position: relative;
+
+  overflow: hidden;
+
+  transition:
+
+    transform 0.2s ease,
+
+    box-shadow 0.25s ease,
+
+    filter 0.25s ease;
 }
+
+
+/* ==========================================================================
+   BUTTON SHINE
+========================================================================== */
+
+.fp-submit-btn::before {
+
+  content: "";
+
+  position: absolute;
+
+  top: 0;
+
+  left: -110%;
+
+  width: 65%;
+
+  height: 100%;
+
+  background:
+
+    linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.24),
+      transparent
+    );
+
+  transform: skewX(-20deg);
+
+  transition: left 0.55s ease;
+}
+
+
+/* ==========================================================================
+   BUTTON HOVER
+========================================================================== */
 
 .fp-submit-btn:hover:not(:disabled) {
+
   filter: brightness(1.06);
-  box-shadow: 0 12px 28px rgba(196, 128, 47, 0.36);
+
+  transform: translateY(-2px);
+
+  box-shadow:
+
+    0 15px 35px rgba(201, 145, 45, 0.27);
 }
+
+
+.fp-submit-btn:hover:not(:disabled)::before {
+
+  left: 130%;
+}
+
+
+/* ==========================================================================
+   BUTTON ACTIVE
+========================================================================== */
 
 .fp-submit-btn:active:not(:disabled) {
-  transform: translateY(1px);
+
+  transform: translateY(0);
+
+  box-shadow:
+
+    0 7px 18px rgba(190, 132, 45, 0.18);
 }
+
+
+/* ==========================================================================
+   BUTTON DISABLED
+========================================================================== */
 
 .fp-submit-btn:disabled {
-  opacity: 0.75;
+
+  opacity: 0.65;
+
   cursor: not-allowed;
+
+  transform: none;
+
+  box-shadow: none;
+
+  filter: none;
 }
 
+
+/* ==========================================================================
+   BUTTON LOADING
+========================================================================== */
+
 .fp-btn-loading {
+
   display: inline-flex;
+
   align-items: center;
+
+  justify-content: center;
+
   gap: 8px;
 }
 
+
+/* ==========================================================================
+   BACK LINK
+========================================================================== */
+
 .fp-back-wrap {
+
   margin-top: 20px;
+
+  position: relative;
+
+  z-index: 2;
 }
+
 
 .fp-back-link {
-  font-size: 13.5px;
-  font-weight: 600;
+
+  font-size: 12.5px;
+
+  font-weight: 700;
+
   color: var(--fp-gold-1);
+
   text-decoration: none;
+
+  transition:
+
+    color 0.2s ease,
+
+    opacity 0.2s ease;
 }
+
 
 .fp-back-link:hover {
+
   color: var(--fp-gold-2);
+
   text-decoration: underline;
 }
+
+
+/* ==========================================================================
+   FOOTER NOTE
+========================================================================== */
 
 .fp-footer-note {
-  margin: 28px 0 0;
-  font-size: 13.5px;
-  color: var(--fp-text-secondary);
+
+  margin: 26px 0 0;
+
+  font-size: 12.5px;
+
+  line-height: 1.6;
+
+  color: var(--fp-text-muted);
+
+  position: relative;
+
+  z-index: 2;
 }
+
 
 .fp-footer-note a {
+
   color: var(--fp-gold-1);
-  font-weight: 600;
+
+  font-weight: 700;
+
   text-decoration: none;
+
+  transition: color 0.2s ease;
 }
 
+
 .fp-footer-note a:hover {
+
   color: var(--fp-gold-2);
+
   text-decoration: underline;
 }
 
-/* --- Sent / confirmation state --- */
+
+/* ==========================================================================
+   SENT / CONFIRMATION STATE
+========================================================================== */
 
 .fp-sent-icon {
+
   display: flex;
+
   align-items: center;
+
   justify-content: center;
-  width: 60px;
-  height: 60px;
-  margin: 4px auto 18px;
+
+  width: 62px;
+
+  height: 62px;
+
+  margin: 5px auto 18px;
+
   border-radius: 50%;
-  background: rgba(196, 128, 47, 0.12);
-  border: 1px solid rgba(196, 128, 47, 0.3);
+
+  background:
+
+    radial-gradient(
+      circle,
+      rgba(220, 168, 75, 0.14),
+      rgba(220, 168, 75, 0.05)
+    );
+
+  border: 1px solid rgba(220, 168, 75, 0.30);
+
   color: var(--fp-gold-1);
+
+  box-shadow:
+
+    0 10px 30px rgba(220, 168, 75, 0.08),
+
+    inset 0 1px 0 rgba(255, 255, 255, 0.04);
 }
 
-/* --- Responsiveness --- */
+
+/* ==========================================================================
+   ACCESSIBILITY
+========================================================================== */
+
+.fp-input.form-control:focus-visible,
+.fp-submit-btn:focus-visible,
+.fp-back-link:focus-visible,
+.fp-footer-note a:focus-visible {
+
+  outline: 2px solid var(--fp-gold-1);
+
+  outline-offset: 3px;
+}
+
+
+/* ==========================================================================
+   MOBILE
+========================================================================== */
 
 @media (max-width: 480px) {
-  .fp-card {
-    padding: 32px 22px 26px;
-    border-radius: 14px;
+
+  .fp-page {
+
+    padding: 32px 14px;
   }
 
+
+  .fp-card {
+
+    max-width: 100%;
+
+    padding: 30px 22px 25px;
+
+    border-radius: 16px;
+  }
+
+
+  .fp-brandmark-svg {
+
+    width: 78px;
+
+    height: 40px;
+  }
+
+
+  .fp-eyebrow {
+
+    font-size: 9.5px;
+
+    letter-spacing: 0.17em;
+  }
+
+
   .fp-title {
+
+    font-size: 25px;
+
+    letter-spacing: -0.3px;
+  }
+
+
+  .fp-title-sm {
+
     font-size: 23px;
   }
 
-  .fp-title-sm {
-    font-size: 22px;
-  }
 
   .fp-subtitle {
-    font-size: 13.5px;
+
+    font-size: 12.5px;
+
+    line-height: 1.7;
+
+    margin-bottom: 24px;
   }
 
-  .fp-brandmark-svg {
-    width: 78px;
-    height: 40px;
+
+  .fp-subtitle-muted {
+
+    font-size: 12px;
+  }
+
+
+  .fp-label {
+
+    font-size: 12px;
+  }
+
+
+  .fp-input.form-control {
+
+    min-height: 47px;
+
+    padding: 11px 12px;
+
+    font-size: 13px;
+  }
+
+
+  .fp-submit-btn {
+
+    min-height: 49px;
+
+    padding: 12px 14px;
+
+    font-size: 11px;
+
+    letter-spacing: 0.07em;
+  }
+
+
+  .fp-back-wrap {
+
+    margin-top: 18px;
+  }
+
+
+  .fp-back-link {
+
+    font-size: 11.5px;
+  }
+
+
+  .fp-footer-note {
+
+    font-size: 11.5px;
+
+    margin-top: 22px;
+  }
+
+
+  .fp-sent-icon {
+
+    width: 58px;
+
+    height: 58px;
+
+    margin-bottom: 16px;
   }
 }
 
-@media (min-width: 992px) {
+
+/* ==========================================================================
+   SMALL PHONES
+========================================================================== */
+
+@media (max-width: 360px) {
+
+  .fp-page {
+
+    padding: 25px 12px;
+  }
+
+
   .fp-card {
-    padding: 48px 44px 36px;
+
+    padding: 26px 16px 20px;
+
+    border-radius: 14px;
+  }
+
+
+  .fp-title {
+
+    font-size: 23px;
+  }
+
+
+  .fp-title-sm {
+
+    font-size: 21px;
+  }
+
+
+  .fp-subtitle {
+
+    font-size: 12px;
+  }
+
+
+  .fp-submit-btn {
+
+    min-height: 47px;
+
+    font-size: 10.5px;
+  }
+
+
+  .fp-footer-note {
+
+    font-size: 11px;
+  }
+}
+
+
+/* ==========================================================================
+   DESKTOP
+========================================================================== */
+
+@media (min-width: 992px) {
+
+  .fp-card {
+
+    padding: 44px 40px 34px;
+  }
+}
+
+
+/* ==========================================================================
+   REDUCED MOTION
+========================================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .fp-card,
+  .fp-input,
+  .fp-submit-btn,
+  .fp-back-link,
+  .fp-footer-note a {
+
+    animation: none;
+
+    transition: none;
+  }
+
+  .fp-submit-btn::before {
+
+    transition: none;
   }
 }

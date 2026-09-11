@@ -15,10 +15,14 @@ import Testimonial from '../sections/testimonial/Testimonial'
 import BigQuestion from '../sections/bigQuestions/BigQuestions'
 import Reveal from '../sections/reveal/Reveal'
 import FinalCTA from '../sections/finalCTA/FinalCTA'
+import Navbar from '../components/navbar/Navbar';
+import Footer from '../components/footer/Footer';
 
 const Home = () => {
   return (
     <div>
+      {/* header */}
+      <Navbar />
       <HeroSection imageSrc={HeroImage} />
       <Story imageSrc= {StoryBG} />
       <Series />
@@ -33,6 +37,9 @@ const Home = () => {
       <BigQuestion />
       <Reveal />
       <FinalCTA />
+
+      {/* footer */}
+      <Footer />
     </div>
   )
 }

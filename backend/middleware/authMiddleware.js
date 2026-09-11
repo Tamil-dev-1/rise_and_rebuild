@@ -26,15 +26,20 @@ const authMiddleware = (req, res, next) => {
 
     // Verify JWT
     const decoded = jwt.verify(
-      token,
-      process.env.JWT_SECRET
-    );
+  token,
+  process.env.JWT_SECRET
+);
 
-    // Save lead ID inside request
-    req.leadId = decoded.leadId;
+if (!decoded.leadId) {
+  return res.status(401).json({
+    success: false,
+    message: "Invalid registration token.",
+  });
+}
 
-    // Continue to controller
-    next();
+req.leadId = decoded.leadId;
+
+next();
 
   } catch (error) {
     console.error("JWT Error:", error.message);

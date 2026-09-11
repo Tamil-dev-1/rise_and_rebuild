@@ -1,0 +1,817 @@
+/* Theme Definition Variables */
+.rr-dash.theme-light {
+  --bg-primary: #f8fafc;
+  --bg-card: #ffffff;
+  --bg-stat: #f3f4f8;
+  --bg-subtle: #fafbfc;
+  --border-color: #e6e9f0;
+  --text-primary: #0f172a;
+  --text-secondary: #64748b;
+  --text-muted: #94a3b8;
+  --track-bg: #e2e8f0;
+}
+
+.rr-dash.theme-dark {
+  --bg-primary: #0b0f19;
+  --bg-card: #151c2c;
+  --bg-stat: #1a2337;
+  --bg-subtle: #1e293b;
+  --border-color: #2a364f;
+  --text-primary: #f8fafc;
+  --text-secondary: #94a3b8;
+  --text-muted: #64748b;
+  --track-bg: #2d3748;
+}
+
+:root {
+  --app-violet-1: #6366f1;
+  --app-violet-2: #4f46e5;
+  --app-violet-bg: rgba(99, 102, 241, 0.12);
+
+  --app-gold: #d97706;
+  --app-gold-bg: rgba(217, 119, 6, 0.12);
+
+  --app-success: #10b981;
+  --app-success-bg: rgba(16, 185, 129, 0.12);
+
+  --app-info: #3b82f6;
+  --app-info-bg: rgba(59, 130, 246, 0.12);
+
+  --app-orange: #f97316;
+  --app-orange-bg: rgba(249, 115, 22, 0.12);
+
+  --app-radius-md: 12px;
+  --app-radius-lg: 16px;
+  --app-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+}
+
+.rr-dash {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+  background-color: var(--bg-primary);
+  padding: 16px;
+  color: var(--text-primary);
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 1380px;
+  margin: 0 auto;
+}
+
+.rr-dash h2, .rr-dash h3 {
+  font-family: "Sora", "Inter", sans-serif;
+}
+
+/* Grids & Containers */
+.rr-row {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 18px;
+  align-items: stretch;
+  width: 100%;
+}
+
+.rr-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--app-radius-lg);
+  padding: 18px;
+  box-shadow: var(--app-shadow);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-sizing: border-box;
+  width: 100%;
+  min-width: 0;
+}
+
+.rr-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
+}
+
+.rr-card-header h3 {
+  margin: 0;
+  font-size: 12.5px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: var(--text-primary);
+  text-transform: uppercase;
+}
+
+.rr-link {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--app-violet-1);
+  text-decoration: none;
+}
+
+.rr-link:hover { text-decoration: underline; }
+
+.rr-dropdown-btn {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  border: none;
+  background: transparent;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  cursor: pointer;
+}
+
+/* Color Tones */
+.rr-tone-violet { color: var(--app-violet-1); background: var(--app-violet-bg); }
+.rr-tone-gold { color: var(--app-gold); background: var(--app-gold-bg); }
+.rr-tone-success { color: var(--app-success); background: var(--app-success-bg); }
+.rr-tone-info { color: var(--app-info); background: var(--app-info-bg); }
+.rr-tone-orange { color: var(--app-orange); background: var(--app-orange-bg); }
+
+/* Top Row Cards */
+.rr-stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  width: 100%;
+}
+
+.rr-stat-card {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  background: var(--bg-stat);
+  border: 1px solid var(--border-color);
+  border-radius: var(--app-radius-lg);
+  padding: 16px;
+  box-shadow: var(--app-shadow);
+  box-sizing: border-box;
+  overflow: hidden;
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+/* Premium gradient washes — one per stat, tied to that stat's own tone
+   (Membership = violet, Next Live Session = gold, Journey Progress = success,
+   Current Challenge = info) so the color always matches the icon/badge on the card. */
+.rr-stats .rr-stat-card:nth-child(1) {
+  background:
+    linear-gradient(135deg, rgba(99, 102, 241, 0.09) 0%, rgba(99, 102, 241, 0) 60%),
+    var(--bg-card);
+  border-color: rgba(99, 102, 241, 0.16);
+}
+
+.rr-stats .rr-stat-card:nth-child(2) {
+  background:
+    linear-gradient(135deg, rgba(217, 119, 6, 0.09) 0%, rgba(217, 119, 6, 0) 60%),
+    var(--bg-card);
+  border-color: rgba(217, 119, 6, 0.16);
+}
+
+.rr-stats .rr-stat-card:nth-child(3) {
+  background:
+    linear-gradient(135deg, rgba(16, 185, 129, 0.09) 0%, rgba(16, 185, 129, 0) 60%),
+    var(--bg-card);
+  border-color: rgba(16, 185, 129, 0.16);
+}
+
+.rr-stats .rr-stat-card:nth-child(4) {
+  background:
+    linear-gradient(135deg, rgba(59, 130, 246, 0.09) 0%, rgba(59, 130, 246, 0) 60%),
+    var(--bg-card);
+  border-color: rgba(59, 130, 246, 0.16);
+}
+
+.rr-stat-card:hover {
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  transform: translateY(-1px);
+}
+
+.rr-stat-icon {
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.rr-stat-body {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  width: 100%;
+}
+
+.rr-stat-label {
+  font-size: 11.5px;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+.rr-stat-value {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.rr-stat-big {
+  font-size: 20px;
+  font-weight: 800;
+  color: var(--text-primary);
+  line-height: 1;
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+}
+
+.rr-stat-big small {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+.rr-stat-track {
+  height: 4px;
+  border-radius: 999px;
+  background: var(--track-bg);
+  overflow: hidden;
+  margin-top: 4px;
+}
+
+.rr-stat-fill {
+  height: 100%;
+  border-radius: 999px;
+  background: currentColor;
+}
+
+.rr-stat-footer {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 2px;
+}
+
+.rr-stat-footer-text {
+  font-size: 11px;
+  color: var(--text-secondary);
+}
+
+.rr-stat-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--app-success);
+}
+
+.rr-stat-badge::before {
+  content: "";
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--app-success);
+}
+
+/* Fixed Hero Card (Prevents Banner Header Clipping) */
+.rr-hero {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--app-radius-lg);
+  min-height: 380px;
+  height: 100%;
+  isolation: isolate;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.12);
+  width: 100%;
+}
+
+.rr-hero-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+}
+
+.rr-hero-scrim {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(180deg, rgba(15, 11, 30, 0.25) 0%, rgba(15, 11, 30, 0.92) 80%);
+}
+
+.rr-hero-content {
+  position: relative;
+  z-index: 2;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding: 24px;
+  color: #ffffff;
+  box-sizing: border-box;
+}
+
+.rr-hero-pill {
+  align-self: flex-start;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.16);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(8px);
+  font-size: 9.5px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  margin-bottom: 12px;
+}
+
+.rr-hero-eyebrow {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.rr-hero-content h2 {
+  margin: 2px 0 6px 0;
+  font-size: 28px;
+  font-weight: 800;
+  line-height: 1.1;
+}
+
+.rr-hero-content > p {
+  margin: 0 0 14px;
+  max-width: 320px;
+  font-size: 12.5px;
+  line-height: 1.4;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.rr-hero-meta {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 12px;
+  font-size: 11.5px;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.rr-hero-meta span {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.rr-hero-countdown {
+  margin-top: auto;
+}
+
+.rr-hero-countdown-label {
+  display: block;
+  font-size: 10px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.65);
+  margin-bottom: 6px;
+}
+
+.rr-hero-countdown-boxes {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 14px;
+}
+
+.rr-count-box {
+  min-width: 44px;
+  padding: 6px 2px;
+  text-align: center;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  backdrop-filter: blur(6px);
+}
+
+.rr-count-box strong {
+  display: block;
+  font-size: 15px;
+  font-weight: 800;
+}
+
+.rr-count-box span {
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.rr-hero-actions {
+  display: flex;
+  gap: 8px;
+}
+
+/* Button Variants */
+.rr-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 8px 14px;
+  border-radius: 8px;
+  border: none;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.rr-btn-primary { background: var(--app-violet-1); color: #fff; }
+.rr-btn-primary:hover { background: var(--app-violet-2); }
+
+.rr-btn-ghost {
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.rr-btn-ghost:hover { background: rgba(255, 255, 255, 0.18); }
+
+.rr-btn-outline {
+  background: transparent;
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
+}
+
+.rr-btn-outline:hover { background: var(--bg-subtle); }
+
+.rr-btn-sm { padding: 5px 10px; font-size: 11px; border-radius: 6px; }
+
+/* Timeline Card Design */
+.rr-journey-card { height: 100%; }
+
+.rr-journey-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex: 1;
+}
+
+.rr-journey-item {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 6px 10px;
+  border-radius: var(--app-radius-md);
+}
+
+.rr-journey-item::before {
+  content: "";
+  position: absolute;
+  left: 21px;
+  top: 30px;
+  bottom: -12px;
+  width: 2px;
+  background: var(--border-color);
+  z-index: 0;
+}
+
+.rr-journey-item-last::before { display: none; }
+.rr-journey-done::before { background: var(--app-success); }
+
+.rr-journey-node {
+  position: relative;
+  z-index: 1;
+  flex-shrink: 0;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg-card);
+  border: 2px solid var(--border-color);
+  color: var(--text-secondary);
+}
+
+.rr-journey-num { font-size: 10px; font-weight: 700; color: var(--text-muted); }
+
+.rr-journey-done .rr-journey-node {
+  background: var(--app-success);
+  border-color: var(--app-success);
+  color: #ffffff;
+}
+
+.rr-journey-current .rr-journey-node {
+  border-color: var(--app-violet-1);
+  background: var(--app-violet-bg);
+}
+
+.rr-journey-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--app-violet-1);
+}
+
+.rr-journey-text {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.rr-journey-title {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.rr-journey-sub {
+  font-size: 11px;
+  color: var(--text-secondary);
+}
+
+.rr-journey-current {
+  border: 1.5px solid var(--app-violet-1);
+  background: var(--bg-subtle);
+}
+
+.rr-journey-current .rr-journey-sub {
+  color: var(--app-violet-1);
+  font-weight: 600;
+}
+
+/* Horizontal Card Grid */
+.rr-continue-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 10px;
+  width: 100%;
+}
+
+.rr-continue-card {
+  position: relative;
+  border-radius: var(--app-radius-md);
+  overflow: hidden;
+  height: 110px;
+  border: 2px solid transparent;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+.rr-continue-card-active {
+  border-color: var(--app-violet-1);
+  box-shadow: 0 0 0 2px var(--app-violet-bg);
+}
+
+.rr-continue-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+}
+
+.rr-continue-scrim {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.05) 0%, rgba(0, 0, 0, 0.85) 100%);
+  z-index: 1;
+}
+
+.rr-continue-badge {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  z-index: 2;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.45);
+  color: #ffffff;
+}
+
+.rr-continue-card-active .rr-continue-badge {
+  background: var(--app-violet-1);
+}
+
+.rr-continue-info {
+  position: relative;
+  z-index: 2;
+  color: #ffffff;
+  display: flex;
+  flex-direction: column;
+}
+
+.rr-continue-id { font-size: 9.5px; font-weight: 700; color: rgba(255, 255, 255, 0.7); }
+.rr-continue-info strong { font-size: 10.5px; font-weight: 700; }
+
+.rr-continue-progress {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 3px;
+  background: rgba(255, 255, 255, 0.2);
+  z-index: 2;
+}
+
+.rr-continue-progress-fill { height: 100%; }
+.rr-continue-progress-done { background: var(--app-success); }
+.rr-continue-progress-current { background: var(--app-violet-1); }
+
+/* Progress Card Rows */
+.rr-progress-rows { display: flex; flex-direction: column; gap: 12px; }
+
+.rr-progress-row-top { display: flex; align-items: center; gap: 10px; margin-bottom: 3px; }
+
+.rr-progress-icon {
+  width: 24px;
+  height: 24px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.rr-progress-label { flex: 1; font-size: 12px; font-weight: 600; color: var(--text-primary); }
+.rr-progress-value { font-size: 11.5px; font-weight: 700; color: var(--text-secondary); }
+
+.rr-progress-track {
+  height: 5px;
+  border-radius: 999px;
+  background: var(--track-bg);
+  overflow: hidden;
+}
+
+.rr-progress-fill { height: 100%; border-radius: 999px; background: currentColor; }
+
+/* Marquee Container */
+.rr-marquee-card {
+  overflow: hidden;
+}
+
+.rr-marquee-track-wrapper {
+  overflow: hidden;
+  width: 100%;
+  display: flex;
+  /* Premium edge fade so cards scroll in/out smoothly instead of clipping abruptly */
+  -webkit-mask-image: linear-gradient(
+    90deg,
+    transparent 0%,
+    #000 6%,
+    #000 94%,
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    90deg,
+    transparent 0%,
+    #000 6%,
+    #000 94%,
+    transparent 100%
+  );
+}
+
+.rr-marquee-track {
+  display: flex;
+  gap: 12px;
+  width: max-content;
+  animation: rr-marquee 30s linear infinite;
+  will-change: transform;
+}
+
+.rr-marquee-track:hover {
+  animation-play-state: paused;
+}
+
+@keyframes rr-marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.rr-quick-action {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 14px;
+  border-radius: var(--app-radius-md);
+  border: 1px solid var(--border-color);
+  background: var(--bg-subtle);
+  color: var(--text-primary);
+  font-size: 11.5px;
+  font-weight: 600;
+  white-space: nowrap;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: all 0.2s ease;
+}
+
+.rr-quick-action:hover {
+  background: var(--bg-card);
+  border-color: var(--app-violet-1);
+  box-shadow: 0 6px 16px rgba(99, 102, 241, 0.15);
+  transform: translateY(-2px);
+}
+
+.rr-quick-icon {
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+/* Reminder Card */
+.rr-reminder {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 12px;
+  border-radius: var(--app-radius-md);
+  background: var(--bg-subtle);
+  border: 1px solid var(--border-color);
+}
+
+.rr-reminder-icon {
+  width: 34px;
+  height: 34px;
+  border-radius: 8px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--app-violet-1);
+  background: var(--app-violet-bg);
+}
+
+.rr-reminder-text {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.rr-reminder-text strong {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.rr-reminder-text span { font-size: 10.5px; color: var(--text-secondary); }
+
+.rr-reminder-pill {
+  flex-shrink: 0;
+  padding: 3px 8px;
+  border-radius: 999px;
+  background: var(--app-violet-bg);
+  color: var(--app-violet-1);
+  font-size: 10.5px;
+  font-weight: 700;
+}
+
+.rr-reminder-chevron { color: var(--text-muted); flex-shrink: 0; }
+
+/* Screen Adaptations */
+@media (max-width: 1200px) {
+  .rr-stats { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 992px) {
+  .rr-row { grid-template-columns: 1fr; }
+  .rr-continue-grid { grid-template-columns: repeat(3, 1fr); }
+}
+
+@media (max-width: 640px) {
+  .rr-stats { grid-template-columns: 1fr; }
+  .rr-continue-grid { grid-template-columns: repeat(2, 1fr); }
+
+  /* "Next Live Session" is the 2nd stat card in the JSX order (Membership,
+     Next Live Session, Journey Progress, Current Challenge) — reorder it to
+     the top of the stack on mobile without touching the component/JS. */
+  .rr-stats .rr-stat-card:nth-child(2) {
+    order: -1;
+  }
+}

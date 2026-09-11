@@ -1,119 +1,311 @@
-/* ================================
+/* =========================================================
+   RISE & REBUILD — REGISTRATION PAGE
+   Premium Black + Ivory + Champagne Gold Theme
+========================================================= */
+
+
+/* =========================================================
+   ROOT COLORS
+========================================================= */
+
+:root {
+  --rr-bg-main: #090807;
+  --rr-bg-secondary: #0d0c0b;
+
+  --rr-card: #12110f;
+  --rr-card-light: #171512;
+
+  --rr-input: #141311;
+  --rr-input-hover: #191714;
+  --rr-input-focus: #1c1915;
+
+  --rr-border: rgba(220, 183, 111, 0.16);
+  --rr-border-hover: rgba(220, 183, 111, 0.28);
+  --rr-border-focus: #d6a94f;
+
+  --rr-white: #f5efe6;
+  --rr-cream: #eee4d5;
+  --rr-text: #d3c7b8;
+  --rr-muted: #9c9082;
+  --rr-faint: #71675d;
+
+  /* GOLD */
+  --rr-gold-light: #f0ca76;
+  --rr-gold: #dca84b;
+  --rr-gold-dark: #bd8430;
+
+  /* BUTTON */
+  --rr-button-light: #f0c76d;
+  --rr-button: #dba446;
+  --rr-button-dark: #b87c27;
+
+  --rr-gold-glow: rgba(220, 168, 75, 0.18);
+
+  --rr-error: #df7065;
+  --rr-success: #7fba8b;
+
+  --rr-radius-card: 20px;
+  --rr-radius-input: 11px;
+  --rr-radius-button: 10px;
+}
+
+
+/* =========================================================
    REGISTRATION SECTION
-================================ */
+========================================================= */
 
 .registration-section {
   min-height: 100vh;
   width: 100%;
-  background: #140f0b;
+
+  background:
+    radial-gradient(
+      circle at 80% 15%,
+      rgba(205, 158, 68, 0.055),
+      transparent 30%
+    ),
+    radial-gradient(
+      circle at 15% 80%,
+      rgba(255, 255, 255, 0.018),
+      transparent 28%
+    ),
+    var(--rr-bg-main);
+
   padding: 90px 20px;
+
   display: flex;
   align-items: center;
+
+  position: relative;
+  overflow: hidden;
 }
 
 
-/* ================================
+/* Very subtle luxury glow */
+
+.registration-section::before {
+  content: "";
+  position: absolute;
+
+  width: 500px;
+  height: 500px;
+
+  top: -250px;
+  right: -180px;
+
+  background: rgba(214, 169, 79, 0.035);
+
+  border-radius: 50%;
+
+  filter: blur(80px);
+
+  pointer-events: none;
+}
+
+
+/* =========================================================
    MAIN WRAPPER
-================================ */
+========================================================= */
 
 .registration-wrapper {
   width: 100%;
   max-width: 850px;
+
   margin: 0 auto;
+
+  position: relative;
+  z-index: 1;
 }
 
 
-/* ================================
+/* =========================================================
    HEADER
-================================ */
+========================================================= */
 
 .registration-header {
   max-width: 720px;
+
   margin: 0 auto 45px;
+
+  text-align: center;
 }
+
+
+/* Small gold heading */
 
 .registration-small-title {
   display: inline-block;
-  margin-bottom: 14px;
 
-  font-size: 13px;
-  font-weight: 600;
-  letter-spacing: 3px;
+  margin-bottom: 16px;
 
-  color: #d9a94f;
+  font-size: 12px;
+  font-weight: 700;
+
+  letter-spacing: 3.5px;
+
+  color: var(--rr-gold-light);
+
+  text-transform: uppercase;
 }
+
+
+/* Main heading */
 
 .registration-header h1 {
   margin: 0 0 18px;
 
-  font-size: clamp(30px, 4vw, 50px);
-  line-height: 1.05;
+  font-family: "Fraunces", "Georgia", serif;
+
+  font-size: clamp(34px, 4vw, 52px);
+
+  line-height: 1.08;
+
   font-weight: 600;
 
-  color: #f3d99a;
+  letter-spacing: -0.8px;
+
+  color: var(--rr-white);
 }
+
+
+/* Gold emphasis effect */
+
+.registration-header h1::after {
+  content: "";
+
+  display: block;
+
+  width: 46px;
+  height: 2px;
+
+  margin: 20px auto 0;
+
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--rr-gold),
+    transparent
+  );
+
+  opacity: 0.75;
+}
+
+
+/* Description */
 
 .registration-header p {
   max-width: 650px;
+
   margin: 0 auto;
 
-  font-size: 16px;
+  font-family: "Manrope", "Segoe UI", sans-serif;
+
+  font-size: 15px;
+
   line-height: 1.8;
 
-  color: rgba(255, 255, 255, 0.68);
+  color: var(--rr-muted);
 }
 
 
-/* ================================
+/* =========================================================
    FORM CARD
-================================ */
+========================================================= */
 
 .registration-card {
   width: 100%;
 
   padding: 45px;
 
-  background: rgba(255, 255, 255, 0.035);
+  background:
+    linear-gradient(
+      145deg,
+      rgba(255, 255, 255, 0.045),
+      rgba(255, 255, 255, 0.018)
+    ),
+    var(--rr-card);
 
-  border: 1px solid rgba(243, 217, 154, 0.18);
+  border: 1px solid var(--rr-border);
 
-  border-radius: 18px;
+  border-radius: var(--rr-radius-card);
 
   box-shadow:
-    0 25px 80px rgba(0, 0, 0, 0.35);
+    0 30px 80px rgba(0, 0, 0, 0.48),
+    inset 0 1px 0 rgba(255, 255, 255, 0.025);
 
-  backdrop-filter: blur(10px);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+
+  position: relative;
+
+  overflow: hidden;
 }
 
 
-/* ================================
+/* Top luxury highlight */
+
+.registration-card::before {
+  content: "";
+
+  position: absolute;
+
+  top: 0;
+  left: 8%;
+
+  width: 84%;
+  height: 1px;
+
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(224, 177, 83, 0.45),
+    transparent
+  );
+
+  opacity: 0.65;
+}
+
+
+/* =========================================================
    FORM GROUP
-================================ */
+========================================================= */
 
 .form-group-custom {
   margin-bottom: 24px;
 }
+
+
+/* Labels */
 
 .form-group-custom label {
   display: block;
 
   margin-bottom: 9px;
 
-  font-size: 14px;
-  font-weight: 500;
+  font-family: "Manrope", "Segoe UI", sans-serif;
 
-  color: #f3e7cd;
+  font-size: 13px;
+
+  font-weight: 600;
+
+  letter-spacing: 0.15px;
+
+  color: var(--rr-cream);
 }
+
+
+/* Required star */
 
 .form-group-custom label span {
-  color: #d9a94f;
-  /* color: red; */
+  color: var(--rr-gold-light);
+
+  margin-left: 2px;
 }
 
 
-/* ================================
+/* =========================================================
    INPUTS
-================================ */
+========================================================= */
 
 .custom-input {
   width: 100%;
@@ -122,24 +314,41 @@
 
   padding: 13px 16px;
 
-  color: #ffffff !important;
+  color: var(--rr-white) !important;
 
-  background: rgba(255, 255, 255, 0.055) !important;
+  background: var(--rr-input) !important;
 
-  border: 1px solid rgba(255, 255, 255, 0.13) !important;
+  border: 1px solid var(--rr-border) !important;
 
-  border-radius: 8px !important;
+  border-radius: var(--rr-radius-input) !important;
 
-  font-size: 15px;
+  font-family: "Manrope", "Segoe UI", sans-serif;
+
+  font-size: 14px;
 
   transition:
-    border-color 0.3s ease,
-    box-shadow 0.3s ease,
-    background 0.3s ease;
+    border-color 0.25s ease,
+    box-shadow 0.25s ease,
+    background 0.25s ease,
+    transform 0.25s ease;
 }
 
+
+/* Placeholder */
+
 .custom-input::placeholder {
-  color: rgba(255, 255, 255, 0.38);
+  color: var(--rr-faint);
+
+  opacity: 1;
+}
+
+
+/* Hover */
+
+.custom-input:hover {
+  background: var(--rr-input-hover) !important;
+
+  border-color: var(--rr-border-hover) !important;
 }
 
 
@@ -148,36 +357,55 @@
 .custom-input:focus {
   outline: none;
 
-  border-color: #d9a94f !important;
+  color: var(--rr-white) !important;
 
-  background: rgba(255, 255, 255, 0.075) !important;
+  background: var(--rr-input-focus) !important;
+
+  border-color: var(--rr-border-focus) !important;
 
   box-shadow:
-    0 0 0 3px rgba(217, 169, 79, 0.1) !important;
+    0 0 0 3px var(--rr-gold-glow),
+    0 8px 25px rgba(0, 0, 0, 0.18) !important;
 }
 
 
-/* Select */
+/* =========================================================
+   SELECT
+========================================================= */
 
 select.custom-input {
-  color: rgba(255, 255, 255, 0.75) !important;
+  color: var(--rr-text) !important;
 
   cursor: pointer;
 }
 
-select.custom-input option {
-  background: #211710;
-  color: #ffffff;
+
+/* Placeholder option */
+
+select.custom-input option:first-child {
+  color: var(--rr-faint);
 }
 
 
-/* ================================
+/* Dropdown options */
+
+select.custom-input option {
+  background: #12100e;
+
+  color: var(--rr-white);
+}
+
+
+/* =========================================================
    SUBMIT BUTTON
-================================ */
+========================================================= */
 
 .submit-wrapper {
   margin-top: 35px;
 }
+
+
+/* Golden CTA */
 
 .register-submit-btn {
   width: 100%;
@@ -187,63 +415,144 @@ select.custom-input option {
   padding: 15px 25px;
 
   border: none;
-  border-radius: 8px;
 
-  background: linear-gradient(
-    135deg,
-    #f3d99a 0%,
-    #d9a94f 50%,
-    #b8863a 100%
-  );
+  border-radius: var(--rr-radius-button);
 
-  color: #140f0b;
+  background:
+    linear-gradient(
+      135deg,
+      var(--rr-button-light) 0%,
+      var(--rr-button) 50%,
+      var(--rr-button-dark) 100%
+    );
 
-  font-size: 14px;
-  font-weight: 700;
+  color: #17120b;
 
-  letter-spacing: 1px;
+  font-family: "Manrope", "Segoe UI", sans-serif;
+
+  font-size: 13px;
+
+  font-weight: 800;
+
+  letter-spacing: 1.2px;
 
   cursor: pointer;
 
+  position: relative;
+
+  overflow: hidden;
+
+  box-shadow:
+    0 10px 28px rgba(190, 135, 42, 0.16);
+
   transition:
-    transform 0.3s ease,
-    box-shadow 0.3s ease,
-    filter 0.3s ease;
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    filter 0.25s ease;
 }
+
+
+/* Button shine */
+
+.register-submit-btn::before {
+  content: "";
+
+  position: absolute;
+
+  top: 0;
+  left: -120%;
+
+  width: 70%;
+  height: 100%;
+
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.22),
+    transparent
+  );
+
+  transform: skewX(-20deg);
+
+  transition: left 0.55s ease;
+}
+
+
+/* Hover */
 
 .register-submit-btn:hover {
   transform: translateY(-2px);
 
-  filter: brightness(1.08);
+  filter: brightness(1.06);
 
   box-shadow:
-    0 12px 30px rgba(217, 169, 79, 0.25);
+    0 14px 35px rgba(205, 151, 48, 0.25);
 }
+
+
+/* Shine animation */
+
+.register-submit-btn:hover::before {
+  left: 130%;
+}
+
+
+/* Active */
 
 .register-submit-btn:active {
   transform: translateY(0);
+
+  box-shadow:
+    0 6px 18px rgba(190, 135, 42, 0.18);
 }
 
 
-/* ================================
+/* Disabled / loading */
+
+.register-submit-btn:disabled {
+  cursor: not-allowed;
+
+  opacity: 0.65;
+
+  transform: none;
+
+  box-shadow: none;
+
+  filter: grayscale(10%);
+}
+
+
+/* =========================================================
    FORM NOTE
-================================ */
+========================================================= */
 
 .form-note {
   margin: 18px 0 0;
 
   text-align: center;
 
-  font-size: 12px;
-  line-height: 1.6;
+  font-family: "Manrope", "Segoe UI", sans-serif;
 
-  color: rgba(255, 255, 255, 0.4);
+  font-size: 11px;
+
+  line-height: 1.7;
+
+  color: var(--rr-faint);
 }
 
 
-/* ================================
+/* =========================================================
+   BOOTSTRAP ROW SPACING
+========================================================= */
+
+.registration-card .row {
+  --bs-gutter-x: 20px;
+}
+
+
+/* =========================================================
    TABLET
-================================ */
+========================================================= */
 
 @media (max-width: 991px) {
 
@@ -262,9 +571,9 @@ select.custom-input option {
 }
 
 
-/* ================================
+/* =========================================================
    MOBILE
-================================ */
+========================================================= */
 
 @media (max-width: 767px) {
 
@@ -274,61 +583,103 @@ select.custom-input option {
     padding: 60px 16px;
   }
 
+
   .registration-wrapper {
     max-width: 100%;
   }
+
 
   .registration-header {
     margin-bottom: 30px;
   }
 
+
   .registration-small-title {
-    font-size: 11px;
-    letter-spacing: 2.5px;
+    font-size: 10px;
+
+    letter-spacing: 2.7px;
+
+    margin-bottom: 13px;
   }
 
+
   .registration-header h1 {
-    font-size: clamp(34px, 10vw, 48px);
+    font-size: clamp(32px, 10vw, 46px);
+
+    letter-spacing: -0.5px;
 
     margin-bottom: 15px;
   }
 
-  .registration-header p {
-    font-size: 14px;
-    line-height: 1.7;
+
+  .registration-header h1::after {
+    margin-top: 16px;
   }
+
+
+  .registration-header p {
+    font-size: 13px;
+
+    line-height: 1.75;
+  }
+
 
   .registration-card {
     padding: 28px 20px;
 
-    border-radius: 14px;
+    border-radius: 16px;
   }
+
+
+  .registration-card .row {
+    --bs-gutter-x: 0;
+  }
+
 
   .form-group-custom {
     margin-bottom: 20px;
   }
 
+
+  .form-group-custom label {
+    font-size: 12px;
+  }
+
+
   .custom-input {
     min-height: 50px;
 
-    font-size: 14px;
+    padding: 12px 14px;
+
+    font-size: 13px;
+
+    border-radius: 10px !important;
   }
+
 
   .register-submit-btn {
     min-height: 54px;
 
     padding: 14px 18px;
 
-    font-size: 12px;
-    letter-spacing: 0.7px;
+    font-size: 11px;
+
+    letter-spacing: 0.8px;
+  }
+
+
+  .form-note {
+    font-size: 10px;
+
+    padding: 0 8px;
   }
 
 }
 
 
-/* ================================
+/* =========================================================
    SMALL MOBILE
-================================ */
+========================================================= */
 
 @media (max-width: 400px) {
 
@@ -336,26 +687,51 @@ select.custom-input option {
     padding: 45px 12px;
   }
 
+
   .registration-card {
     padding: 24px 16px;
+
+    border-radius: 14px;
   }
+
 
   .registration-header h1 {
     font-size: 34px;
   }
 
+
   .registration-header p {
-    font-size: 13px;
+    font-size: 12.5px;
   }
+
 
   .custom-input {
     min-height: 48px;
 
     padding: 11px 13px;
+
+    font-size: 12.5px;
   }
+
 
   .register-submit-btn {
-    font-size: 11px;
+    min-height: 52px;
+
+    font-size: 10.5px;
+
+    letter-spacing: 0.6px;
   }
 
+}
+
+
+/* =========================================================
+   ACCESSIBILITY
+========================================================= */
+
+.custom-input:focus-visible,
+.register-submit-btn:focus-visible {
+  outline: 2px solid var(--rr-gold-light);
+
+  outline-offset: 3px;
 }

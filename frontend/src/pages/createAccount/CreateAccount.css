@@ -1,389 +1,920 @@
+
 /* ==========================================================================
-   Rise & Rebuild — Create Account
-   Design tokens
+   RISE & REBUILD — CREATE ACCOUNT
+   Premium Black / Ivory / Champagne Gold Theme
    ========================================================================== */
 
 @import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Manrope:wght@400;500;600;700;800&display=swap');
 
-:root {
-  --bg-page: #120c09;
-  --bg-card: #1e140f;
-  --bg-input: #291c15;
-  --bg-input-focus: #2f2019;
-
-  --border-soft: #3c2c22;
-  --border-strong: #4d382a;
-
-  --text-primary: #f6e9d8;
-  --text-muted: #a58e7c;
-  --text-faint: #7c6a5c;
-
-  --gold-1: #f6c37c;
-  --gold-2: #d99a3e;
-  --gold-3: #b6771f;
-
-  --error: #e2685a;
-  --success: #7fbf8f;
-
-  --font-display: 'Fraunces', 'Georgia', serif;
-  --font-body: 'Manrope', 'Segoe UI', sans-serif;
-
-  --radius-card: 18px;
-  --radius-input: 10px;
-}
 
 /* ==========================================================================
-   Page shell
+   DESIGN TOKENS
    ========================================================================== */
 
-.rr-page {
+:root {
+  --ca-bg-page: #090807;
+  --ca-bg-card: #11100e;
+  --ca-bg-input: #141311;
+  --ca-bg-input-hover: #181613;
+  --ca-bg-input-focus: #1b1814;
+
+  --ca-border-soft: rgba(224, 184, 108, 0.14);
+  --ca-border-medium: rgba(224, 184, 108, 0.24);
+  --ca-border-strong: rgba(224, 184, 108, 0.38);
+  --ca-border-input: rgba(255, 255, 255, 0.11);
+
+  --ca-text-primary: #f5efe6;
+  --ca-text-secondary: #ded3c5;
+  --ca-text-muted: #9e9285;
+  --ca-text-faint: #70675e;
+  --ca-text-dark: #17120b;
+
+  --ca-gold-1: #f1ca76;
+  --ca-gold-2: #dca84b;
+  --ca-gold-3: #bb812d;
+
+  --ca-gold-soft: rgba(220, 168, 75, 0.12);
+
+  --ca-error: #df7065;
+  --ca-success: #7fba8b;
+
+  --ca-font-display: 'Fraunces', 'Georgia', serif;
+  --ca-font-body: 'Manrope', 'Segoe UI', sans-serif;
+
+  --ca-radius-card: 20px;
+  --ca-radius-input: 11px;
+  --ca-radius-button: 11px;
+}
+
+
+/* ==========================================================================
+   PAGE
+   ========================================================================== */
+
+.ca-page {
   min-height: 100vh;
   width: 100%;
+
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 48px 20px;
+
+  padding: 55px 20px;
+
   background:
-    radial-gradient(circle at 50% 0%, rgba(217, 154, 62, 0.10), transparent 55%),
-    var(--bg-page);
-  font-family: var(--font-body);
+    radial-gradient(
+      circle at 50% -10%,
+      rgba(220, 168, 75, 0.09),
+      transparent 42%
+    ),
+    radial-gradient(
+      circle at 100% 100%,
+      rgba(255, 255, 255, 0.018),
+      transparent 35%
+    ),
+    var(--ca-bg-page);
+
+  font-family: var(--ca-font-body);
+
   box-sizing: border-box;
+
+  position: relative;
+  overflow: hidden;
 }
 
-.rr-page *,
-.rr-page *::before,
-.rr-page *::after {
-  box-sizing: border-box;
+
+/* Background glow */
+
+.ca-page::before {
+  content: "";
+
+  position: absolute;
+
+  width: 420px;
+  height: 420px;
+
+  left: -240px;
+  bottom: -220px;
+
+  border-radius: 50%;
+
+  background: rgba(220, 168, 75, 0.035);
+
+  filter: blur(90px);
+
+  pointer-events: none;
 }
+
 
 /* ==========================================================================
-   Card
+   GLOBAL SCOPE
    ========================================================================== */
 
-.rr-card {
+.ca-page *,
+.ca-page *::before,
+.ca-page *::after {
+  box-sizing: border-box;
+}
+
+
+/* ==========================================================================
+   CARD
+   ========================================================================== */
+
+.ca-card {
   width: 100%;
   max-width: 440px;
-  background: var(--bg-card);
-  border: 1px solid var(--border-soft);
-  border-radius: var(--radius-card);
+
+  position: relative;
+  z-index: 1;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(255, 255, 255, 0.035),
+      rgba(255, 255, 255, 0.012)
+    ),
+    var(--ca-bg-card);
+
+  border: 1px solid var(--ca-border-soft);
+
+  border-radius: var(--ca-radius-card);
+
   padding: 40px 36px 32px;
-  box-shadow: 0 24px 60px -20px rgba(0, 0, 0, 0.65);
+
+  box-shadow:
+    0 30px 80px rgba(0, 0, 0, 0.55),
+    0 10px 30px rgba(0, 0, 0, 0.25),
+    inset 0 1px 0 rgba(255, 255, 255, 0.025);
+
   text-align: center;
+
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+
+  overflow: hidden;
 }
 
-.rise-mark {
-  display: block;
-  margin: 0 auto 6px;
+
+/* Gold line */
+
+.ca-card::before {
+  content: "";
+
+  position: absolute;
+
+  top: 0;
+  left: 12%;
+
+  width: 76%;
+  height: 1px;
+
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(224, 184, 108, 0.55),
+    transparent
+  );
+
+  opacity: 0.7;
 }
 
-.rr-eyebrow {
-  margin: 0 0 10px;
-  font-family: var(--font-body);
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  background: linear-gradient(90deg, var(--gold-1), var(--gold-3));
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
+
+/* Inner highlight */
+
+.ca-card::after {
+  content: "";
+
+  position: absolute;
+
+  top: 0;
+  left: 0;
+  right: 0;
+
+  height: 120px;
+
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.018),
+    transparent
+  );
+
+  pointer-events: none;
 }
 
-.rr-title {
-  margin: 0 0 12px;
-  font-family: var(--font-display);
-  font-weight: 600;
-  font-size: 30px;
-  line-height: 1.15;
-  color: var(--text-primary);
-}
-
-.rr-subtitle {
-  margin: 0 0 28px;
-  font-size: 14px;
-  line-height: 1.55;
-  color: var(--text-muted);
-}
 
 /* ==========================================================================
-   Form fields
+   RISE MARK
    ========================================================================== */
 
-.rr-form {
-  text-align: left;
-}
-
-.rr-field {
-  margin-bottom: 18px;
-}
-
-.rr-field label,
-.rr-checkbox-row label {
+.ca-rise-mark {
   display: block;
-  margin-bottom: 7px;
-  font-size: 13px;
-  font-weight: 600;
-  color: var(--text-primary);
-}
 
-.rr-input {
-  width: 100%;
-  padding: 12px 14px;
-  font-family: var(--font-body);
-  font-size: 14px;
-  color: var(--text-primary);
-  background: var(--bg-input);
-  border: 1px solid var(--border-soft);
-  border-radius: var(--radius-input);
-  outline: none;
-  transition: border-color 0.18s ease, background-color 0.18s ease, box-shadow 0.18s ease;
-}
+  margin: 0 auto 8px;
 
-.rr-input::placeholder {
-  color: var(--text-faint);
-}
-
-.rr-input:focus {
-  background: var(--bg-input-focus);
-  border-color: var(--gold-2);
-  box-shadow: 0 0 0 3px rgba(217, 154, 62, 0.18);
-}
-
-.rr-input.is-invalid {
-  border-color: var(--error);
-}
-
-.rr-input.is-invalid:focus {
-  box-shadow: 0 0 0 3px rgba(226, 104, 90, 0.18);
-}
-
-.rr-input-group {
   position: relative;
+  z-index: 2;
+}
+
+
+/* ==========================================================================
+   EYEBROW
+   ========================================================================== */
+
+.ca-eyebrow {
+  margin: 0 0 11px;
+
+  font-family: var(--ca-font-body);
+
+  font-size: 10px;
+  font-weight: 800;
+
+  letter-spacing: 0.19em;
+
+  text-transform: uppercase;
+
+  background: linear-gradient(
+    90deg,
+    var(--ca-gold-1),
+    var(--ca-gold-2),
+    var(--ca-gold-3)
+  );
+
+  -webkit-background-clip: text;
+  background-clip: text;
+
+  color: transparent;
+
+  position: relative;
+  z-index: 2;
+}
+
+
+/* ==========================================================================
+   TITLE
+   ========================================================================== */
+
+.ca-title {
+  margin: 0 0 12px;
+
+  font-family: var(--ca-font-display);
+
+  font-weight: 600;
+
+  font-size: 31px;
+
+  line-height: 1.12;
+
+  letter-spacing: -0.5px;
+
+  color: var(--ca-text-primary);
+
+  position: relative;
+  z-index: 2;
+}
+
+
+/* Gold divider */
+
+.ca-title::after {
+  content: "";
+
+  display: block;
+
+  width: 34px;
+  height: 2px;
+
+  margin: 15px auto 0;
+
+  background: linear-gradient(
+    90deg,
+    var(--ca-gold-3),
+    var(--ca-gold-1)
+  );
+
+  border-radius: 2px;
+
+  opacity: 0.75;
+}
+
+
+/* ==========================================================================
+   SUBTITLE
+   ========================================================================== */
+
+.ca-subtitle {
+  margin: 0 0 29px;
+
+  font-size: 13.5px;
+
+  line-height: 1.7;
+
+  color: var(--ca-text-muted);
+
+  position: relative;
+  z-index: 2;
+}
+
+
+/* ==========================================================================
+   FORM
+   ========================================================================== */
+
+.ca-form {
+  text-align: left;
+
+  position: relative;
+  z-index: 2;
+}
+
+
+/* ==========================================================================
+   FORM FIELD
+   ========================================================================== */
+
+.ca-field {
+  margin-bottom: 19px;
+}
+
+
+.ca-field label,
+.ca-checkbox-row label {
+  display: block;
+
+  margin-bottom: 8px;
+
+  font-size: 12.5px;
+
+  font-weight: 600;
+
+  color: var(--ca-text-secondary);
+}
+
+
+/* ==========================================================================
+   INPUT
+   ========================================================================== */
+
+.ca-input {
+  width: 100%;
+
+  min-height: 48px;
+
+  padding: 12px 14px;
+
+  font-family: var(--ca-font-body);
+
+  font-size: 13.5px;
+
+  color: var(--ca-text-primary);
+
+  background: var(--ca-bg-input);
+
+  border: 1px solid var(--ca-border-input);
+
+  border-radius: var(--ca-radius-input);
+
+  outline: none;
+
+  transition:
+    border-color 0.25s ease,
+    background-color 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+
+.ca-input::placeholder {
+  color: var(--ca-text-faint);
+  opacity: 1;
+}
+
+
+.ca-input:hover {
+  background: var(--ca-bg-input-hover);
+
+  border-color: var(--ca-border-medium);
+}
+
+
+.ca-input:focus {
+  background: var(--ca-bg-input-focus);
+
+  border-color: var(--ca-gold-2);
+
+  box-shadow:
+    0 0 0 3px var(--ca-gold-soft),
+    0 8px 22px rgba(0, 0, 0, 0.16);
+}
+
+
+/* ==========================================================================
+   INVALID INPUT
+   ========================================================================== */
+
+.ca-input.ca-invalid {
+  border-color: var(--ca-error);
+}
+
+
+.ca-input.ca-invalid:focus {
+  box-shadow:
+    0 0 0 3px rgba(223, 112, 101, 0.15);
+}
+
+
+/* ==========================================================================
+   PASSWORD GROUP
+   ========================================================================== */
+
+.ca-input-group {
+  position: relative;
+
   display: flex;
   align-items: center;
 }
 
-.rr-input-group .rr-input {
-  padding-right: 44px;
+
+.ca-input-group .ca-input {
+  padding-right: 46px;
 }
 
-.rr-toggle-visibility {
+
+/* ==========================================================================
+   PASSWORD VISIBILITY BUTTON
+   ========================================================================== */
+
+.ca-toggle {
   position: absolute;
-  right: 10px;
+
+  right: 9px;
+
   display: flex;
   align-items: center;
   justify-content: center;
-  background: none;
+
+  width: 34px;
+  height: 34px;
+
+  background: transparent;
+
   border: none;
+
   padding: 6px;
-  color: var(--text-muted);
+
+  color: var(--ca-text-muted);
+
   cursor: pointer;
-  border-radius: 6px;
-  transition: color 0.15s ease, background-color 0.15s ease;
+
+  border-radius: 8px;
+
+  transition:
+    color 0.2s ease,
+    background-color 0.2s ease,
+    transform 0.2s ease;
 }
 
-.rr-toggle-visibility:hover {
-  color: var(--gold-1);
-  background: rgba(246, 195, 124, 0.08);
+
+.ca-toggle:hover {
+  color: var(--ca-gold-1);
+
+  background: var(--ca-gold-soft);
 }
 
-.rr-toggle-visibility:focus-visible,
-.rr-input:focus-visible,
-.rr-submit:focus-visible,
-.rr-checkbox-row input:focus-visible {
-  outline: 2px solid var(--gold-1);
+
+.ca-toggle:active {
+  transform: scale(0.94);
+}
+
+
+/* ==========================================================================
+   ACCESSIBILITY
+   ========================================================================== */
+
+.ca-toggle:focus-visible,
+.ca-input:focus-visible,
+.ca-submit:focus-visible,
+.ca-checkbox-row input:focus-visible {
+  outline: 2px solid var(--ca-gold-1);
+
   outline-offset: 2px;
 }
 
-.rr-error {
-  display: block;
-  margin-top: 6px;
-  font-size: 12px;
-  color: var(--error);
-}
-
-.rr-error-checkbox {
-  margin-top: -6px;
-  margin-bottom: 14px;
-}
 
 /* ==========================================================================
-   Checkbox row
+   ERROR
    ========================================================================== */
 
-.rr-checkbox-row {
-  display: flex;
-  align-items: flex-start;
-  gap: 10px;
-  margin: 4px 0 24px;
+.ca-error {
+  display: block;
+
+  margin-top: 6px;
+
+  font-size: 11px;
+
+  line-height: 1.5;
+
+  color: var(--ca-error);
 }
 
-.rr-checkbox-row input[type="checkbox"] {
+
+/* ==========================================================================
+   CHECKBOX
+   ========================================================================== */
+
+.ca-checkbox-row {
+  display: flex;
+
+  align-items: flex-start;
+
+  gap: 10px;
+
+  margin: 5px 0 24px;
+}
+
+
+.ca-checkbox-row input[type="checkbox"] {
   margin-top: 3px;
+
   width: 16px;
   height: 16px;
-  accent-color: var(--gold-2);
+
+  accent-color: var(--ca-gold-2);
+
   cursor: pointer;
+
   flex-shrink: 0;
 }
 
-.rr-checkbox-row label {
+
+.ca-checkbox-row label {
   margin-bottom: 0;
+
   font-weight: 500;
-  font-size: 13px;
-  color: var(--text-muted);
+
+  font-size: 12px;
+
+  line-height: 1.6;
+
+  color: var(--ca-text-muted);
+
   cursor: pointer;
 }
 
-.rr-checkbox-row a {
-  color: var(--gold-1);
+
+.ca-checkbox-row a {
+  color: var(--ca-gold-1);
+
   text-decoration: none;
+
+  transition: color 0.2s ease;
 }
 
-.rr-checkbox-row a:hover {
+
+.ca-checkbox-row a:hover {
+  color: var(--ca-gold-2);
+
   text-decoration: underline;
 }
 
+
+.ca-checkbox-invalid input {
+  outline: 1px solid var(--ca-error);
+}
+
+
 /* ==========================================================================
-   Submit + footer
+   SERVER ERROR
    ========================================================================== */
 
-.rr-submit {
+.ca-server-error {
+  margin-top: -6px;
+
+  margin-bottom: 14px;
+
+  font-size: 11px;
+
+  line-height: 1.5;
+
+  color: var(--ca-error);
+}
+
+
+/* ==========================================================================
+   SUBMIT BUTTON
+   ========================================================================== */
+
+.ca-submit {
   width: 100%;
+
+  min-height: 50px;
+
   padding: 13px 16px;
-  font-family: var(--font-body);
-  font-size: 13px;
+
+  font-family: var(--ca-font-body);
+
+  font-size: 12px;
+
   font-weight: 800;
-  letter-spacing: 0.06em;
+
+  letter-spacing: 0.08em;
+
   text-transform: uppercase;
-  color: #241505;
-  background: linear-gradient(90deg, var(--gold-1), var(--gold-3));
+
+  color: var(--ca-text-dark);
+
+  background: linear-gradient(
+    135deg,
+    var(--ca-gold-1) 0%,
+    var(--ca-gold-2) 52%,
+    var(--ca-gold-3) 100%
+  );
+
   border: none;
-  border-radius: var(--radius-input);
+
+  border-radius: var(--ca-radius-button);
+
   cursor: pointer;
-  transition: filter 0.18s ease, transform 0.08s ease;
+
+  position: relative;
+
+  overflow: hidden;
+
+  box-shadow:
+    0 8px 25px rgba(190, 132, 45, 0.16);
+
+  transition:
+    filter 0.25s ease,
+    transform 0.2s ease,
+    box-shadow 0.25s ease;
 }
 
-.rr-submit:hover {
+
+.ca-submit::before {
+  content: "";
+
+  position: absolute;
+
+  top: 0;
+  left: -110%;
+
+  width: 65%;
+  height: 100%;
+
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.25),
+    transparent
+  );
+
+  transform: skewX(-20deg);
+
+  transition: left 0.55s ease;
+}
+
+
+.ca-submit:hover {
   filter: brightness(1.06);
+
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 14px 32px rgba(201, 145, 45, 0.25);
 }
 
-.rr-submit:active {
-  transform: translateY(1px);
+
+.ca-submit:hover::before {
+  left: 130%;
 }
 
-.rr-footer {
+
+.ca-submit:active {
+  transform: translateY(0);
+
+  box-shadow:
+    0 7px 18px rgba(190, 132, 45, 0.18);
+}
+
+
+.ca-submit:disabled {
+  opacity: 0.65;
+
+  cursor: not-allowed;
+
+  transform: none;
+}
+
+
+/* ==========================================================================
+   FOOTER
+   ========================================================================== */
+
+.ca-footer {
   margin: 20px 0 0;
+
   text-align: center;
-  font-size: 13px;
-  color: var(--text-muted);
+
+  font-size: 12px;
+
+  line-height: 1.6;
+
+  color: var(--ca-text-muted);
 }
 
-.rr-footer a {
-  color: var(--gold-1);
-  font-weight: 600;
+
+.ca-login-link {
+  color: var(--ca-gold-1);
+
+  font-weight: 700;
+
   text-decoration: none;
+
+  transition: color 0.2s ease;
 }
 
-.rr-footer a:hover {
+
+.ca-login-link:hover {
+  color: var(--ca-gold-2);
+
   text-decoration: underline;
 }
 
+
 /* ==========================================================================
-   Success state
+   SUCCESS
    ========================================================================== */
 
-.rr-success {
+.ca-success {
   padding: 24px 4px 8px;
 }
 
-.rr-success-title {
-  font-family: var(--font-display);
-  font-size: 22px;
+
+.ca-success-title {
+  font-family: var(--ca-font-display);
+
+  font-size: 23px;
+
   font-weight: 600;
-  color: var(--success);
-  margin: 0 0 8px;
+
+  color: var(--ca-success);
+
+  margin: 0 0 9px;
 }
 
-.rr-success-copy {
-  font-size: 14px;
-  color: var(--text-muted);
+
+.ca-success-copy {
+  font-size: 13.5px;
+
+  color: var(--ca-text-muted);
+
   margin: 0;
-  line-height: 1.6;
+
+  line-height: 1.7;
 }
+
 
 /* ==========================================================================
-   Responsiveness
+   TABLET
    ========================================================================== */
 
-/* Tablets */
 @media (max-width: 768px) {
-  .rr-card {
+  .ca-page {
+    padding: 45px 20px;
+  }
+
+  .ca-card {
     max-width: 400px;
+
     padding: 36px 30px 28px;
   }
 
-  .rr-title {
-    font-size: 27px;
+  .ca-title {
+    font-size: 28px;
   }
 }
 
-/* Large phones */
+
+/* ==========================================================================
+   LARGE PHONES
+   ========================================================================== */
+
 @media (max-width: 480px) {
-  .rr-page {
+  .ca-page {
     padding: 32px 14px;
   }
 
-  .rr-card {
+  .ca-card {
     max-width: 100%;
+
     padding: 30px 22px 24px;
-    border-radius: 14px;
+
+    border-radius: 16px;
   }
 
-  .rise-mark {
+  .ca-rise-mark {
     width: 96px;
     height: 38px;
   }
 
-  .rr-title {
-    font-size: 24px;
+  .ca-eyebrow {
+    font-size: 9.5px;
+
+    letter-spacing: 0.17em;
   }
 
-  .rr-subtitle {
-    font-size: 13px;
+  .ca-title {
+    font-size: 25px;
+
+    letter-spacing: -0.3px;
+  }
+
+  .ca-subtitle {
+    font-size: 12.5px;
+
+    line-height: 1.7;
+
     margin-bottom: 24px;
   }
 
-  .rr-input {
+  .ca-field {
+    margin-bottom: 17px;
+  }
+
+  .ca-field label {
+    font-size: 12px;
+  }
+
+  .ca-input {
+    min-height: 47px;
+
     padding: 11px 12px;
-    font-size: 13.5px;
+
+    font-size: 13px;
   }
 
-  .rr-submit {
+  .ca-submit {
+    min-height: 49px;
+
     padding: 12px 14px;
+
+    font-size: 11px;
+
+    letter-spacing: 0.07em;
+  }
+
+  .ca-footer {
+    font-size: 11.5px;
+
+    margin-top: 18px;
   }
 }
 
-/* Small phones */
+
+/* ==========================================================================
+   SMALL PHONES
+   ========================================================================== */
+
 @media (max-width: 360px) {
-  .rr-card {
+  .ca-page {
+    padding: 25px 12px;
+  }
+
+  .ca-card {
     padding: 26px 16px 20px;
+
+    border-radius: 14px;
   }
 
-  .rr-title {
-    font-size: 22px;
+  .ca-title {
+    font-size: 23px;
   }
 
-  .rr-checkbox-row label {
-    font-size: 12.5px;
+  .ca-subtitle {
+    font-size: 12px;
+  }
+
+  .ca-checkbox-row label {
+    font-size: 11.5px;
+  }
+
+  .ca-submit {
+    min-height: 47px;
+
+    font-size: 10.5px;
   }
 }
 
-/* Reduced motion */
+
+/* ==========================================================================
+   REDUCED MOTION
+   ========================================================================== */
+
 @media (prefers-reduced-motion: reduce) {
-  .rr-input,
-  .rr-submit,
-  .rr-toggle-visibility {
+  .ca-input,
+  .ca-submit,
+  .ca-toggle,
+  .ca-checkbox-row a {
     transition: none;
   }
 }
+

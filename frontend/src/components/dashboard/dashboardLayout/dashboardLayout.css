@@ -1,0 +1,45 @@
+/* =========================================================
+   DASHBOARD LAYOUT
+========================================================= */
+
+.dashboard-layout {
+  min-height: 100vh;
+
+  background: #f7f7fa;
+}
+
+.dashboard-main {
+  min-height: 100vh;
+
+  margin-left: 270px;
+}
+
+.dashboard-content {
+  min-height: calc(100vh - 92px);
+
+  padding: 28px 36px;
+
+  background:
+    radial-gradient(
+      circle at 85% 0%,
+      rgba(111, 67, 220, 0.035),
+      transparent 30%
+    ),
+    #f8f8fb;
+}
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 900px) {
+  .dashboard-main {
+    margin-left: 0;
+  }
+
+  .dashboard-content {
+    min-height: calc(100vh - 76px);
+
+    padding: 22px 18px;
+  }
+}

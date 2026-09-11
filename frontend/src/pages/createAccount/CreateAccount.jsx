@@ -1,10 +1,20 @@
+
 import React, { useState } from "react";
-import { Link, useNavigate  } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import "./CreateAccount.css";
 
-// Simple inline eye / eye-off icons so the component has zero icon-library dependency
+// Eye / Eye-off icon
 const EyeIcon = ({ off }) => (
-  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+  <svg
+    width="18"
+    height="18"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="1.8"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+  >
     {off ? (
       <>
         <path d="M17.94 17.94A10.94 10.94 0 0 1 12 19c-5.5 0-9.5-4-11-7 .9-1.6 2.3-3.4 4.2-4.9" />
@@ -21,25 +31,61 @@ const EyeIcon = ({ off }) => (
   </svg>
 );
 
-// Decorative "rising sun over horizon" signature mark — ties back to "RISE & REBUILD"
+// Rise & Rebuild decorative mark
 const RiseMark = () => (
-  <svg className="rise-mark" width="120" height="46" viewBox="0 0 120 46" fill="none" aria-hidden="true">
+  <svg
+    className="ca-rise-mark"
+    width="120"
+    height="46"
+    viewBox="0 0 120 46"
+    fill="none"
+    aria-hidden="true"
+  >
     <defs>
-      <linearGradient id="riseGrad" x1="0" y1="0" x2="1" y2="0">
-        <stop offset="0%" stopColor="var(--gold-1)" />
-        <stop offset="100%" stopColor="var(--gold-2)" />
+      <linearGradient
+        id="ca-rise-gradient"
+        x1="0"
+        y1="0"
+        x2="1"
+        y2="0"
+      >
+        <stop offset="0%" stopColor="var(--ca-gold-1)" />
+        <stop offset="100%" stopColor="var(--ca-gold-2)" />
       </linearGradient>
     </defs>
-    <path d="M4 34 A56 56 0 0 1 116 34" stroke="url(#riseGrad)" strokeWidth="2" strokeLinecap="round" />
-    <circle cx="60" cy="34" r="9" fill="url(#riseGrad)" opacity="0.9" />
-    <line x1="4" y1="40" x2="116" y2="40" stroke="var(--border-soft)" strokeWidth="1" />
+
+    <path
+      d="M4 34 A56 56 0 0 1 116 34"
+      stroke="url(#ca-rise-gradient)"
+      strokeWidth="2"
+      strokeLinecap="round"
+    />
+
+    <circle
+      cx="60"
+      cy="34"
+      r="9"
+      fill="url(#ca-rise-gradient)"
+      opacity="0.9"
+    />
+
+    <line
+      x1="4"
+      y1="40"
+      x2="116"
+      y2="40"
+      stroke="var(--ca-border-soft)"
+      strokeWidth="1"
+    />
   </svg>
 );
 
 export default function CreateAccount() {
-
+  const location = useLocation();
   const navigate = useNavigate();
 
+  // Selected membership plan coming from Membership page
+  const selectedPlan = location.state;
 
   const [form, setForm] = useState({
     fullName: "",
@@ -48,240 +94,463 @@ export default function CreateAccount() {
     confirmPassword: "",
     agree: false,
   });
+
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirm, setShowConfirm] = useState(false);
+
   const [errors, setErrors] = useState({});
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
   const [serverError, setServerError] = useState("");
 
+  // Handle form changes
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
-    setForm((prev) => ({ ...prev, [name]: type === "checkbox" ? checked : value }));
-    setErrors((prev) => ({ ...prev, [name]: undefined }));
+
+    setForm((prev) => ({
+      ...prev,
+      [name]: type === "checkbox" ? checked : value,
+    }));
+
+    setErrors((prev) => ({
+      ...prev,
+      [name]: undefined,
+    }));
+
+    setServerError("");
   };
 
+  // Validate form
   const validate = () => {
     const next = {};
-    if (!form.fullName.trim()) next.fullName = "Enter your full name.";
+
+    if (!form.fullName.trim()) {
+      next.fullName = "Enter your full name.";
+    }
+
     if (!form.email.trim()) {
       next.email = "Enter your email address.";
-    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) {
+    } else if (
+      !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)
+    ) {
       next.email = "Enter a valid email address.";
     }
+
     if (!form.password) {
       next.password = "Create a password.";
     } else if (form.password.length < 8) {
-      next.password = "Password must be at least 8 characters.";
+      next.password =
+        "Password must be at least 8 characters.";
     }
+
     if (!form.confirmPassword) {
       next.confirmPassword = "Confirm your password.";
-    } else if (form.confirmPassword !== form.password) {
+    } else if (
+      form.confirmPassword !== form.password
+    ) {
       next.confirmPassword = "Passwords don't match.";
     }
-    if (!form.agree) next.agree = "You must agree to the Terms & Conditions.";
+
+    if (!form.agree) {
+      next.agree =
+        "You must agree to the Terms & Conditions.";
+    }
+
     return next;
   };
 
+  // Submit Create Account form
   const handleSubmit = async (e) => {
-  e.preventDefault();
+    e.preventDefault();
 
-  const next = validate();
-  setErrors(next);
+    const next = validate();
 
-  // Stop if frontend validation fails
-  if (Object.keys(next).length !== 0) {
-    return;
-  }
+    setErrors(next);
 
-  setLoading(true);
-  setServerError("");
-
-  try {
-    // Get the JWT token from registration
-    const token = sessionStorage.getItem("authToken");
-
-    // Token not found
-    if (!token) {
-      setServerError(
-        "Registration session expired. Please register again."
-      );
+    if (Object.keys(next).length !== 0) {
       return;
     }
 
-    // Send request to backend
-    const response = await fetch(
-      "http://localhost:5000/api/auth/register",
-      {
-        method: "POST",
+    setLoading(true);
+    setServerError("");
 
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
+    try {
+      // JWT token created during lead registration
+      const token = sessionStorage.getItem("registrationToken");
 
-        body: JSON.stringify({
-          fullName: form.fullName,
-          email: form.email,
-          password: form.password,
-        }),
+      if (!token) {
+        setServerError(
+          "Registration session expired. Please register again."
+        );
+        return;
       }
-    );
 
-    const data = await response.json();
+      const response = await fetch(
+        "http://localhost:5000/api/auth/register",
+        {
+          method: "POST",
 
-    // Backend returned an error
-    if (!response.ok) {
-      setServerError(
-        data.message || "Unable to create account."
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+
+          body: JSON.stringify({
+            fullName: form.fullName,
+            email: form.email,
+            password: form.password,
+            planId: selectedPlan?.planId,
+            planName: selectedPlan?.planName,
+            price: selectedPlan?.price,
+            period: selectedPlan?.period,
+          }),
+        }
       );
-      return;
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        setServerError(
+          data.message || "Unable to create account."
+        );
+        return;
+      }
+
+      // Account successfully created
+      setSubmitted(true);
+
+      console.log("Account created:", data);
+
+      // Redirect to login
+      setTimeout(() => {
+        navigate("/login");
+      }, 1500);
+    } catch (error) {
+      console.error("Create Account Error:", error);
+
+      setServerError(
+        "Unable to connect to the server. Please try again."
+      );
+    } finally {
+      setLoading(false);
     }
-
-    // Account successfully created
-    setSubmitted(true);
-
-    console.log("Account created:", data);
-
-    // Go to login page
-    setTimeout(() => {
-      navigate("/login");
-    }, 1500);
-
-  } catch (error) {
-    console.error("Create Account Error:", error);
-
-    setServerError(
-      "Unable to connect to the server. Please try again."
-    );
-
-  } finally {
-    setLoading(false);
-  }
-};
+  };
 
   return (
-    <div className="rr-page">
-      <div className="rr-card">
+    <div className="ca-page">
+      <div className="ca-card">
+
+        {/* Decorative Rise & Rebuild mark */}
         <RiseMark />
-        <p className="rr-eyebrow">Season 2 &middot; Rise &amp; Rebuild</p>
-        <h1 className="rr-title">Create Your Account</h1>
-        <p className="rr-subtitle">
-          Create an account to continue with your Season&nbsp;2 membership.
+
+        {/* Eyebrow */}
+        <p className="ca-eyebrow">
+          Season 2 · Rise & Rebuild
         </p>
 
+        {/* Title */}
+        <h1 className="ca-title">
+          Create Your Account
+        </h1>
+
+        {/* Subtitle */}
+        <p className="ca-subtitle">
+          Create an account to continue with your Season 2
+          membership.
+        </p>
+
+        {/* ============================= */}
+        {/* SELECTED MEMBERSHIP PLAN */}
+        {/* ============================= */}
+
+        {selectedPlan && (
+          <div className="selected-plan">
+            <p className="selected-plan-label">
+              Selected Plan
+            </p>
+
+            <h3 className="selected-plan-name">
+              {selectedPlan.planName}
+            </h3>
+
+            <div className="selected-plan-price">
+              <strong>
+                ₹{selectedPlan.price}
+              </strong>
+
+              <span>
+                {selectedPlan.period}
+              </span>
+            </div>
+          </div>
+        )}
+
+        {/* ============================= */}
+        {/* SUCCESS MESSAGE */}
+        {/* ============================= */}
+
         {submitted ? (
-          <div className="rr-success" role="status">
-            <p className="rr-success-title">You're in.</p>
-            <p className="rr-success-copy">
-              Your account has been created. Welcome to Season 2 of Rise &amp; Rebuild.
+          <div
+            className="ca-success"
+            role="status"
+          >
+            <p className="ca-success-title">
+              You're in.
+            </p>
+
+            <p className="ca-success-copy">
+              Your account has been created.
+              Welcome to Season 2 of Rise & Rebuild.
             </p>
           </div>
         ) : (
-          <form className="rr-form" onSubmit={handleSubmit} noValidate>
-            <div className="rr-field">
-              <label htmlFor="fullName">Full Name</label>
+          <form
+            className="ca-form"
+            onSubmit={handleSubmit}
+            noValidate
+          >
+
+            {/* ============================= */}
+            {/* FULL NAME */}
+            {/* ============================= */}
+
+            <div className="ca-field">
+              <label htmlFor="ca-fullName">
+                Full Name
+              </label>
+
               <input
-                id="fullName"
+                id="ca-fullName"
                 name="fullName"
                 type="text"
                 placeholder="Name"
                 value={form.fullName}
                 onChange={handleChange}
-                className={`rr-input ${errors.fullName ? "is-invalid" : ""}`}
+                className={`ca-input ${errors.fullName
+                  ? "ca-invalid"
+                  : ""
+                  }`}
               />
-              {errors.fullName && <span className="rr-error">{errors.fullName}</span>}
+
+              {errors.fullName && (
+                <span className="ca-error">
+                  {errors.fullName}
+                </span>
+              )}
             </div>
 
-            <div className="rr-field">
-              <label htmlFor="email">Email Address</label>
+            {/* ============================= */}
+            {/* EMAIL */}
+            {/* ============================= */}
+
+            <div className="ca-field">
+              <label htmlFor="ca-email">
+                Email Address
+              </label>
+
               <input
-                id="email"
+                id="ca-email"
                 name="email"
                 type="email"
                 placeholder="user@gmail.com"
                 value={form.email}
                 onChange={handleChange}
-                className={`rr-input ${errors.email ? "is-invalid" : ""}`}
+                className={`ca-input ${errors.email
+                  ? "ca-invalid"
+                  : ""
+                  }`}
               />
-              {errors.email && <span className="rr-error">{errors.email}</span>}
+
+              {errors.email && (
+                <span className="ca-error">
+                  {errors.email}
+                </span>
+              )}
             </div>
 
-            <div className="rr-field">
-              <label htmlFor="password">Password</label>
-              <div className="rr-input-group">
+            {/* ============================= */}
+            {/* PASSWORD */}
+            {/* ============================= */}
+
+            <div className="ca-field">
+              <label htmlFor="ca-password">
+                Password
+              </label>
+
+              <div className="ca-input-group">
                 <input
-                  id="password"
+                  id="ca-password"
                   name="password"
-                  type={showPassword ? "text" : "password"}
+                  type={
+                    showPassword
+                      ? "text"
+                      : "password"
+                  }
                   placeholder="••••••••••••"
                   value={form.password}
                   onChange={handleChange}
-                  className={`rr-input ${errors.password ? "is-invalid" : ""}`}
+                  className={`ca-input ${errors.password
+                    ? "ca-invalid"
+                    : ""
+                    }`}
                 />
+
                 <button
                   type="button"
-                  className="rr-toggle-visibility"
-                  onClick={() => setShowPassword((s) => !s)}
-                  aria-label={showPassword ? "Hide password" : "Show password"}
+                  className="ca-toggle"
+                  onClick={() =>
+                    setShowPassword(
+                      (prev) => !prev
+                    )
+                  }
+                  aria-label={
+                    showPassword
+                      ? "Hide password"
+                      : "Show password"
+                  }
                 >
-                  <EyeIcon off={showPassword} />
+                  <EyeIcon
+                    off={showPassword}
+                  />
                 </button>
               </div>
-              {errors.password && <span className="rr-error">{errors.password}</span>}
+
+              {errors.password && (
+                <span className="ca-error">
+                  {errors.password}
+                </span>
+              )}
             </div>
 
-            <div className="rr-field">
-              <label htmlFor="confirmPassword">Confirm Password</label>
-              <div className="rr-input-group">
+            {/* ============================= */}
+            {/* CONFIRM PASSWORD */}
+            {/* ============================= */}
+
+            <div className="ca-field">
+              <label htmlFor="ca-confirmPassword">
+                Confirm Password
+              </label>
+
+              <div className="ca-input-group">
                 <input
-                  id="confirmPassword"
+                  id="ca-confirmPassword"
                   name="confirmPassword"
-                  type={showConfirm ? "text" : "password"}
+                  type={
+                    showConfirm
+                      ? "text"
+                      : "password"
+                  }
                   placeholder="••••••••••••"
                   value={form.confirmPassword}
                   onChange={handleChange}
-                  className={`rr-input ${errors.confirmPassword ? "is-invalid" : ""}`}
+                  className={`ca-input ${errors.confirmPassword
+                    ? "ca-invalid"
+                    : ""
+                    }`}
                 />
+
                 <button
                   type="button"
-                  className="rr-toggle-visibility"
-                  onClick={() => setShowConfirm((s) => !s)}
-                  aria-label={showConfirm ? "Hide password" : "Show password"}
+                  className="ca-toggle"
+                  onClick={() =>
+                    setShowConfirm(
+                      (prev) => !prev
+                    )
+                  }
+                  aria-label={
+                    showConfirm
+                      ? "Hide password"
+                      : "Show password"
+                  }
                 >
-                  <EyeIcon off={showConfirm} />
+                  <EyeIcon
+                    off={showConfirm}
+                  />
                 </button>
               </div>
-              {errors.confirmPassword && <span className="rr-error">{errors.confirmPassword}</span>}
+
+              {errors.confirmPassword && (
+                <span className="ca-error">
+                  {errors.confirmPassword}
+                </span>
+              )}
             </div>
 
-            <div className={`rr-checkbox-row ${errors.agree ? "is-invalid" : ""}`}>
+            {/* ============================= */}
+            {/* TERMS & CONDITIONS */}
+            {/* ============================= */}
+
+            <div
+              className={`ca-checkbox-row ${errors.agree
+                ? "ca-checkbox-invalid"
+                : ""
+                }`}
+            >
               <input
-                id="agree"
+                id="ca-agree"
                 name="agree"
                 type="checkbox"
                 checked={form.agree}
                 onChange={handleChange}
               />
-              <label htmlFor="agree">
-                I agree to the <a href="#terms">Terms &amp; Conditions</a>
+
+              <label htmlFor="ca-agree">
+                I agree to the{" "}
+                <a href="#terms">
+                  Terms & Conditions
+                </a>
               </label>
             </div>
-            {serverError && (
-              <div className="rr-error rr-error-checkbox">{serverError}</div>)}
 
-            <button type="submit" className="rr-submit" disabled={loading}>
-              {loading ? "Creating Account...":"Create Account"}
+            {errors.agree && (
+              <span className="ca-error">
+                {errors.agree}
+              </span>
+            )}
+
+            {/* ============================= */}
+            {/* SERVER ERROR */}
+            {/* ============================= */}
+
+            {serverError && (
+              <div className="ca-server-error">
+                {serverError}
+              </div>
+            )}
+
+            {/* ============================= */}
+            {/* SUBMIT BUTTON */}
+            {/* ============================= */}
+
+            <button
+              type="submit"
+              className="ca-submit"
+              disabled={loading}
+            >
+              {loading
+                ? "Creating Account..."
+                : "Create Account"}
             </button>
 
-           
-                       <p className="rr-footer">
-              Already have an account? <Link to="/login" className="text-decoration-none">Login</Link>
+            {/* ============================= */}
+            {/* LOGIN LINK */}
+            {/* ============================= */}
+
+            <p className="ca-footer">
+              Already have an account?{" "}
+
+              <Link
+                to="/login"
+                className="ca-login-link"
+              >
+                Login
+              </Link>
             </p>
-          
+
           </form>
         )}
       </div>
     </div>
   );
 }
+

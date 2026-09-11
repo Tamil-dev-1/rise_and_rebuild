@@ -1,11 +1,28 @@
 import React, { useState } from "react";
-import { Link, useNavigate } from 'react-router-dom'
 
-import "./Login.css";
+import {
+  Link,
+  useNavigate,
+  useLocation,
+} from "react-router-dom";
 
-// Inline eye / eye-off icon — zero icon-library dependency
+import "./login.css";
+
+// ============================================================
+// Inline eye / eye-off icon
+// ============================================================
+
 const EyeIcon = ({ off }) => (
-  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+  <svg
+    width="18"
+    height="18"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="1.8"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+  >
     {off ? (
       <>
         <path d="M17.94 17.94A10.94 10.94 0 0 1 12 19c-5.5 0-9.5-4-11-7 .9-1.6 2.3-3.4 4.2-4.9" />
@@ -22,212 +39,496 @@ const EyeIcon = ({ off }) => (
   </svg>
 );
 
-// Decorative "rising sun over horizon" signature mark — shared with the Create Account page
+// ============================================================
+// Rise & Rebuild decorative mark
+// ============================================================
+
 const RiseMark = () => (
-  <svg className="rise-mark" width="120" height="46" viewBox="0 0 120 46" fill="none" aria-hidden="true">
+  <svg
+    className="login-rise-mark"
+    width="120"
+    height="46"
+    viewBox="0 0 120 46"
+    fill="none"
+    aria-hidden="true"
+  >
     <defs>
-      <linearGradient id="riseGradLogin" x1="0" y1="0" x2="1" y2="0">
-        <stop offset="0%" stopColor="var(--gold-1)" />
-        <stop offset="100%" stopColor="var(--gold-2)" />
+      <linearGradient
+        id="login-rise-gradient"
+        x1="0"
+        y1="0"
+        x2="1"
+        y2="0"
+      >
+        <stop
+          offset="0%"
+          stopColor="var(--login-gold-1)"
+        />
+
+        <stop
+          offset="100%"
+          stopColor="var(--login-gold-2)"
+        />
       </linearGradient>
     </defs>
-    <path d="M4 34 A56 56 0 0 1 116 34" stroke="url(#riseGradLogin)" strokeWidth="2" strokeLinecap="round" />
-    <circle cx="60" cy="34" r="9" fill="url(#riseGradLogin)" opacity="0.9" />
-    <line x1="4" y1="40" x2="116" y2="40" stroke="var(--border-soft)" strokeWidth="1" />
+
+    <path
+      d="M4 34 A56 56 0 0 1 116 34"
+      stroke="url(#login-rise-gradient)"
+      strokeWidth="2"
+      strokeLinecap="round"
+    />
+
+    <circle
+      cx="60"
+      cy="34"
+      r="9"
+      fill="url(#login-rise-gradient)"
+      opacity="0.9"
+    />
+
+    <line
+      x1="4"
+      y1="40"
+      x2="116"
+      y2="40"
+      stroke="var(--login-border-soft)"
+      strokeWidth="1"
+    />
   </svg>
 );
 
+// ============================================================
+// Login Form
+// ============================================================
+
 export default function LoginForm() {
+  const navigate = useNavigate();
 
-    const navigate = useNavigate();
+  // Get selected plan passed from Membership page
+  const location = useLocation();
 
-  const [form, setForm] = useState({ email: "", password: "" });
-  const [showPassword, setShowPassword] = useState(false);
+  const selectedPlan = location.state;
+
+  const [form, setForm] = useState({
+    email: "",
+    password: "",
+  });
+
+  const [showPassword, setShowPassword] =
+    useState(false);
+
   const [errors, setErrors] = useState({});
-  const [submitting, setSubmitting] = useState(false);
-  const [submitted, setSubmitted] = useState(false);
-  const [serverError, setServerError] = useState("");
+
+  const [submitting, setSubmitting] =
+    useState(false);
+
+  const [submitted, setSubmitted] =
+    useState(false);
+
+  const [serverError, setServerError] =
+    useState("");
+
+  // ============================================================
+  // Handle input changes
+  // ============================================================
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setForm((prev) => ({ ...prev, [name]: value }));
-    setErrors((prev) => ({ ...prev, [name]: undefined }));
+
+    setForm((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+
+    setErrors((prev) => ({
+      ...prev,
+      [name]: undefined,
+    }));
+
+    setServerError("");
   };
+
+  // ============================================================
+  // Frontend validation
+  // ============================================================
 
   const validate = () => {
     const next = {};
+
     if (!form.email.trim()) {
       next.email = "Enter your email address.";
-    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) {
-      next.email = "Enter a valid email address.";
+    } else if (
+      !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(
+        form.email
+      )
+    ) {
+      next.email =
+        "Enter a valid email address.";
     }
+
     if (!form.password) {
-      next.password = "Enter your password.";
+      next.password =
+        "Enter your password.";
     }
+
     return next;
   };
 
- const handleSubmit = async (e) => {
+  // ============================================================
+  // Login submit
+  // ============================================================
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Clear previous server error
     setServerError("");
 
-    // Frontend validation
+    // Validate form
     const next = validate();
 
     setErrors(next);
 
-    // Stop if validation has errors
     if (Object.keys(next).length !== 0) {
-        return;
+      return;
     }
 
     setSubmitting(true);
 
     try {
-        const response = await fetch(
-            "http://localhost:5000/api/auth/login",
-            {
-                method: "POST",
+      // ========================================================
+      // Login API
+      // ========================================================
 
-                headers: {
-                    "Content-Type": "application/json",
-                },
+      const response = await fetch(
+        "http://localhost:5000/api/auth/login",
+        {
+          method: "POST",
 
-                body: JSON.stringify({
-                    email: form.email,
-                    password: form.password,
-                }),
-            }
-        );
+          headers: {
+            "Content-Type":
+              "application/json",
+          },
 
-        const data = await response.json();
-
-        console.log("Login API response:", data);
-
-        // Backend returned an error
-        if (!response.ok) {
-            setServerError(
-                data.message || "Login failed."
-            );
-
-            return;
+          body: JSON.stringify({
+            email: form.email,
+            password: form.password,
+          }),
         }
+      );
 
-        // Login successful
-        sessionStorage.setItem(
-            "authToken",
-            data.token
-        );
+      const data = await response.json();
 
-        // Store user information
-        sessionStorage.setItem(
-            "user",
-            JSON.stringify(data.user)
-        );
+      console.log(
+        "Login API response:",
+        data
+      );
 
-        // Show success
-        setSubmitted(true);
+      // ========================================================
+      // Backend returned an error
+      // ========================================================
 
-        // Go to dashboard
-        navigate("/dashboard");
-
-    } catch (error) {
-
-        console.error("Login Error:", error);
-
+      if (!response.ok) {
         setServerError(
-            "Unable to connect to the server."
+          data.message || "Login failed."
         );
 
-    } finally {
+        return;
+      }
 
-        setSubmitting(false);
+      // ========================================================
+      // Login successful
+      // ========================================================
+
+      // Store login JWT
+      sessionStorage.setItem(
+        "authToken",
+        data.token
+      );
+
+      // Store user information
+      sessionStorage.setItem(
+        "user",
+        JSON.stringify(data.user)
+      );
+
+      // Show success state
+      setSubmitted(true);
+
+      // ========================================================
+      // IMPORTANT:
+      //
+      // If the user came from Membership page with
+      // a selected plan, send them to Payment.
+      //
+      // Example:
+      //
+      // Membership
+      //      ↓
+      // Select Yearly
+      //      ↓
+      // Login
+      //      ↓
+      // Payment
+      //
+      // ========================================================
+
+      if (selectedPlan) {
+        console.log(
+          "Selected plan after login:",
+          selectedPlan
+        );
+
+        navigate("/payment", {
+          state: selectedPlan,
+        });
+
+        return;
+      }
+
+      // ========================================================
+      // Normal login flow
+      //
+      // If there is no selected plan, check membership status.
+      // ========================================================
+
+      const membershipStatus =
+        data.user?.membership?.status;
+
+      console.log(
+        "Membership Status:",
+        membershipStatus
+      );
+
+      // ========================================================
+      // Active member → Dashboard
+      // ========================================================
+
+      if (
+        membershipStatus === "ACTIVE"
+      ) {
+        navigate("/dashboard");
+      }
+
+      // ========================================================
+      // Pending / no membership → Payment
+      // ========================================================
+
+      else {
+        navigate("/payment");
+      }
+    } catch (error) {
+      console.error(
+        "Login Error:",
+        error
+      );
+
+      setServerError(
+        "Unable to connect to the server."
+      );
+    } finally {
+      setSubmitting(false);
     }
-};
+  };
+
+  // ============================================================
+  // UI
+  // ============================================================
 
   return (
-    <div className="rr-page">
-      <div className="rr-card">
+    <div className="login-page">
+
+      <div className="login-card">
+
         <RiseMark />
-        <p className="rr-eyebrow">Season 2 &middot; Rise &amp; Rebuild</p>
-        <h1 className="rr-title">Welcome Back</h1>
-        <p className="rr-subtitle">Login to your Season&nbsp;2 account.</p>
+
+        <p className="login-eyebrow">
+          Season 2 · Rise &amp; Rebuild
+        </p>
+
+        <h1 className="login-title">
+          Welcome Back
+        </h1>
+
+        <p className="login-subtitle">
+          Login to your Season 2 account.
+        </p>
 
         {submitted ? (
-          <div className="rr-success" role="status">
-            <p className="rr-success-title">You're signed in.</p>
-            <p className="rr-success-copy">
-              Welcome back to Season 2 of Rise &amp; Rebuild.
+          <div
+            className="login-success"
+            role="status"
+          >
+            <p className="login-success-title">
+              You're signed in.
+            </p>
+
+            <p className="login-success-copy">
+              Welcome back to Season 2 of
+              Rise &amp; Rebuild.
             </p>
           </div>
         ) : (
-          <form className="rr-form" onSubmit={handleSubmit} noValidate>
-            <div className="rr-field">
-              <label htmlFor="email">Email Address</label>
+          <form
+            className="login-form"
+            onSubmit={handleSubmit}
+            noValidate
+          >
+
+            {/* ==================================================
+                Email
+            ================================================== */}
+
+            <div className="login-field">
+
+              <label htmlFor="login-email">
+                Email Address
+              </label>
+
               <input
-                id="email"
+                id="login-email"
                 name="email"
                 type="email"
                 placeholder="user@gmail.com"
                 value={form.email}
                 onChange={handleChange}
-                className={`rr-input ${errors.email ? "is-invalid" : ""}`}
+                className={`login-input ${
+                  errors.email
+                    ? "login-invalid"
+                    : ""
+                }`}
                 autoComplete="email"
               />
-              {errors.email && <span className="rr-error">{errors.email}</span>}
+
+              {errors.email && (
+                <span className="login-error">
+                  {errors.email}
+                </span>
+              )}
+
             </div>
 
-            <div className="rr-field">
-              <label htmlFor="password">Password</label>
-              <div className="rr-input-group">
+            {/* ==================================================
+                Password
+            ================================================== */}
+
+            <div className="login-field">
+
+              <label htmlFor="login-password">
+                Password
+              </label>
+
+              <div className="login-input-group">
+
                 <input
-                  id="password"
+                  id="login-password"
                   name="password"
-                  type={showPassword ? "text" : "password"}
+                  type={
+                    showPassword
+                      ? "text"
+                      : "password"
+                  }
                   placeholder="••••••••••••"
                   value={form.password}
                   onChange={handleChange}
-                  className={`rr-input ${errors.password ? "is-invalid" : ""}`}
+                  className={`login-input ${
+                    errors.password
+                      ? "login-invalid"
+                      : ""
+                  }`}
                   autoComplete="current-password"
                 />
+
                 <button
                   type="button"
-                  className="rr-toggle-visibility"
-                  onClick={() => setShowPassword((s) => !s)}
-                  aria-label={showPassword ? "Hide password" : "Show password"}
+                  className="login-toggle"
+                  onClick={() =>
+                    setShowPassword(
+                      (prev) => !prev
+                    )
+                  }
+                  aria-label={
+                    showPassword
+                      ? "Hide password"
+                      : "Show password"
+                  }
                 >
-                  <EyeIcon off={showPassword} />
+                  <EyeIcon
+                    off={showPassword}
+                  />
                 </button>
+
               </div>
+
+              {errors.password && (
+                <span className="login-error">
+                  {errors.password}
+                </span>
+              )}
+
               {serverError && (
-                 <div className="rr-error">{serverError}
-                 </div>)}
+                <div className="login-server-error">
+                  {serverError}
+                </div>
+              )}
+
             </div>
 
-            <div className="rr-forgot-row">
-              <Link to="/forgot-password" >Forgot Password?</Link>
+            {/* ==================================================
+                Forgot Password
+            ================================================== */}
+
+            <div className="login-forgot-row">
+
+              <Link to="/forgot-password">
+                Forgot Password?
+              </Link>
+
             </div>
 
-            <button type="submit" className="rr-submit" disabled={submitting}>
+            {/* ==================================================
+                Login Button
+            ================================================== */}
+
+            <button
+              type="submit"
+              className="login-submit"
+              disabled={submitting}
+            >
+
               {submitting ? (
-                <span className="rr-spinner" aria-hidden="true" />
+                <span
+                  className="login-spinner"
+                  aria-hidden="true"
+                />
               ) : (
                 "Login"
               )}
+
             </button>
 
-        
-                    <p className="rr-footer">
-              Don&apos;t have an account?
-                <Link to="/create-account" className="text-decoration-none gap-2">Create account
-                 </Link>
+            {/* ==================================================
+                Create Account
+            ================================================== */}
+
+            <p className="login-footer">
+
+              Don't have an account?{" "}
+
+              <Link
+                to="/membership"
+                className="login-create-link"
+              >
+                Create account
+              </Link>
+
             </p>
-          
+
           </form>
         )}
+
       </div>
+
     </div>
   );
 }

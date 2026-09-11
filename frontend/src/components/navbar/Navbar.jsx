@@ -58,6 +58,7 @@ export default function RiseRebuildNavbar() {
               text="REGISTER NOW"
               className="rr-cta-btn"
             />
+            <button><Link to="/login">Login</Link></button>
 
           </Nav>
         </Navbar.Collapse>

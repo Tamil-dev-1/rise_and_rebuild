@@ -2,22 +2,22 @@
 import React, { useEffect, useState } from "react";
 import { Navigate } from "react-router-dom";
 
-const ProtectRoute = ({ children }) => {
+const MembershipProtectedRoute = ({ children }) => {
   const [loading, setLoading] = useState(true);
   const [user, setUser] = useState(null);
 
   useEffect(() => {
-    const checkUser = async () => {
+    const checkMembership = async () => {
       try {
         const token = sessionStorage.getItem("authToken");
 
-        // 1. No login token
+        // 1. User is not logged in
         if (!token) {
           setLoading(false);
           return;
         }
 
-        // 2. Get latest user data from backend
+        // 2. Get latest user information from backend
         const response = await fetch(
           "http://localhost:5000/api/auth/me",
           {
@@ -30,7 +30,7 @@ const ProtectRoute = ({ children }) => {
 
         const data = await response.json();
 
-        // 3. Invalid / expired token
+        // 3. Token invalid or expired
         if (!response.ok || !data.success) {
           sessionStorage.removeItem("authToken");
           sessionStorage.removeItem("user");
@@ -39,7 +39,7 @@ const ProtectRoute = ({ children }) => {
           return;
         }
 
-        // 4. Store latest user data
+        // 4. Save latest user information
         setUser(data.user);
 
         sessionStorage.setItem(
@@ -47,7 +47,7 @@ const ProtectRoute = ({ children }) => {
           JSON.stringify(data.user)
         );
       } catch (error) {
-        console.error("ProtectRoute Error:", error);
+        console.error("Membership Protection Error:", error);
 
         sessionStorage.removeItem("authToken");
         sessionStorage.removeItem("user");
@@ -56,17 +56,17 @@ const ProtectRoute = ({ children }) => {
       }
     };
 
-    checkUser();
+    checkMembership();
   }, []);
 
-  // While checking backend
+  // While checking the backend
   if (loading) {
-    return <div>Checking account...</div>;
+    return <div>Checking membership...</div>;
   }
 
   // Not logged in
   if (!user) {
-    return <Navigate to="/register" replace />;
+    return <Navigate to="/login" replace />;
   }
 
   // Account is not active
@@ -74,10 +74,14 @@ const ProtectRoute = ({ children }) => {
     return <Navigate to="/login" replace />;
   }
 
-  // User is authenticated
-  // Membership status does NOT matter here.
+  // Membership is not active
+  if (user.membership?.status !== "ACTIVE") {
+    return <Navigate to="/payment" replace />;
+  }
+
+  // User is logged in and membership is active
   return children;
 };
 
-export default ProtectRoute;
+export default MembershipProtectedRoute;
 

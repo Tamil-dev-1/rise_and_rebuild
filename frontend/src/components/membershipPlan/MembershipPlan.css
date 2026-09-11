@@ -1,0 +1,445 @@
+/* ===========================================================
+   MembershipPlans.css
+   Theme overrides layered on top of Bootstrap 5.
+   Import order matters: bootstrap.min.css first, this file after
+   (see MembershipPlans.jsx) so these rules win.
+   =========================================================== */
+
+:root{
+  --mp-bg:            #0F0B09;
+  --mp-bg-raised:     #171210;
+  --mp-bg-card:       #15100D;
+  --mp-bg-card-2:     #1B140F;
+  --mp-border:        rgba(255,255,255,0.08);
+  --mp-border-soft:   rgba(255,255,255,0.06);
+  --mp-gold:          #D8A34C;
+  --mp-gold-light:    #EFC77E;
+  --mp-gold-deep:     #B8863A;
+  --mp-text:          #F3EEE7;
+  --mp-text-dim:      #C9C0B5;
+  --mp-text-mute:     #8F857B;
+  --mp-radius-lg:     18px;
+  --mp-radius-md:     14px;
+  --mp-radius-sm:     10px;
+  --mp-font-body:     'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --mp-font-script:   'Playfair Display', Georgia, serif;
+}
+
+.mp-page{
+  background: var(--mp-bg);
+  color: var(--mp-text);
+  font-family: var(--mp-font-body);
+  min-height: 100vh;
+}
+
+.mp-page button{ font-family: inherit; }
+.mp-page img{ max-width: 100%; display: block; }
+
+/* -------------------- Eyebrow / shared text -------------------- */
+.mp-eyebrow{
+  color: var(--mp-gold);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  margin: 0;
+}
+
+.mp-gold{ color: var(--mp-gold); }
+
+/* =========================================================
+   HERO
+   ========================================================= */
+.mp-hero{ margin-bottom: 40px; }
+
+.mp-title{
+  font-weight: 700;
+  font-size: clamp(30px, 4vw, 46px);
+  line-height: 1.14;
+  letter-spacing: -0.01em;
+  color: var(--mp-text);
+}
+
+.mp-desc{
+  color: var(--mp-text-dim);
+  font-size: 16px;
+  line-height: 1.65;
+  max-width: 46ch;
+}
+
+.mp-stat-icon{
+  width: 34px;
+  height: 34px;
+  flex: none;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--mp-border);
+  border-radius: 50%;
+  color: var(--mp-gold);
+}
+
+.mp-stat-icon svg{ width: 17px; height: 17px; }
+
+.mp-stat-text{
+  font-size: 13.5px;
+  color: var(--mp-text-dim);
+  white-space: nowrap;
+}
+
+.mp-stat-text strong{
+  color: var(--mp-text);
+  font-weight: 600;
+}
+
+/* -------- quote card -------- */
+.mp-quote-card{
+  position: relative;
+  width: 100%;
+  max-width: 360px;
+  background: linear-gradient(180deg, var(--mp-bg-card-2), var(--mp-bg-card));
+  border: 1px solid var(--mp-border);
+  border-radius: var(--mp-radius-lg);
+  padding: 30px 26px 26px;
+  overflow: hidden;
+}
+
+.mp-quote-mark{
+  position: absolute;
+  top: 8px;
+  left: 22px;
+  font-family: var(--mp-font-script);
+  font-size: 64px;
+  color: var(--mp-gold);
+  opacity: 0.9;
+  line-height: 1;
+}
+
+.mp-quote-media{
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  border-radius: var(--mp-radius-md);
+  overflow: hidden;
+  margin: 26px 0 20px;
+  background: linear-gradient(135deg, #2a221b, #14100c);
+}
+
+.mp-quote-media img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+}
+
+.mp-media-empty{ display: grid; place-items: center; }
+.mp-media-empty::after{
+  content: "Portrait photo";
+  color: var(--mp-text-mute);
+  font-size: 12px;
+  letter-spacing: 0.04em;
+}
+
+.mp-quote-text{
+  font-size: 16px;
+  line-height: 1.55;
+  color: var(--mp-text);
+  margin: 0 0 14px;
+}
+
+.mp-quote-text em{
+  font-style: italic;
+  color: var(--mp-gold-light);
+}
+
+.mp-quote-name{
+  font-family: var(--mp-font-script);
+  font-style: italic;
+  font-size: 19px;
+  color: var(--mp-gold);
+  margin: 0;
+}
+
+/* =========================================================
+   PRICING
+   ========================================================= */
+.mp-pricing{ margin-bottom: 56px; }
+
+.mp-plan{
+  background: var(--mp-bg-card);
+  border: 1px solid var(--mp-border) !important;
+  border-radius: var(--mp-radius-lg) !important;
+  position: relative;
+}
+
+.mp-plan .card-body{
+  padding: 30px 24px 26px;
+}
+
+.mp-plan-featured{
+  background: linear-gradient(180deg, #1E170F, #15100C);
+  border: 1px solid rgba(216,163,76,0.55) !important;
+  box-shadow: 0 0 0 1px rgba(216,163,76,0.12), 0 20px 40px -20px rgba(216,163,76,0.35);
+  transform: translateY(-6px);
+}
+
+.mp-plan-badge{
+  position: absolute;
+  top: -14px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--mp-gold);
+  color: #1B1208;
+  font-size: 11.5px;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  padding: 6px 16px;
+  border-radius: 999px;
+  white-space: nowrap;
+  z-index: 2;
+}
+
+.mp-plan-icon{
+  width: 54px;
+  height: 54px;
+  margin: 6px auto 18px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  border: 1px solid var(--mp-border);
+  color: var(--mp-gold);
+  background: rgba(216,163,76,0.06);
+}
+
+.mp-plan-icon svg{ width: 24px; height: 24px; }
+
+.mp-plan-name{
+  font-size: 19px;
+  font-weight: 600;
+  margin: 0 0 6px;
+  color: var(--mp-text);
+}
+
+.mp-plan-tag{
+  font-size: 12.5px;
+  color: var(--mp-text-mute);
+  margin: 0 0 18px;
+}
+
+.mp-plan-price{
+  font-size: 34px;
+  font-weight: 700;
+  color: var(--mp-gold);
+  margin: 0 0 22px;
+}
+
+.mp-plan-currency{
+  font-size: 22px;
+  font-weight: 600;
+  vertical-align: 4px;
+  margin-right: 1px;
+}
+
+.mp-plan-period{
+  display: block;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--mp-text-mute);
+  margin-top: 2px;
+}
+
+.mp-plan-features{
+  margin: 0 0 26px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.mp-plan-features li{
+  position: relative;
+  padding-left: 26px;
+  font-size: 13.5px;
+  color: var(--mp-text-dim);
+  line-height: 1.4;
+}
+
+.mp-plan-features li::before{
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 1px;
+  width: 17px;
+  height: 17px;
+  border-radius: 50%;
+  background: rgba(216,163,76,0.14);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M3 8.5l3 3 7-7' fill='none' stroke='%23D8A34C' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 10px 10px;
+}
+
+.mp-plan-cta{
+  padding: 13px 18px;
+  border-radius: 10px !important;
+  border: 1px solid var(--mp-border) !important;
+  background: transparent;
+  color: var(--mp-text);
+  font-size: 14px;
+  font-weight: 600;
+  transition: border-color .18s ease, background-color .18s ease;
+}
+
+.mp-plan-cta:hover{
+  border-color: var(--mp-gold) !important;
+  color: var(--mp-text);
+}
+
+.mp-plan-cta-filled{
+  background: linear-gradient(180deg, var(--mp-gold-light), var(--mp-gold-deep));
+  border-color: transparent !important;
+  color: #211605;
+}
+
+.mp-plan-cta-filled:hover{
+  filter: brightness(1.06);
+  color: #211605;
+}
+
+.mp-plan-cta:focus-visible,
+.mp-faq-item:focus-visible,
+.mp-btn-outline:focus-visible{
+  outline: 2px solid var(--mp-gold);
+  outline-offset: 2px;
+}
+
+/* =========================================================
+   BENEFITS STRIP
+   ========================================================= */
+.mp-benefits{
+  background: var(--mp-bg-raised);
+  border: 1px solid var(--mp-border-soft);
+  border-radius: var(--mp-radius-lg);
+  padding: 34px 30px;
+  margin-bottom: 56px;
+}
+
+.mp-benefit-icon{
+  width: 46px;
+  height: 46px;
+  margin-bottom: 14px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  border: 1px solid var(--mp-border);
+  color: var(--mp-gold);
+}
+
+.mp-benefit-icon svg{ width: 21px; height: 21px; }
+
+.mp-benefit-title{
+  font-size: 14px;
+  font-weight: 600;
+  margin: 0 0 6px;
+  color: var(--mp-text);
+}
+
+.mp-benefit-desc{
+  font-size: 12.5px;
+  color: var(--mp-text-mute);
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* =========================================================
+   FAQ
+   ========================================================= */
+.mp-faq{
+  background: var(--mp-bg-raised);
+  border: 1px solid var(--mp-border-soft);
+  border-radius: var(--mp-radius-lg);
+  padding: 36px 32px 40px;
+}
+
+.mp-faq-heading{
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--mp-text);
+}
+
+.mp-faq-contact-text{
+  font-size: 13px;
+  color: var(--mp-text-mute);
+  white-space: nowrap;
+}
+
+.mp-btn-outline{
+  padding: 9px 18px;
+  border-radius: 8px !important;
+  border: 1px solid var(--mp-border) !important;
+  background: transparent;
+  color: var(--mp-text);
+  font-size: 13px;
+  font-weight: 600;
+  white-space: nowrap;
+  transition: border-color .18s ease;
+}
+
+.mp-btn-outline:hover{
+  border-color: var(--mp-gold) !important;
+  color: var(--mp-text);
+}
+
+.mp-faq-item{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  width: 100%;
+  background: var(--mp-bg-card);
+  border: 1px solid var(--mp-border);
+  border-radius: var(--mp-radius-sm);
+  padding: 16px 20px;
+  color: var(--mp-text-dim);
+  font-size: 14px;
+  text-align: left;
+  transition: border-color .18s ease, color .18s ease;
+}
+
+.mp-faq-item:hover{
+  border-color: rgba(216,163,76,0.4);
+  color: var(--mp-text);
+}
+
+.mp-faq-plus{
+  flex: none;
+  width: 22px;
+  height: 22px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  border: 1px solid var(--mp-border);
+  color: var(--mp-gold);
+  font-size: 15px;
+  transition: transform .2s ease;
+}
+
+.mp-faq-item[aria-expanded="true"] .mp-faq-plus{
+  transform: rotate(45deg);
+}
+
+/* =========================================================
+   RESPONSIVE (Bootstrap breakpoints already handle the grid
+   reflow via col-* classes above; these fine-tune spacing)
+   ========================================================= */
+@media (max-width: 1024px){
+  .mp-plan-featured{ transform: none; }
+}
+
+@media (max-width: 767.98px){
+  .mp-title{ font-size: 30px; }
+  .mp-desc{ font-size: 14.5px; }
+  .mp-benefits{ padding: 28px 20px; }
+  .mp-faq{ padding: 28px 18px 32px; }
+}
+
+@media (prefers-reduced-motion: reduce){
+  .mp-page *{ transition-duration: 0.001ms !important; }
+}

@@ -1,9 +1,10 @@
 import React from 'react'
+import MembershipPlan from '../../components/membershipPlan/MembershipPlan'
 
 const Membership = () => {
   return (
     <div>
-      <h1>Membership page</h1>
+      <MembershipPlan />
     </div>
   )
 }

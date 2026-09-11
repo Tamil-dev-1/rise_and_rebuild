@@ -7,6 +7,8 @@ import connectDB from "./config/db.js";
 import leadRoutes from "./routes/leadRoutes.js";
 import authRoutes from "./routes/authRoutes.js"
 
+import paymentRoutes from "./routes/paymentRoutes.js";
+
 
 // dotenv.config();
 
@@ -35,6 +37,10 @@ app.use("/api/leads", leadRoutes);
 //CREATE ACCOUNT -- AUTH ROUTES
 
 app.use("/api/auth", authRoutes);
+
+//PAYMENT ORDER ROUTES
+
+app.use("/api/payment", paymentRoutes);
 
 
 const PORT = process.env.PORT || 5000;

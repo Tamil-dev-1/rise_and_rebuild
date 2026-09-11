@@ -1,0 +1,71 @@
+/* ==========================================================================
+   Rise & Rebuild — Global theme tokens
+   Import this ONCE at the app root (see App.jsx). Every component
+   (Header, Sidebar, pages) should read colors from these --app-* variables
+   instead of hardcoding hex values, so this single file controls the
+   look of dark AND light mode for the entire application.
+
+   ThemeContext sets data-theme="dark" | "light" on <html>; the blocks
+   below react to that attribute.
+   ========================================================================== */
+
+:root,
+[data-theme="dark"] {
+  color-scheme: dark;
+
+  --app-bg: #0c0a17;
+  --app-surface: #14121f;
+  --app-surface-elevated: #1a1630;
+  --app-surface-hover: #211c3a;
+  --app-border: rgba(255, 255, 255, 0.08);
+
+  --app-text: #f4f1fb;
+  --app-text-muted: #8d87a8;
+  --app-text-faint: #605c7a;
+
+  --app-gold: #ecb468;
+  --app-gold-soft: #f7d79a;
+  --app-violet-1: #7c5cff;
+  --app-violet-2: #c25bff;
+  --app-danger: #ff5c72;
+
+  --app-shadow: rgba(0, 0, 0, 0.45);
+  --app-overlay: rgba(8, 6, 14, 0.65);
+}
+
+[data-theme="light"] {
+  color-scheme: light;
+
+  --app-bg: #f4f5fb;
+  --app-surface: #ffffff;
+  --app-surface-elevated: #ffffff;
+  --app-surface-hover: #f0f1fa;
+  --app-border: rgba(16, 15, 35, 0.08);
+
+  --app-text: #17162b;
+  --app-text-muted: #6c6889;
+  --app-text-faint: #a5a1c0;
+
+  --app-gold: #d99a3f;
+  --app-gold-soft: #b97e2a;
+  --app-violet-1: #7c5cff;
+  --app-violet-2: #a855f7;
+  --app-danger: #e0304a;
+
+  --app-shadow: rgba(23, 22, 43, 0.1);
+  --app-overlay: rgba(23, 22, 43, 0.35);
+}
+
+/* Shared easing + radii, identical in both themes */
+:root {
+  --app-ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --app-radius-lg: 18px;
+  --app-radius-md: 12px;
+  --app-radius-sm: 8px;
+}
+
+body {
+  background: var(--app-bg);
+  color: var(--app-text);
+  transition: background-color 0.3s var(--app-ease), color 0.3s var(--app-ease);
+}

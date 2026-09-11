@@ -1,0 +1,141 @@
+.payment-page {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px 20px;
+  background: #f4f9f6;
+}
+
+.payment-card {
+  width: 100%;
+  max-width: 520px;
+  padding: 44px 40px;
+  border-radius: 24px;
+  border: 1px solid #e6ede9;
+  background: #ffffff;
+  box-shadow: 0 20px 45px rgba(16, 94, 61, 0.08);
+}
+
+.payment-eyebrow {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  margin-bottom: 12px;
+  color: #1e8a5e;
+  text-transform: uppercase;
+}
+
+.payment-card h1 {
+  margin-bottom: 10px;
+  color: #0f2e21;
+  font-size: 28px;
+  font-weight: 700;
+}
+
+.payment-subtitle {
+  margin-bottom: 30px;
+  color: #6b7a73;
+  line-height: 1.5;
+}
+
+.payment-plan {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  padding: 22px;
+  border-radius: 16px;
+  background: #f1f8f4;
+  border: 1px solid #e0efe6;
+}
+
+.payment-label {
+  display: block;
+  font-size: 12px;
+  margin-bottom: 5px;
+  color: #6b7a73;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.payment-plan h2 {
+  margin: 0;
+  color: #0f2e21;
+  font-size: 20px;
+}
+
+.payment-price {
+  text-align: right;
+}
+
+.payment-price strong {
+  display: block;
+  font-size: 28px;
+  color: #1e8a5e;
+}
+
+.payment-price span {
+  font-size: 13px;
+  color: #6b7a73;
+}
+
+.payment-status {
+  display: flex;
+  justify-content: space-between;
+  margin: 25px 0;
+  padding: 15px 0;
+  border-bottom: 1px solid #e6ede9;
+}
+
+.payment-status span {
+  color: #6b7a73;
+  font-size: 13px;
+}
+
+.payment-status strong {
+  font-size: 13px;
+  color: #0f2e21;
+}
+
+.payment-button {
+  width: 100%;
+  padding: 15px;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 15px;
+  letter-spacing: 0.3px;
+  color: #ffffff;
+  background: linear-gradient(135deg, #1e8a5e, #14663f);
+  box-shadow: 0 10px 25px rgba(20, 102, 63, 0.35);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.payment-button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 14px 30px rgba(20, 102, 63, 0.45);
+}
+
+.payment-button:active {
+  transform: translateY(0);
+}
+
+.payment-back {
+  width: 100%;
+  margin-top: 12px;
+  padding: 12px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  color: #1e8a5e;
+  font-weight: 600;
+  font-size: 14px;
+  transition: color 0.15s ease;
+}
+
+.payment-back:hover {
+  color: #14663f;
+  text-decoration: underline;
+}

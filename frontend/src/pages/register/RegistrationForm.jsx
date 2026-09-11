@@ -71,9 +71,9 @@ const handleSubmit = async (e) => {
       return;
     }
 
-    // Store JWT
+    // Store registration JWT
     sessionStorage.setItem(
-      "authToken",
+      "registrationToken",
       data.token
     );
 

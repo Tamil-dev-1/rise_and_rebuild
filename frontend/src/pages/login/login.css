@@ -1,428 +1,1008 @@
+
 /* ==========================================================================
-   Rise & Rebuild — Login
-   Same design tokens as the Create Account page, so both screens feel
-   like one continuous product.
+   RISE & REBUILD — LOGIN
+   Premium Black / Ivory / Champagne Gold Theme
+
+   IMPORTANT:
+   All classes and variables use "login-" prefix.
+   This prevents conflicts with other pages.
    ========================================================================== */
 
-@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Manrope:wght@400;500;600;700;800&display=swap');
+
+/* ==========================================================================
+   DESIGN TOKENS
+   ========================================================================== */
 
 :root {
-  --bg-page: #120c09;
-  --bg-card: #1e140f;
-  --bg-input: #291c15;
-  --bg-input-focus: #2f2019;
+  --login-bg-page: #090807;
+  --login-bg-card: #11100e;
 
-  --border-soft: #3c2c22;
-  --border-strong: #4d382a;
+  --login-bg-input: #141311;
+  --login-bg-input-hover: #181613;
+  --login-bg-input-focus: #1b1814;
 
-  --text-primary: #f6e9d8;
-  --text-muted: #a58e7c;
-  --text-faint: #7c6a5c;
+  --login-border-soft: rgba(224, 184, 108, 0.14);
+  --login-border-medium: rgba(224, 184, 108, 0.24);
+  --login-border-input: rgba(255, 255, 255, 0.11);
 
-  --gold-1: #f6c37c;
-  --gold-2: #d99a3e;
-  --gold-3: #b6771f;
+  --login-text-primary: #f5efe6;
+  --login-text-secondary: #ded3c5;
+  --login-text-muted: #9e9285;
+  --login-text-faint: #70675e;
+  --login-text-dark: #17120b;
 
-  --error: #e2685a;
-  --success: #7fbf8f;
+  --login-gold-1: #f1ca76;
+  --login-gold-2: #dca84b;
+  --login-gold-3: #bb812d;
 
-  --font-display: 'Fraunces', 'Georgia', serif;
-  --font-body: 'Manrope', 'Segoe UI', sans-serif;
+  --login-gold-soft: rgba(220, 168, 75, 0.12);
 
-  --radius-card: 18px;
-  --radius-input: 10px;
+  --login-error: #df7065;
+  --login-success: #7fba8b;
+
+  --login-font-display: "Fraunces", "Georgia", serif;
+  --login-font-body: "Manrope", "Segoe UI", sans-serif;
+
+  --login-radius-card: 20px;
+  --login-radius-input: 11px;
+  --login-radius-button: 11px;
 }
 
+
 /* ==========================================================================
-   Page shell
+   PAGE
    ========================================================================== */
 
-.rr-page {
+.login-page {
   min-height: 100vh;
   width: 100%;
+
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 48px 20px;
+
+  padding: 55px 20px;
+
   background:
-    radial-gradient(circle at 50% 0%, rgba(217, 154, 62, 0.10), transparent 55%),
-    var(--bg-page);
-  font-family: var(--font-body);
+    radial-gradient(
+      circle at 50% -10%,
+      rgba(220, 168, 75, 0.09),
+      transparent 42%
+    ),
+    radial-gradient(
+      circle at 100% 100%,
+      rgba(255, 255, 255, 0.018),
+      transparent 35%
+    ),
+    var(--login-bg-page);
+
+  font-family: var(--login-font-body);
+
   box-sizing: border-box;
+
+  position: relative;
+
+  overflow: hidden;
 }
 
-.rr-page *,
-.rr-page *::before,
-.rr-page *::after {
-  box-sizing: border-box;
+
+/* Background glow */
+
+.login-page::before {
+  content: "";
+
+  position: absolute;
+
+  width: 420px;
+  height: 420px;
+
+  left: -240px;
+  bottom: -220px;
+
+  border-radius: 50%;
+
+  background: rgba(220, 168, 75, 0.035);
+
+  filter: blur(90px);
+
+  pointer-events: none;
 }
+
 
 /* ==========================================================================
-   Card — a touch more "premium" than the base card: soft outer glow,
-   hairline top highlight, gentle entrance.
+   SCOPE
    ========================================================================== */
 
-.rr-card {
+.login-page *,
+.login-page *::before,
+.login-page *::after {
+  box-sizing: border-box;
+}
+
+
+/* ==========================================================================
+   CARD
+   ========================================================================== */
+
+.login-card {
   position: relative;
+
   width: 100%;
   max-width: 420px;
-  background: var(--bg-card);
-  border: 1px solid var(--border-soft);
-  border-radius: var(--radius-card);
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(255, 255, 255, 0.035),
+      rgba(255, 255, 255, 0.012)
+    ),
+    var(--login-bg-card);
+
+  border: 1px solid var(--login-border-soft);
+
+  border-radius: var(--login-radius-card);
+
   padding: 42px 36px 34px;
+
   box-shadow:
-    0 24px 60px -20px rgba(0, 0, 0, 0.65),
-    0 0 0 1px rgba(246, 195, 124, 0.03),
-    0 40px 80px -40px rgba(217, 154, 62, 0.12);
+    0 30px 80px rgba(0, 0, 0, 0.55),
+    0 10px 30px rgba(0, 0, 0, 0.25),
+    0 0 45px rgba(220, 168, 75, 0.025),
+    inset 0 1px 0 rgba(255, 255, 255, 0.025);
+
   text-align: center;
-  animation: rr-card-in 0.5s ease both;
+
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+
+  overflow: hidden;
+
+  animation: login-card-in 0.5s ease both;
 }
 
-.rr-card::before {
+
+/* Premium gold top line */
+
+.login-card::before {
   content: "";
+
   position: absolute;
+
   top: 0;
-  left: 14%;
-  right: 14%;
+
+  left: 12%;
+  right: 12%;
+
   height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(246, 195, 124, 0.5), transparent);
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      rgba(241, 202, 118, 0.65),
+      transparent
+    );
+
+  opacity: 0.8;
 }
 
-@keyframes rr-card-in {
+
+/* Card highlight */
+
+.login-card::after {
+  content: "";
+
+  position: absolute;
+
+  top: 0;
+  left: 0;
+  right: 0;
+
+  height: 120px;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.018),
+      transparent
+    );
+
+  pointer-events: none;
+}
+
+
+/* ==========================================================================
+   CARD ENTRANCE
+   ========================================================================== */
+
+@keyframes login-card-in {
   from {
     opacity: 0;
+
     transform: translateY(10px);
   }
+
   to {
     opacity: 1;
+
     transform: translateY(0);
   }
 }
 
-.rise-mark {
-  display: block;
-  margin: 0 auto 6px;
-}
-
-.rr-eyebrow {
-  margin: 0 0 10px;
-  font-family: var(--font-body);
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  background: linear-gradient(90deg, var(--gold-1), var(--gold-3));
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-}
-
-.rr-title {
-  margin: 0 0 12px;
-  font-family: var(--font-display);
-  font-weight: 600;
-  font-size: 30px;
-  line-height: 1.15;
-  color: var(--text-primary);
-}
-
-.rr-subtitle {
-  margin: 0 0 30px;
-  font-size: 14px;
-  line-height: 1.55;
-  color: var(--text-muted);
-}
 
 /* ==========================================================================
-   Form fields
+   RISE MARK
    ========================================================================== */
 
-.rr-form {
-  text-align: left;
-}
-
-.rr-field {
-  margin-bottom: 18px;
-}
-
-.rr-field label {
+.login-rise-mark {
   display: block;
-  margin-bottom: 7px;
-  font-size: 13px;
-  font-weight: 600;
-  color: var(--text-primary);
-}
 
-.rr-input {
-  width: 100%;
-  padding: 12px 14px;
-  font-family: var(--font-body);
-  font-size: 14px;
-  color: var(--text-primary);
-  background: var(--bg-input);
-  border: 1px solid var(--border-soft);
-  border-radius: var(--radius-input);
-  outline: none;
-  transition: border-color 0.18s ease, background-color 0.18s ease, box-shadow 0.18s ease;
-}
+  margin: 0 auto 8px;
 
-.rr-input::placeholder {
-  color: var(--text-faint);
-}
-
-.rr-input:focus {
-  background: var(--bg-input-focus);
-  border-color: var(--gold-2);
-  box-shadow: 0 0 0 3px rgba(217, 154, 62, 0.18);
-}
-
-.rr-input.is-invalid {
-  border-color: var(--error);
-}
-
-.rr-input.is-invalid:focus {
-  box-shadow: 0 0 0 3px rgba(226, 104, 90, 0.18);
-}
-
-.rr-input-group {
   position: relative;
+
+  z-index: 2;
+}
+
+
+/* ==========================================================================
+   EYEBROW
+   ========================================================================== */
+
+.login-eyebrow {
+  margin: 0 0 11px;
+
+  font-family: var(--login-font-body);
+
+  font-size: 10px;
+
+  font-weight: 800;
+
+  letter-spacing: 0.19em;
+
+  text-transform: uppercase;
+
+  background:
+    linear-gradient(
+      90deg,
+      var(--login-gold-1),
+      var(--login-gold-2),
+      var(--login-gold-3)
+    );
+
+  -webkit-background-clip: text;
+  background-clip: text;
+
+  color: transparent;
+
+  position: relative;
+
+  z-index: 2;
+}
+
+
+/* ==========================================================================
+   TITLE
+   ========================================================================== */
+
+.login-title {
+  margin: 0 0 12px;
+
+  font-family: var(--login-font-display);
+
+  font-weight: 600;
+
+  font-size: 31px;
+
+  line-height: 1.12;
+
+  letter-spacing: -0.5px;
+
+  color: var(--login-text-primary);
+
+  position: relative;
+
+  z-index: 2;
+}
+
+
+/* Gold divider */
+
+.login-title::after {
+  content: "";
+
+  display: block;
+
+  width: 34px;
+
+  height: 2px;
+
+  margin: 15px auto 0;
+
+  background:
+    linear-gradient(
+      90deg,
+      var(--login-gold-3),
+      var(--login-gold-1)
+    );
+
+  border-radius: 2px;
+
+  opacity: 0.75;
+}
+
+
+/* ==========================================================================
+   SUBTITLE
+   ========================================================================== */
+
+.login-subtitle {
+  margin: 0 0 30px;
+
+  font-size: 13.5px;
+
+  line-height: 1.7;
+
+  color: var(--login-text-muted);
+
+  position: relative;
+
+  z-index: 2;
+}
+
+
+/* ==========================================================================
+   FORM
+   ========================================================================== */
+
+.login-form {
+  text-align: left;
+
+  position: relative;
+
+  z-index: 2;
+}
+
+
+/* ==========================================================================
+   FIELD
+   ========================================================================== */
+
+.login-field {
+  margin-bottom: 19px;
+}
+
+
+.login-field label {
+  display: block;
+
+  margin-bottom: 8px;
+
+  font-size: 12.5px;
+
+  font-weight: 600;
+
+  letter-spacing: 0.1px;
+
+  color: var(--login-text-secondary);
+}
+
+
+/* ==========================================================================
+   INPUT
+   ========================================================================== */
+
+.login-input {
+  width: 100%;
+
+  min-height: 48px;
+
+  padding: 12px 14px;
+
+  font-family: var(--login-font-body);
+
+  font-size: 13.5px;
+
+  color: var(--login-text-primary);
+
+  background: var(--login-bg-input);
+
+  border: 1px solid var(--login-border-input);
+
+  border-radius: var(--login-radius-input);
+
+  outline: none;
+
+  transition:
+    border-color 0.25s ease,
+    background-color 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+
+/* Placeholder */
+
+.login-input::placeholder {
+  color: var(--login-text-faint);
+
+  opacity: 1;
+}
+
+
+/* Hover */
+
+.login-input:hover {
+  background: var(--login-bg-input-hover);
+
+  border-color: var(--login-border-medium);
+}
+
+
+/* Focus */
+
+.login-input:focus {
+  background: var(--login-bg-input-focus);
+
+  border-color: var(--login-gold-2);
+
+  box-shadow:
+    0 0 0 3px var(--login-gold-soft),
+    0 8px 22px rgba(0, 0, 0, 0.16);
+}
+
+
+/* ==========================================================================
+   INVALID INPUT
+   ========================================================================== */
+
+.login-input.login-invalid {
+  border-color: var(--login-error);
+}
+
+
+.login-input.login-invalid:focus {
+  box-shadow:
+    0 0 0 3px rgba(223, 112, 101, 0.15);
+}
+
+
+/* ==========================================================================
+   PASSWORD GROUP
+   ========================================================================== */
+
+.login-input-group {
+  position: relative;
+
   display: flex;
+
   align-items: center;
 }
 
-.rr-input-group .rr-input {
-  padding-right: 44px;
+
+.login-input-group .login-input {
+  padding-right: 46px;
 }
 
-.rr-toggle-visibility {
+
+/* ==========================================================================
+   PASSWORD TOGGLE
+   ========================================================================== */
+
+.login-toggle {
   position: absolute;
-  right: 10px;
+
+  right: 9px;
+
   display: flex;
+
   align-items: center;
+
   justify-content: center;
-  background: none;
+
+  width: 34px;
+
+  height: 34px;
+
+  background: transparent;
+
   border: none;
+
   padding: 6px;
-  color: var(--text-muted);
+
+  color: var(--login-text-muted);
+
   cursor: pointer;
-  border-radius: 6px;
-  transition: color 0.15s ease, background-color 0.15s ease;
+
+  border-radius: 8px;
+
+  transition:
+    color 0.2s ease,
+    background-color 0.2s ease,
+    transform 0.2s ease;
 }
 
-.rr-toggle-visibility:hover {
-  color: var(--gold-1);
-  background: rgba(246, 195, 124, 0.08);
+
+.login-toggle:hover {
+  color: var(--login-gold-1);
+
+  background: var(--login-gold-soft);
 }
 
-.rr-toggle-visibility:focus-visible,
-.rr-input:focus-visible,
-.rr-submit:focus-visible {
-  outline: 2px solid var(--gold-1);
+
+.login-toggle:active {
+  transform: scale(0.94);
+}
+
+
+/* ==========================================================================
+   ACCESSIBILITY
+   ========================================================================== */
+
+.login-toggle:focus-visible,
+.login-input:focus-visible,
+.login-submit:focus-visible {
+  outline: 2px solid var(--login-gold-1);
+
   outline-offset: 2px;
 }
 
-.rr-error {
-  display: block;
-  margin-top: 6px;
-  font-size: 12px;
-  color: var(--error);
-}
 
 /* ==========================================================================
-   Forgot password
+   ERROR
    ========================================================================== */
 
-.rr-forgot-row {
+.login-error {
+  display: block;
+
+  margin-top: 6px;
+
+  font-size: 11px;
+
+  line-height: 1.5;
+
+  color: var(--login-error);
+}
+
+
+/* ==========================================================================
+   SERVER ERROR
+   ========================================================================== */
+
+.login-server-error {
+  margin-top: 6px;
+
+  font-size: 11px;
+
+  line-height: 1.5;
+
+  color: var(--login-error);
+}
+
+
+/* ==========================================================================
+   FORGOT PASSWORD
+   ========================================================================== */
+
+.login-forgot-row {
   display: flex;
+
   justify-content: flex-end;
+
   margin: -6px 0 22px;
 }
 
-.rr-forgot-row a {
-  font-size: 12.5px;
-  font-weight: 600;
-  color: var(--gold-1);
+
+.login-forgot-row a {
+  font-size: 12px;
+
+  font-weight: 700;
+
+  color: var(--login-gold-1);
+
   text-decoration: none;
+
   letter-spacing: 0.01em;
+
+  transition:
+    color 0.2s ease,
+    opacity 0.2s ease;
 }
 
-.rr-forgot-row a:hover {
+
+.login-forgot-row a:hover {
+  color: var(--login-gold-2);
+
   text-decoration: underline;
 }
 
+
 /* ==========================================================================
-   Submit + footer
+   SUBMIT BUTTON
    ========================================================================== */
 
-.rr-submit {
+.login-submit {
   position: relative;
+
   width: 100%;
-  min-height: 46px;
+
+  min-height: 50px;
+
   padding: 13px 16px;
-  font-family: var(--font-body);
-  font-size: 13px;
+
+  font-family: var(--login-font-body);
+
+  font-size: 12px;
+
   font-weight: 800;
+
   letter-spacing: 0.08em;
+
   text-transform: uppercase;
-  color: #241505;
-  background: linear-gradient(90deg, var(--gold-1), var(--gold-3));
+
+  color: var(--login-text-dark);
+
+  background:
+    linear-gradient(
+      135deg,
+      var(--login-gold-1) 0%,
+      var(--login-gold-2) 52%,
+      var(--login-gold-3) 100%
+    );
+
   border: none;
-  border-radius: var(--radius-input);
+
+  border-radius: var(--login-radius-button);
+
   cursor: pointer;
+
   display: flex;
+
   align-items: center;
+
   justify-content: center;
-  transition: filter 0.18s ease, transform 0.08s ease, box-shadow 0.18s ease;
-  box-shadow: 0 10px 24px -12px rgba(217, 154, 62, 0.55);
+
+  overflow: hidden;
+
+  box-shadow:
+    0 10px 28px rgba(190, 132, 45, 0.18);
+
+  transition:
+    filter 0.25s ease,
+    transform 0.2s ease,
+    box-shadow 0.25s ease;
 }
 
-.rr-submit:hover:not(:disabled) {
+
+/* Button shine */
+
+.login-submit::before {
+  content: "";
+
+  position: absolute;
+
+  top: 0;
+
+  left: -110%;
+
+  width: 65%;
+
+  height: 100%;
+
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.24),
+      transparent
+    );
+
+  transform: skewX(-20deg);
+
+  transition: left 0.55s ease;
+}
+
+
+/* Hover */
+
+.login-submit:hover:not(:disabled) {
   filter: brightness(1.06);
-  box-shadow: 0 14px 28px -12px rgba(217, 154, 62, 0.65);
+
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 15px 35px rgba(201, 145, 45, 0.27);
 }
 
-.rr-submit:active:not(:disabled) {
-  transform: translateY(1px);
+
+.login-submit:hover:not(:disabled)::before {
+  left: 130%;
 }
 
-.rr-submit:disabled {
+
+/* Active */
+
+.login-submit:active:not(:disabled) {
+  transform: translateY(0);
+
+  box-shadow:
+    0 7px 18px rgba(190, 132, 45, 0.18);
+}
+
+
+/* Disabled */
+
+.login-submit:disabled {
   cursor: not-allowed;
-  opacity: 0.85;
+
+  opacity: 0.65;
+
+  transform: none;
+
+  box-shadow: none;
+
+  filter: none;
 }
 
-.rr-spinner {
+
+/* ==========================================================================
+   SPINNER
+   ========================================================================== */
+
+.login-spinner {
   width: 16px;
+
   height: 16px;
+
   border-radius: 50%;
-  border: 2px solid rgba(36, 21, 5, 0.35);
-  border-top-color: #241505;
-  animation: rr-spin 0.7s linear infinite;
+
+  border: 2px solid rgba(23, 18, 11, 0.30);
+
+  border-top-color: var(--login-text-dark);
+
+  animation: login-spin 0.7s linear infinite;
 }
 
-@keyframes rr-spin {
+
+@keyframes login-spin {
   to {
     transform: rotate(360deg);
   }
 }
 
-.rr-footer {
+
+/* ==========================================================================
+   FOOTER
+   ========================================================================== */
+
+.login-footer {
   margin: 20px 0 0;
+
   text-align: center;
-  font-size: 13px;
-  color: var(--text-muted);
+
+  font-size: 12px;
+
+  line-height: 1.6;
+
+  color: var(--login-text-muted);
 }
 
-.rr-footer a {
-  color: var(--gold-1);
-  font-weight: 600;
+
+.login-create-link {
+  color: var(--login-gold-1);
+
+  font-weight: 700;
+
   text-decoration: none;
+
+  transition: color 0.2s ease;
 }
 
-.rr-footer a:hover {
+
+.login-create-link:hover {
+  color: var(--login-gold-2);
+
   text-decoration: underline;
 }
 
+
 /* ==========================================================================
-   Success state
+   SUCCESS
    ========================================================================== */
 
-.rr-success {
+.login-success {
   padding: 24px 4px 8px;
 }
 
-.rr-success-title {
-  font-family: var(--font-display);
-  font-size: 22px;
+
+.login-success-title {
+  font-family: var(--login-font-display);
+
+  font-size: 23px;
+
   font-weight: 600;
-  color: var(--success);
-  margin: 0 0 8px;
+
+  color: var(--login-success);
+
+  margin: 0 0 9px;
 }
 
-.rr-success-copy {
-  font-size: 14px;
-  color: var(--text-muted);
+
+.login-success-copy {
+  font-size: 13.5px;
+
+  color: var(--login-text-muted);
+
   margin: 0;
-  line-height: 1.6;
+
+  line-height: 1.7;
 }
+
 
 /* ==========================================================================
-   Responsiveness
+   TABLET
    ========================================================================== */
 
-/* Tablets */
 @media (max-width: 768px) {
-  .rr-card {
+
+  .login-page {
+    padding: 45px 20px;
+  }
+
+  .login-card {
     max-width: 390px;
+
     padding: 38px 30px 28px;
   }
 
-  .rr-title {
-    font-size: 27px;
+  .login-title {
+    font-size: 28px;
   }
+
 }
 
-/* Large phones */
+
+/* ==========================================================================
+   LARGE PHONES
+   ========================================================================== */
+
 @media (max-width: 480px) {
-  .rr-page {
+
+  .login-page {
     padding: 32px 14px;
   }
 
-  .rr-card {
+  .login-card {
     max-width: 100%;
+
     padding: 30px 22px 24px;
-    border-radius: 14px;
+
+    border-radius: 16px;
   }
 
-  .rise-mark {
+  .login-rise-mark {
     width: 96px;
+
     height: 38px;
   }
 
-  .rr-title {
-    font-size: 24px;
+  .login-eyebrow {
+    font-size: 9.5px;
+
+    letter-spacing: 0.17em;
   }
 
-  .rr-subtitle {
-    font-size: 13px;
-    margin-bottom: 26px;
+  .login-title {
+    font-size: 25px;
+
+    letter-spacing: -0.3px;
   }
 
-  .rr-input {
-    padding: 11px 12px;
-    font-size: 13.5px;
+  .login-subtitle {
+    font-size: 12.5px;
+
+    line-height: 1.7;
+
+    margin-bottom: 25px;
   }
 
-  .rr-submit {
-    padding: 12px 14px;
-  }
-}
-
-/* Small phones */
-@media (max-width: 360px) {
-  .rr-card {
-    padding: 26px 16px 20px;
+  .login-field {
+    margin-bottom: 17px;
   }
 
-  .rr-title {
-    font-size: 22px;
-  }
-
-  .rr-forgot-row a {
+  .login-field label {
     font-size: 12px;
   }
+
+  .login-input {
+    min-height: 47px;
+
+    padding: 11px 12px;
+
+    font-size: 13px;
+  }
+
+  .login-forgot-row {
+    margin-bottom: 20px;
+  }
+
+  .login-forgot-row a {
+    font-size: 11.5px;
+  }
+
+  .login-submit {
+    min-height: 49px;
+
+    padding: 12px 14px;
+
+    font-size: 11px;
+
+    letter-spacing: 0.07em;
+  }
+
+  .login-footer {
+    font-size: 11.5px;
+
+    margin-top: 18px;
+  }
+
 }
 
-/* Reduced motion */
+
+/* ==========================================================================
+   SMALL PHONES
+   ========================================================================== */
+
+@media (max-width: 360px) {
+
+  .login-page {
+    padding: 25px 12px;
+  }
+
+  .login-card {
+    padding: 26px 16px 20px;
+
+    border-radius: 14px;
+  }
+
+  .login-title {
+    font-size: 23px;
+  }
+
+  .login-subtitle {
+    font-size: 12px;
+  }
+
+  .login-forgot-row a {
+    font-size: 11px;
+  }
+
+  .login-submit {
+    min-height: 47px;
+
+    font-size: 10.5px;
+  }
+
+}
+
+
+/* ==========================================================================
+   REDUCED MOTION
+   ========================================================================== */
+
 @media (prefers-reduced-motion: reduce) {
-  .rr-input,
-  .rr-submit,
-  .rr-toggle-visibility,
-  .rr-card {
+
+  .login-input,
+  .login-submit,
+  .login-toggle,
+  .login-card {
     transition: none;
+
     animation: none;
   }
 
-  .rr-spinner {
+  .login-spinner {
     animation-duration: 1.2s;
   }
+
 }
+
