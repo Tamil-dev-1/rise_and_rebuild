@@ -4,10 +4,12 @@ import Lead from "../models/Lead.js";
 import jwt from "jsonwebtoken";
 import crypto from "crypto";
 import { sendPasswordResetEmail } from "../utils/sendEmail.js"
+import MEMBERSHIP_PRICE from "../data/MembershipPrice.js";
 
 
 
 // CREATE ACCOUNT
+
 
 export const registerUser = async (req, res) => {
   try {
@@ -16,16 +18,13 @@ export const registerUser = async (req, res) => {
       email,
       password,
       planId,
-      planName,
-      price,
-      period,
     } = req.body;
 
     // Get leadId from JWT middleware
     const leadId = req.leadId;
 
     // 1. Check required fields
-    if (!leadId || !email || !password) {
+    if (!leadId || !email || !password || !planId) {
       return res.status(400).json({
         success: false,
         message: "All required fields are required.",
@@ -53,15 +52,18 @@ export const registerUser = async (req, res) => {
       });
     }
 
-    // 5. Check membership plan
-    if (!planId || !planName || price === undefined || !period) {
+    // 5. Get official membership plan from backend
+    const plan = MEMBERSHIP_PRICE[planId];
+
+    // 6. Check whether plan exists
+    if (!plan) {
       return res.status(400).json({
         success: false,
-        message: "Membership plan is required.",
+        message: "Invalid membership plan.",
       });
     }
 
-    // 6. Check password length
+    // 7. Check password length
     if (password.length < 8) {
       return res.status(400).json({
         success: false,
@@ -69,7 +71,7 @@ export const registerUser = async (req, res) => {
       });
     }
 
-    // 7. Check whether account already exists
+    // 8. Check whether account already exists
     const existingUser = await User.findOne({
       email: normalizedEmail,
     });
@@ -78,18 +80,6 @@ export const registerUser = async (req, res) => {
       return res.status(409).json({
         success: false,
         message: "An account with this email already exists.",
-      });
-    }
-
-    // 8. Convert price to number
-    const numericPrice = Number(
-      String(price).replace(/,/g, "")
-    );
-
-    if (isNaN(numericPrice)) {
-      return res.status(400).json({
-        success: false,
-        message: "Invalid membership price.",
       });
     }
 
@@ -106,11 +96,17 @@ export const registerUser = async (req, res) => {
       accountStatus: "ACTIVE",
 
       membership: {
-        planId,
-        planName,
-        price: numericPrice,
-        period,
+        // Backend-controlled membership details
+        planId: plan.planId,
+        planName: plan.planName,
+        price: plan.price,
+        period: plan.period,
+
+        // Payment is not completed yet
         status: "PENDING",
+
+        startedAt: null,
+        expiresAt: null,
       },
     });
 
@@ -126,6 +122,8 @@ export const registerUser = async (req, res) => {
         price: user.membership.price,
         period: user.membership.period,
         status: user.membership.status,
+        startedAt: user.membership.startedAt,
+        expiresAt: user.membership.expiresAt,
       },
     });
 
@@ -138,6 +136,7 @@ export const registerUser = async (req, res) => {
     });
   }
 };
+
 
 
 // ================================
@@ -453,17 +452,13 @@ export const resetPassword = async (req, res) => {
 
 export const changeMembershipPlan = async (req, res) => {
   try {
-    const {
-      planId,
-      planName,
-      price,
-      period,
-    } = req.body;
+    // Frontend sends only planId
+    const { planId } = req.body;
 
     // 1. Get logged-in user from JWT middleware
     const userId = req.userId;
 
-    // 2. Check user
+    // 2. Check user authentication
     if (!userId) {
       return res.status(401).json({
         success: false,
@@ -471,27 +466,26 @@ export const changeMembershipPlan = async (req, res) => {
       });
     }
 
-    // 3. Check membership data
-    if (!planId || !planName || price === undefined || !period) {
+    // 3. Check planId
+    if (!planId) {
       return res.status(400).json({
         success: false,
-        message: "Complete membership plan details are required.",
+        message: "Membership plan is required.",
       });
     }
 
-    // 4. Convert price to number
-    const numericPrice = Number(
-      String(price).replace(/,/g, "")
-    );
+    // 4. Get official plan details from backend
+    const plan = MEMBERSHIP_PRICE[planId];
 
-    if (isNaN(numericPrice)) {
+    // 5. Check whether plan exists
+    if (!plan) {
       return res.status(400).json({
         success: false,
-        message: "Invalid membership price.",
+        message: "Invalid membership plan.",
       });
     }
 
-    // 5. Find logged-in user
+    // 6. Find logged-in user
     const user = await User.findById(userId);
 
     if (!user) {
@@ -501,24 +495,23 @@ export const changeMembershipPlan = async (req, res) => {
       });
     }
 
-    // 6. Update existing membership
-    user.membership.planId = planId;
-    user.membership.planName = planName;
-    user.membership.price = numericPrice;
-    user.membership.period = period;
+    // 7. Update membership using backend-controlled plan details
+    user.membership.planId = plan.planId;
+    user.membership.planName = plan.planName;
+    user.membership.price = plan.price;
+    user.membership.period = plan.period;
 
-    // Important:
-    // Changing plan does NOT mean payment is successful.
+    // Changing plan does NOT mean payment is successful
     user.membership.status = "PENDING";
 
     // Payment dates should be cleared until payment succeeds
     user.membership.startedAt = null;
     user.membership.expiresAt = null;
 
-    // 7. Save to MongoDB
+    // 8. Save to MongoDB
     await user.save();
 
-    // 8. Return updated membership
+    // 9. Return updated membership
     return res.status(200).json({
       success: true,
       message: "Membership plan updated successfully.",
@@ -532,7 +525,6 @@ export const changeMembershipPlan = async (req, res) => {
         expiresAt: user.membership.expiresAt,
       },
     });
-
   } catch (error) {
     console.error("Change Membership Plan Error:", error);
 
@@ -542,7 +534,6 @@ export const changeMembershipPlan = async (req, res) => {
     });
   }
 };
-
 
 
 export const getCurrentUser = async (req, res) => {

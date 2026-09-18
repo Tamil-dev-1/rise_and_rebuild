@@ -1,0 +1,311 @@
+/* ==========================================================
+   My Membership Page Styles
+   ========================================================== */
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+
+* {
+  box-sizing: border-box;
+}
+
+.membership-page {
+  background-color: #f6f8fc;
+  background-image: 
+    radial-gradient(at 0% 0%, rgba(224, 231, 255, 0.4) 0px, transparent 50%),
+    radial-gradient(at 100% 100%, rgba(238, 242, 255, 0.5) 0px, transparent 50%);
+  min-height: 100vh;
+  width: 100%;
+  color: #1e293b;
+  font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  padding-bottom: 3.5rem;
+}
+
+.membership-container {
+  max-width: 1140px;
+  margin: 0 auto;
+  padding: 2.5rem 2rem;
+}
+
+/* Header Section */
+.membership-header {
+  margin-bottom: 2rem;
+}
+
+.membership-title {
+  font-size: 1.85rem;
+  font-weight: 800;
+  letter-spacing: -0.025em;
+  margin-bottom: 0.25rem;
+  color: #0f172a;
+}
+
+.membership-subtitle {
+  font-size: 0.95rem;
+  color: #64748b;
+  margin-bottom: 0;
+  font-weight: 500;
+}
+
+/* Base Membership Card Layout */
+.membership-card {
+  background: #ffffff;
+  border-radius: 20px;
+  border: 1px solid rgba(226, 232, 240, 0.8);
+  padding: 1.6rem;
+  height: 100%;
+  box-shadow: 0 4px 20px -2px rgba(15, 23, 42, 0.03);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.membership-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 25px -5px rgba(15, 23, 42, 0.07);
+}
+
+.card-section-title {
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: #0f172a;
+  letter-spacing: -0.01em;
+  margin-bottom: 1.25rem;
+}
+
+/* ---- Card 1: Current Plan Card ---- */
+.current-plan-card {
+  justify-content: space-between;
+}
+
+.card-top-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.25rem;
+}
+
+.plan-title-wrap {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.crown-icon-wrap {
+  width: 42px;
+  height: 42px;
+  background: linear-gradient(135deg, #7c3aed 0%, #6d28d9 100%);
+  color: #ffffff;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 6px 16px -2px rgba(124, 58, 237, 0.4);
+}
+
+.plan-name {
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: #0f172a;
+  margin: 0;
+  letter-spacing: -0.01em;
+}
+
+.status-badge {
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 0.35rem 0.8rem;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+}
+
+.active-badge, .paid-badge {
+  background-color: #d1fae5;
+  color: #059669;
+}
+
+.plan-price-wrap {
+  display: flex;
+  align-items: baseline;
+  gap: 0.3rem;
+  margin-bottom: 1.5rem;
+}
+
+.price-amount {
+  font-size: 1.65rem;
+  font-weight: 800;
+  color: #0f172a;
+  letter-spacing: -0.02em;
+}
+
+.price-cycle {
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: #64748b;
+}
+
+.next-renewal-pill {
+  background-color: #f1f5f9;
+  border-radius: 14px;
+  padding: 0.85rem 1.1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+}
+
+.renewal-label {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #64748b;
+}
+
+.renewal-date {
+  font-size: 0.85rem;
+  font-weight: 800;
+  color: #1e293b;
+}
+
+.change-plan-btn {
+  background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
+  border: none;
+  border-radius: 999px;
+  padding: 0.75rem 1.4rem;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #ffffff;
+  width: 100%;
+  box-shadow: 0 10px 22px -4px rgba(79, 70, 229, 0.4);
+  transition: all 0.25s ease;
+  cursor: pointer;
+}
+
+.change-plan-btn:hover,
+.change-plan-btn:focus,
+.change-plan-btn:active {
+  background: linear-gradient(135deg, #4f46e5 0%, #4338ca 100%) !important;
+  transform: translateY(-2px);
+  box-shadow: 0 14px 26px -3px rgba(79, 70, 229, 0.5) !important;
+  color: #ffffff !important;
+}
+
+/* ---- Card 2: Plan Features Card ---- */
+.features-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.feature-item {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: #334155;
+}
+
+.check-icon-wrap {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #e0f2fe;
+  color: #0284c7;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+/* ---- Card 3: Payment History Card ---- */
+.history-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.8rem;
+}
+
+.view-all-link {
+  background: transparent;
+  border: none;
+  color: #6366f1;
+  font-size: 0.85rem;
+  font-weight: 700;
+  cursor: pointer;
+  padding: 0;
+  transition: color 0.2s ease;
+}
+
+.view-all-link:hover {
+  color: #4338ca;
+  text-decoration: underline;
+}
+
+.history-table-wrapper {
+  overflow-x: auto;
+}
+
+.history-table {
+  margin: 0;
+  vertical-align: middle;
+}
+
+.history-table th {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: #94a3b8;
+  padding-bottom: 0.9rem;
+  text-transform: capitalize;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.history-table td {
+  padding: 0.9rem 0;
+  font-size: 0.88rem;
+  border-bottom: 1px solid #f8fafc;
+}
+
+.history-table tr:last-child td {
+  border-bottom: none;
+}
+
+.date-cell {
+  color: #64748b;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.plan-cell {
+  color: #1e293b;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.amount-cell {
+  color: #0f172a;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+/* Responsiveness */
+@media (max-width: 991.98px) {
+  .membership-container {
+    padding: 2rem 1.5rem;
+  }
+}
+
+@media (max-width: 767.98px) {
+  .membership-container {
+    padding: 1.5rem 1rem;
+  }
+
+  .membership-card {
+    padding: 1.25rem;
+  }
+
+  .price-amount {
+    font-size: 1.45rem;
+  }
+}

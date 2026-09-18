@@ -1,34 +1,139 @@
-import React from "react";
-import { useNavigate, useLocation } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "./Payment.css";
 
 export default function Payment() {
   const navigate = useNavigate();
-  const location = useLocation();
 
-  // Get logged-in user
-  const storedUser = sessionStorage.getItem("user");
+  const [loading, setLoading] = useState(true);
+  const [user, setUser] = useState(null);
+  const [error, setError] = useState("");
 
-  // If user information doesn't exist
-  if (!storedUser) {
-    navigate("/login");
+  useEffect(() => {
+    const checkUserMembership = async () => {
+      try {
+        const token = sessionStorage.getItem("authToken");
+
+        // 1. User is not logged in
+        if (!token) {
+          navigate("/login", { replace: true });
+          return;
+        }
+
+        // 2. Get latest user + membership from backend
+        const response = await fetch(
+          "http://localhost:5000/api/auth/me",
+          {
+            method: "GET",
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+
+        const data = await response.json();
+
+        // 3. Invalid / expired token
+        if (!response.ok || !data.success) {
+          sessionStorage.removeItem("authToken");
+          sessionStorage.removeItem("user");
+
+          navigate("/login", { replace: true });
+          return;
+        }
+
+        // 4. Save latest user information
+        sessionStorage.setItem(
+          "user",
+          JSON.stringify(data.user)
+        );
+
+        setUser(data.user);
+
+        // 5. Check membership status
+        const membershipStatus =
+          data.user.membership?.status;
+
+        // 6. Membership already active
+        if (membershipStatus === "ACTIVE") {
+          navigate("/dashboard", { replace: true });
+          return;
+        }
+
+        // 7. No membership selected
+        if (
+          !membershipStatus ||
+          membershipStatus === "NONE"
+        ) {
+          navigate("/membership", { replace: true });
+          return;
+        }
+
+        // 8. EXPIRED membership
+        if (membershipStatus === "EXPIRED") {
+          // Renewal page will be added later.
+          // For now, keep the user on Payment.
+          setLoading(false);
+          return;
+        }
+
+        // 9. PENDING membership
+        // User should remain on Payment page.
+        setLoading(false);
+      } catch (error) {
+        console.error("Payment Membership Check Error:", error);
+
+        setError(
+          "Unable to verify your membership. Please try again."
+        );
+
+        setLoading(false);
+      }
+    };
+
+    checkUserMembership();
+  }, [navigate]);
+
+  // While checking backend
+  if (loading) {
+    return (
+      <div className="payment-page">
+        <div className="payment-card">
+          <p>Checking your membership...</p>
+        </div>
+      </div>
+    );
+  }
+
+  // Error
+  if (error) {
+    return (
+      <div className="payment-page">
+        <div className="payment-card">
+          <h2>Something went wrong</h2>
+
+          <p>{error}</p>
+
+          <button
+            type="button"
+            onClick={() => window.location.reload()}
+          >
+            Try Again
+          </button>
+        </div>
+      </div>
+    );
+  }
+
+  // No user
+  if (!user) {
     return null;
   }
 
-  const user = JSON.parse(storedUser);
-
-  // Existing membership from logged-in user's session
   const membership = user.membership;
 
-  // Newly selected plan from Membership page
-  const selectedPlan = location.state;
-
-  // Use newly selected plan if available.
-  // Otherwise use the user's existing membership.
-  const paymentPlan = selectedPlan || membership;
-
-  // If membership information doesn't exist
-  if (!paymentPlan) {
+  // No membership
+  if (!membership) {
     return (
       <div className="payment-page">
         <div className="payment-card">
@@ -77,18 +182,18 @@ export default function Payment() {
             </span>
 
             <h2>
-              {paymentPlan.planName}
+              {membership.planName}
             </h2>
           </div>
 
           <div className="payment-price">
 
             <strong>
-              ₹{paymentPlan.price}
+              ₹{membership.price}
             </strong>
 
             <span>
-              {paymentPlan.period}
+              {membership.period}
             </span>
 
           </div>
@@ -103,7 +208,7 @@ export default function Payment() {
           </span>
 
           <strong>
-            {paymentPlan?.status || "PENDING"}
+            {membership.status}
           </strong>
 
         </div>
@@ -113,9 +218,13 @@ export default function Payment() {
           type="button"
           className="payment-button"
           onClick={() => {
-            console.log("Payment Plan:", paymentPlan);
+            console.log(
+              "Current Membership:",
+              membership
+            );
 
-            // Razorpay integration will be added here later
+            // Razorpay integration will be added
+            // after Phase 2, 3 and 4 are completed.
           }}
         >
           Proceed to Payment

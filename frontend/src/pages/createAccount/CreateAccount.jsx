@@ -200,9 +200,7 @@ export default function CreateAccount() {
             email: form.email,
             password: form.password,
             planId: selectedPlan?.planId,
-            planName: selectedPlan?.planName,
-            price: selectedPlan?.price,
-            period: selectedPlan?.period,
+
           }),
         }
       );

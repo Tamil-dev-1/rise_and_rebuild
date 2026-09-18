@@ -815,3 +815,13 @@
     order: -1;
   }
 }
+
+
+.rr-quick-action-locked {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.rr-quick-action-locked:hover {
+  transform: none;
+}

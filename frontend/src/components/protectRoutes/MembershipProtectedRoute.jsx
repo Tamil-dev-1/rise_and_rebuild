@@ -51,6 +51,8 @@ const MembershipProtectedRoute = ({ children }) => {
 
         sessionStorage.removeItem("authToken");
         sessionStorage.removeItem("user");
+
+        setUser(null);
       } finally {
         setLoading(false);
       }
@@ -59,28 +61,51 @@ const MembershipProtectedRoute = ({ children }) => {
     checkMembership();
   }, []);
 
-  // While checking the backend
+  // While checking backend
   if (loading) {
     return <div>Checking membership...</div>;
   }
 
-  // Not logged in
+  // 5. User is not logged in
   if (!user) {
     return <Navigate to="/login" replace />;
   }
 
-  // Account is not active
+  // 6. Account is not active
   if (user.accountStatus !== "ACTIVE") {
     return <Navigate to="/login" replace />;
   }
 
-  // Membership is not active
-  if (user.membership?.status !== "ACTIVE") {
+  // 7. Get membership status
+  const membershipStatus = user.membership?.status;
+
+  // 8. User has not selected a membership
+  if (!membershipStatus || membershipStatus === "NONE") {
+    return <Navigate to="/membership" replace />;
+  }
+
+  // 9. User selected a plan but payment is not completed
+  if (membershipStatus === "PENDING") {
     return <Navigate to="/payment" replace />;
   }
 
-  // User is logged in and membership is active
-  return children;
+  // 10. Membership has expired
+  if (membershipStatus === "EXPIRED") {
+    return <Navigate to="/payment" replace />;
+  }
+
+  // 11. Membership was cancelled
+  if (membershipStatus === "CANCELLED") {
+    return <Navigate to="/membership" replace />;
+  }
+
+  // 12. Only ACTIVE membership can access dashboard
+  if (membershipStatus === "ACTIVE") {
+    return children;
+  }
+
+  // 13. Safety fallback
+  return <Navigate to="/membership" replace />;
 };
 
 export default MembershipProtectedRoute;

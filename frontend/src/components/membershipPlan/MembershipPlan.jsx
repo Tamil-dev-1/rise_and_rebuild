@@ -307,9 +307,6 @@ export default function MembershipPlans() {
 
     const selectedPlan = {
       planId: plan.id,
-      planName: plan.name,
-      price: plan.price,
-      period: plan.period,
     };
 
     // ============================================================

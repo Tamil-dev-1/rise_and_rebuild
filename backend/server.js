@@ -8,7 +8,7 @@ import leadRoutes from "./routes/leadRoutes.js";
 import authRoutes from "./routes/authRoutes.js"
 
 import paymentRoutes from "./routes/paymentRoutes.js";
-
+import communityRoutes from "./routes/communityRoutes.js";
 
 // dotenv.config();
 
@@ -41,6 +41,9 @@ app.use("/api/auth", authRoutes);
 //PAYMENT ORDER ROUTES
 
 app.use("/api/payment", paymentRoutes);
+
+//Community access routes
+app.use("/api/community", communityRoutes);
 
 
 const PORT = process.env.PORT || 5000;

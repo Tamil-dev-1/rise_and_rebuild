@@ -1,3 +1,4 @@
+
 import React, { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./RegistrationForm.css";
@@ -15,13 +16,16 @@ const initialFormData = {
 
 const RegistrationForm = () => {
   const navigate = useNavigate();
+
   // Loading state
   const [loading, setLoading] = useState(false);
 
   // Form state
   const [formData, setFormData] = useState(initialFormData);
 
+  // ============================================================
   // Handle input changes
+  // ============================================================
   const handleChange = (e) => {
     const { name, value } = e.target;
 
@@ -31,86 +35,127 @@ const RegistrationForm = () => {
     }));
   };
 
+  // ============================================================
+  // Submit registration form
+  // ============================================================
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
+    setLoading(true);
 
-  // Submit form
-const handleSubmit = async (e) => {
-  e.preventDefault();
+    try {
+      const response = await fetch(
+        "http://localhost:5000/api/leads/register",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(formData),
+        }
+      );
 
-  setLoading(true);
+      const data = await response.json();
 
-  try {
-    const response = await fetch(
-      "http://localhost:5000/api/leads/register",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
+      console.log("Backend Response:", data);
+
+      // ========================================================
+      // Backend registration failed
+      // ========================================================
+      if (!response.ok || !data.success) {
+        alert(data.message || "Registration failed.");
+        return;
       }
-    );
 
-    const data = await response.json();
+      // ========================================================
+      // Check required backend response data
+      // ========================================================
+      if (!data.token || !data.leadId) {
+        console.error("Missing registration data:", data);
 
-    console.log("Backend Response:", data);
+        alert(
+          "Registration successful, but required registration information was not received."
+        );
 
-    // Backend failed
-    if (!response.ok || !data.success) {
-      alert(
-        data.message || "Registration failed."
+        return;
+      }
+
+      // ========================================================
+      // IMPORTANT:
+      // Save registration token
+      // This is for the newly registered user.
+      // It is NOT the same as authToken.
+      // ========================================================
+      sessionStorage.setItem(
+        "registrationToken",
+        data.token
       );
-      return;
-    }
 
-    // Backend succeeded but JWT missing
-    if (!data.token) {
-      alert(
-        "Registration successful, but authorization token was not received."
+      // ========================================================
+      // Save lead ID
+      // ========================================================
+      sessionStorage.setItem(
+        "leadId",
+        data.leadId
       );
-      return;
+
+      // ========================================================
+      // Save registered user information
+      // ========================================================
+      sessionStorage.setItem(
+        "registeredUser",
+        JSON.stringify(formData)
+      );
+
+      // ========================================================
+      // Debug - check what was saved
+      // ========================================================
+      console.log(
+        "registrationToken:",
+        sessionStorage.getItem("registrationToken")
+      );
+
+      console.log(
+        "leadId:",
+        sessionStorage.getItem("leadId")
+      );
+
+      console.log(
+        "registeredUser:",
+        sessionStorage.getItem("registeredUser")
+      );
+
+      // ========================================================
+      // Clear form
+      // ========================================================
+      setFormData(initialFormData);
+
+      // ========================================================
+      // Registration success
+      // ========================================================
+      alert("Registration successful!");
+
+      // ========================================================
+      // Go to Membership page
+      // ========================================================
+      navigate("/membership", {
+        replace: true,
+      });
+
+    } catch (error) {
+      console.error(
+        "Registration Error:",
+        error
+      );
+
+      alert(
+        "Something went wrong. Please try again."
+      );
+
+    } finally {
+      setLoading(false);
     }
-
-    // Store registration JWT
-    sessionStorage.setItem(
-      "registrationToken",
-      data.token
-    );
-
-    // Store registered user information
-    sessionStorage.setItem(
-      "registeredUser",
-      JSON.stringify(formData)
-    );
-
-    // Clear form
-    setFormData(initialFormData);
-
-    alert("Registration successful!");
-
-    // Navigate only after successful registration
-    navigate("/membership", {
-      replace: true,
-    });
-
-  } catch (error) {
-
-    console.error(
-      "Registration Error:",
-      error
-    );
-
-    alert(
-      "Please Enter Required Fields."
-    );
-
-  } finally {
-
-    setLoading(false);
-
-  }
-};
-
+  };
 
   return (
     <section className="registration-section">
@@ -268,10 +313,6 @@ const handleSubmit = async (e) => {
                     Select your age group
                   </option>
 
-                  {/* <option value="under-18">
-                    Under 18
-                  </option> */}
-
                   <option value="18-25">
                     18–25
                   </option>
@@ -364,7 +405,7 @@ const handleSubmit = async (e) => {
                     ? "REDIRECTING..."
                     : "SUBMIT & JOIN THE PRIORITY LIST"}
                 </button>
- 
+
               </div>
 
               <p className="form-note">
@@ -382,3 +423,5 @@ const handleSubmit = async (e) => {
 };
 
 export default RegistrationForm;
+
+

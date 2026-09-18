@@ -1,0 +1,500 @@
+/* =========================================================
+   YOUR JOURNEY PAGE
+   Clean compact UI matching the reference screenshot
+========================================================= */
+
+.journey-page {
+  width: 100%;
+  min-height: 100%;
+  background: #ffffff;
+  color: #111827;
+  font-family: "Inter", "Segoe UI", system-ui, sans-serif;
+}
+
+
+/* =========================================================
+   CONTAINER
+========================================================= */
+
+.journey-container {
+  width: 100%;
+  max-width: 1500px;
+  margin: 0 auto;
+  padding: 24px 28px 40px;
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.journey-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 18px;
+}
+
+.journey-title {
+  margin: 0;
+  font-size: 24px;
+  line-height: 1.2;
+  font-weight: 750;
+  letter-spacing: -0.5px;
+  color: #111827;
+}
+
+.journey-subtitle {
+  margin: 5px 0 0;
+  font-size: 12px;
+  line-height: 1.5;
+  color: #7b8492;
+}
+
+
+/* =========================================================
+   PROGRESS
+========================================================= */
+
+.journey-progress-section {
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.journey-progress-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 7px;
+}
+
+.journey-progress-text {
+  font-size: 11px;
+  font-weight: 600;
+  color: #6b7280;
+}
+
+.journey-progress-percent {
+  font-size: 11px;
+  font-weight: 700;
+  color: #4f7cff;
+}
+
+
+/* Progress Track */
+
+.journey-progress-track {
+  width: 100%;
+  height: 5px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: #e8edf4;
+}
+
+.journey-progress-fill {
+  height: 100%;
+  border-radius: 999px;
+  background: #4f7cff;
+  transition: width 0.5s ease;
+}
+
+
+/* =========================================================
+   JOURNEY GRID
+========================================================= */
+
+.journey-grid {
+  display: grid;
+
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+
+  gap: 14px;
+}
+
+
+/* =========================================================
+   JOURNEY CARD
+========================================================= */
+
+.journey-card {
+  position: relative;
+
+  width: 100%;
+
+  aspect-ratio: 1.72 / 1;
+
+  overflow: hidden;
+
+  border-radius: 9px;
+
+  background: #17202c;
+
+  cursor: pointer;
+
+  border: 1px solid rgba(0, 0, 0, 0.08);
+
+  isolation: isolate;
+
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+
+/* =========================================================
+   CARD IMAGE
+========================================================= */
+
+.journey-card-image {
+  position: absolute;
+
+  inset: 0;
+
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+
+  display: block;
+
+  transition: transform 0.4s ease;
+}
+
+
+/* =========================================================
+   IMAGE OVERLAY
+========================================================= */
+
+.journey-card-overlay {
+  position: absolute;
+
+  inset: 0;
+
+  z-index: 1;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(0, 0, 0, 0.28) 0%,
+      rgba(0, 0, 0, 0.08) 35%,
+      rgba(0, 0, 0, 0.78) 100%
+    );
+}
+
+
+/* =========================================================
+   CARD CONTENT
+========================================================= */
+
+.journey-card-content {
+  position: absolute;
+
+  inset: 0;
+
+  z-index: 2;
+
+  display: flex;
+
+  flex-direction: column;
+
+  justify-content: space-between;
+
+  padding: 9px 10px;
+}
+
+
+/* =========================================================
+   CARD TOP
+========================================================= */
+
+.journey-card-top {
+  display: flex;
+
+  align-items: flex-start;
+
+  justify-content: space-between;
+}
+
+
+/* Number */
+
+.journey-number {
+  display: inline-flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  min-width: 23px;
+  height: 20px;
+
+  padding: 0 5px;
+
+  border-radius: 4px;
+
+  background: rgba(0, 0, 0, 0.48);
+
+  color: #ffffff;
+
+  font-size: 9px;
+
+  font-weight: 700;
+
+  letter-spacing: 0.3px;
+
+  backdrop-filter: blur(5px);
+}
+
+
+/* Completed icon */
+
+.journey-check-icon {
+  color: #31d58a;
+
+  font-size: 13px;
+
+  filter:
+    drop-shadow(0 1px 2px rgba(0, 0, 0, 0.5));
+}
+
+
+/* Locked icon */
+
+.journey-lock-icon {
+  color: rgba(255, 255, 255, 0.9);
+
+  font-size: 11px;
+
+  filter:
+    drop-shadow(0 1px 2px rgba(0, 0, 0, 0.5));
+}
+
+
+/* =========================================================
+   CARD BOTTOM
+========================================================= */
+
+.journey-card-bottom {
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: flex-start;
+
+  gap: 4px;
+}
+
+
+.journey-card-bottom h3 {
+  margin: 0;
+
+  color: #ffffff;
+
+  font-size: 12px;
+
+  line-height: 1.2;
+
+  font-weight: 700;
+
+  letter-spacing: -0.1px;
+
+  text-shadow:
+    0 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+
+/* =========================================================
+   STATUS BADGE
+========================================================= */
+
+.journey-status {
+  display: inline-flex;
+
+  align-items: center;
+
+  gap: 4px;
+
+  padding: 3px 6px;
+
+  border-radius: 999px;
+
+  font-size: 7px;
+
+  line-height: 1;
+
+  font-weight: 700;
+
+  text-transform: capitalize;
+
+  letter-spacing: 0.1px;
+
+  backdrop-filter: blur(6px);
+}
+
+
+/* Completed */
+
+.journey-status-completed {
+  color: #40e19a;
+
+  background: rgba(27, 135, 89, 0.28);
+
+  border: 1px solid rgba(64, 225, 154, 0.28);
+}
+
+
+/* Upcoming */
+
+.journey-status-upcoming {
+  color: #e7eaf0;
+
+  background: rgba(0, 0, 0, 0.38);
+
+  border: 1px solid rgba(255, 255, 255, 0.16);
+}
+
+
+/* =========================================================
+   HOVER
+========================================================= */
+
+.journey-card:hover {
+  transform: translateY(-3px);
+
+  box-shadow:
+    0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.journey-card:hover .journey-card-image {
+  transform: scale(1.06);
+}
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 1100px) {
+
+  .journey-container {
+    padding: 22px 22px 35px;
+  }
+
+  .journey-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+
+    gap: 13px;
+  }
+
+}
+
+
+/* =========================================================
+   SMALL TABLET
+========================================================= */
+
+@media (max-width: 850px) {
+
+  .journey-container {
+    padding: 20px 18px 30px;
+  }
+
+  .journey-title {
+    font-size: 21px;
+  }
+
+  .journey-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+
+    gap: 11px;
+  }
+
+  .journey-card-content {
+    padding: 8px;
+  }
+
+  .journey-card-bottom h3 {
+    font-size: 11px;
+  }
+
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 650px) {
+
+  .journey-container {
+    padding: 18px 14px 28px;
+  }
+
+  .journey-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+
+    gap: 11px;
+  }
+
+  .journey-card {
+    aspect-ratio: 1.55 / 1;
+  }
+
+  .journey-title {
+    font-size: 20px;
+  }
+
+  .journey-subtitle {
+    font-size: 11px;
+  }
+
+}
+
+
+/* =========================================================
+   VERY SMALL MOBILE
+========================================================= */
+
+@media (max-width: 400px) {
+
+  .journey-container {
+    padding: 16px 10px 24px;
+  }
+
+  .journey-grid {
+    gap: 9px;
+  }
+
+  .journey-card {
+    border-radius: 7px;
+  }
+
+  .journey-card-content {
+    padding: 7px;
+  }
+
+  .journey-number {
+    min-width: 21px;
+    height: 18px;
+
+    font-size: 8px;
+  }
+
+  .journey-check-icon {
+    font-size: 11px;
+  }
+
+  .journey-lock-icon {
+    font-size: 10px;
+  }
+
+  .journey-card-bottom h3 {
+    font-size: 10px;
+  }
+
+  .journey-status {
+    font-size: 6.5px;
+    padding: 3px 5px;
+  }
+
+}

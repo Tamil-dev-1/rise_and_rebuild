@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   Crown,
   Calendar,
@@ -16,12 +16,18 @@ import {
   Users,
   Settings2,
   Flame,
+  Gift,
+  UsersRound,
+  CalendarCheck,
+  MessageCircleQuestion,
 } from "lucide-react";
 import { useCountdown } from "../../hooks/useCountdown";
 import "./Dashboard.css"
 import HeroImg from "../../assets/images/dashboard/heroImg.png"
-
-const HERO_BG_IMAGE = HeroImg 
+import {
+  hasMembershipPermission,
+} from "../../utils/membershipPermissions";
+const HERO_BG_IMAGE = HeroImg
 
 const JOURNEY_IMAGES = [
   "https://images.pexels.com/photos/100077/pexels-photo-100077.jpeg",
@@ -36,9 +42,6 @@ const STATS = [
     icon: Crown,
     tone: "violet",
     label: "Membership",
-    value: "Transformation Plan",
-    footer: "₹999 / month",
-    badge: "ACTIVE",
   },
   {
     icon: Calendar,
@@ -84,20 +87,147 @@ const PROGRESS_ROWS = [
 const QUICK_ACTIONS = [
   { icon: PlayCircle, label: "Watch Latest Replay", tone: "violet" },
   { icon: BookOpen, label: "Open Workbook", tone: "success" },
-  { icon: Target, label: "Continue Challenge", tone: "gold" },
+  { icon: Target, label: "Accountability", tone: "gold" },
   { icon: Users, label: "Community", tone: "info" },
   { icon: Settings2, label: "Manage Membership", tone: "violet" },
+  { icon: MessageCircleQuestion, label: "Live Q&A", tone: "blue" },
+  { icon: Gift, label: "Bonus Content", tone: "gold" },
+  { icon: UsersRound, label: "Small Group", tone: "violet" },
+  { icon: CalendarCheck, label: "Monthly Accountability", tone: "green" },
+  { icon: MessageCircleQuestion, label: "Priority Q&A", tone: "violet" },
 ];
 
 export default function Dashboard({ theme = "light" }) {
+  const [user, setUser] = useState(null);
+
   const countdown = useCountdown("2026-09-12T19:00:00");
+
+  useEffect(() => {
+    const getCurrentUser = async () => {
+      try {
+        const token = sessionStorage.getItem("authToken");
+
+        if (!token) {
+          return;
+        }
+
+        const response = await fetch(
+          "http://localhost:5000/api/auth/me",
+          {
+            method: "GET",
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+
+        const data = await response.json();
+
+        if (!response.ok || !data.success) {
+          return;
+        }
+
+        setUser(data.user);
+
+        sessionStorage.setItem(
+          "user",
+          JSON.stringify(data.user)
+        );
+      } catch (error) {
+        console.error("Dashboard User Error:", error);
+      }
+    };
+
+    getCurrentUser();
+  }, []);
+
+  const membership = user?.membership;
+
+  const planId = membership?.planId;
+
+  const canAccessCommunity =
+    hasMembershipPermission(
+      planId,
+      "community"
+    );
+
+  const canAccessLiveQna =
+    hasMembershipPermission(
+      planId,
+      "liveQna"
+    );
+
+  const canAccessAccountability =
+    hasMembershipPermission(
+      planId,
+      "accountability"
+    );
+
+  const canAccessBonusContent =
+    hasMembershipPermission(
+      planId,
+      "bonusContent"
+    );
+
+  const canAccessSmallGroup =
+    hasMembershipPermission(
+      planId,
+      "smallGroup"
+    );
+
+  const canAccessMonthlyAccountability =
+    hasMembershipPermission(
+      planId,
+      "monthlyAccountability"
+    );
+
+  const canAccessPriorityQna =
+    hasMembershipPermission(
+      planId,
+      "priorityQna"
+    );
+
+    const canAccessTwelveMonthJourney =
+  hasMembershipPermission(
+    planId,
+    "twelveMonthJourney"
+  );
+
+  const membershipName =
+    membership?.planName || "Membership";
+
+  const membershipPrice =
+    membership?.price != null
+      ? `₹${membership.price} ${membership.period || ""}`
+      : "";
+
+  const membershipStatus =
+    membership?.status || "UNKNOWN";
 
   return (
     <div className={`rr-dash theme-${theme}`}>
       {/* Top Stat Cards Row */}
       <section className="rr-stats">
         {STATS.map((s) => (
-          <StatCard key={s.label} {...s} />
+          <StatCard
+            key={s.label}
+            {...s}
+            value={
+              s.label === "Membership"
+                ? membershipName
+                : s.value
+            }
+            footer={
+              s.label === "Membership"
+                ? membershipPrice
+                : s.footer
+            }
+            badge={
+              s.label === "Membership"
+                ? membershipStatus
+                : s.badge
+            }
+          />
         ))}
       </section>
 
@@ -146,9 +276,8 @@ export default function Dashboard({ theme = "light" }) {
             {JOURNEY_STEPS.map((step, i) => (
               <li
                 key={step.id}
-                className={`rr-journey-item rr-journey-${step.status} ${
-                  i === JOURNEY_STEPS.length - 1 ? "rr-journey-item-last" : ""
-                }`}
+                className={`rr-journey-item rr-journey-${step.status} ${i === JOURNEY_STEPS.length - 1 ? "rr-journey-item-last" : ""
+                  }`}
               >
                 <span className="rr-journey-node">
                   {step.status === "done" ? (
@@ -165,8 +294,8 @@ export default function Dashboard({ theme = "light" }) {
                     {step.status === "done"
                       ? "Completed"
                       : step.status === "current"
-                      ? "Current Episode"
-                      : "Upcoming"}
+                        ? "Current Episode"
+                        : "Upcoming"}
                   </span>
                 </div>
                 {step.status !== "upcoming" && (
@@ -197,9 +326,8 @@ export default function Dashboard({ theme = "light" }) {
             {JOURNEY_STEPS.map((step) => (
               <div
                 key={step.id}
-                className={`rr-continue-card ${
-                  step.status === "current" ? "rr-continue-card-active" : ""
-                }`}
+                className={`rr-continue-card ${step.status === "current" ? "rr-continue-card-active" : ""
+                  }`}
               >
                 <img src={step.img} alt={step.title} className="rr-continue-img" />
                 <div className="rr-continue-scrim" />
@@ -220,8 +348,8 @@ export default function Dashboard({ theme = "light" }) {
                         step.status === "done"
                           ? "100%"
                           : step.status === "current"
-                          ? "45%"
-                          : "0%",
+                            ? "45%"
+                            : "0%",
                     }}
                   />
                 </div>
@@ -281,14 +409,48 @@ export default function Dashboard({ theme = "light" }) {
           </div>
           <div className="rr-marquee-track-wrapper">
             <div className="rr-marquee-track">
-              {[...QUICK_ACTIONS, ...QUICK_ACTIONS].map((a, idx) => (
-                <button className="rr-quick-action" key={`${a.label}-${idx}`}>
-                  <span className={`rr-quick-icon rr-tone-${a.tone}`}>
-                    <a.icon size={16} strokeWidth={2.1} />
-                  </span>
-                  <span>{a.label}</span>
-                </button>
-              ))}
+              {[...QUICK_ACTIONS, ...QUICK_ACTIONS].map((a, idx) => {
+                const isCommunity = a.label === "Community";
+                const isLiveQna = a.label === "Live Q&A";
+                const isAccountability = a.label === "Accountability";
+                const isBonusContent = a.label === "Bonus Content";
+                const isSmallGroup = a.label === "Small Group";
+                const isMonthlyAccountability =
+                  a.label === "Monthly Accountability";
+                const isPriorityQna =
+                  a.label === "Priority Q&A";
+
+                const isLocked =
+                  (isCommunity && !canAccessCommunity) ||
+                  (isLiveQna && !canAccessLiveQna) ||
+                  (isAccountability && !canAccessAccountability) ||
+                  (isBonusContent && !canAccessBonusContent) ||
+                  (isSmallGroup && !canAccessSmallGroup) ||
+                  (isMonthlyAccountability &&
+                    !canAccessMonthlyAccountability) ||
+                  (isPriorityQna && !canAccessPriorityQna);
+                return (
+                  <button
+                    className={`rr-quick-action ${isLocked ? "rr-quick-action-locked" : ""
+                      }`}
+                    key={`${a.label}-${idx}`}
+                    disabled={isLocked}
+                  >
+                    <span className={`rr-quick-icon rr-tone-${a.tone}`}>
+                      {isLocked ? (
+                        <Lock size={16} strokeWidth={2.1} />
+                      ) : (
+                        <a.icon size={16} strokeWidth={2.1} />
+                      )}
+                    </span>
+
+                    <span>
+                      {a.label}
+                      {isLocked && " 🔒"}
+                    </span>
+                  </button>
+                );
+              })}
             </div>
           </div>
         </div>
